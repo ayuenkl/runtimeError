@@ -1,0 +1,26 @@
+<header class="navbar navbar-inverse">
+	<div class="container">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#re-navbar-1" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">{{:: $ctrl.appName }}</a>
+		</div>
+
+		<nav class="hidden-xs">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Log in</a></li>
+			</ul>
+		</nav>
+
+		<nav class="visible-xs" uib-collapse="!$ctrl.isCollapsed">
+			<ul class="nav navbar-nav">
+				<li><a href="#">Log in</a></li>
+			</ul>
+		</nav>
+
+	</div>
+</header>
