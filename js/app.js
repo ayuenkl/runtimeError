@@ -23,6 +23,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				template: '<questions-list questions-group="interest" />'
 			}
 		}
+
 	});
 
 	sp.state({
