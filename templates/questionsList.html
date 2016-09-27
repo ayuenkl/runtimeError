@@ -1,4 +1,7 @@
-<div class="list-group">
+<div ng-show="$ctrl.isLoading">
+	加載中...
+</div>
+<div class="list-group" ng-hide="$ctrl.isLoading">
 	<a href="" class="list-group-item" ng-repeat="question in $ctrl.questions">
 		<div class="row">
 			<div class="col-sm-10 col-sm-push-2">
