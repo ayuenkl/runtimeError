@@ -1,0 +1,205 @@
+<div ng-show="$ctrl.isLoading">
+	加載中...
+</div>
+
+<div class="container-fluid" ng-hide="$ctrl.isLoading">
+	<h3>在 href-transitioning 下， $stateChangeSuccess 不能被觸發。</h3>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<p>我這結論對不？除非我用 $state.transitinoTo，否則 $stateChangeSuccess 不能被觸發。</p>
+			<pre class="pre-scrollable">
+//in app config
+.state('detail.zoom', {
+        url: '/zoom/{itemId}',
+        templateUrl: 'detail/zoom-partial.html'
+    })
+
+//in html
+&lt;a href="#/zoom/{{item.id}}" &gt;ZOOM IT!&lt;/a&gt;
+
+//in directive
+scope.$state.transitionTo('detail.zoom', { itemId: item.id});
+
+//in some controller
+$scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
+			</pre>
+			<p>transitionTo 的事件會觸發 $stateChangeSuccess，但 href 的版于郤不能，請問是否有辦法兩種事件也可同時觸發？</p>
+			<p><small><mark>angularjs</mark>&nbsp;&nbsp;<mark>angularjs-routing</mark></small></p>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<p><span class="glyphicon glyphicon-arrow-up" title="這問題對我有幫助"></span>&nbsp;<strong>1</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down" title="這問題對我沒有幫助"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-star-empty"></span></p>
+					<p><a href="#">edit</a>
+				</div>
+				<div class="col-sm-9">
+					<div class="pull-right userBox">
+						<div class="row">
+							<div class="col-xs-3">
+								<img class ="userBoxAvatar" src="{{:: $ctrl.users[0].avatar }}">
+							</div>
+							<div class="col-xs-9">
+								<p><small>問於 2013-08-02 08:02</small></p>
+								<p><small>{{:: $ctrl.users[0].username }}</small></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<ul class="list-group">
+				<li class="list-group-item"><small>或許你應該試試 $routeChangeSuccess - <a href="#">CodeHater</a> <span class="text-muted">2013-08-02 08:06</span></small></li>
+				<li class="list-group-item"><small>@Codezilla, 我可以試，但我很懷疑，因我用的是 angular-ui/ui-router，一個不同於 angularjs 的類，不是默認的 routeProvider。 - <a href="#">{{:: $ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:18</span></small></li>
+				<li class="list-group-item"><small>噢，我知道我犯了甚麼錯了，我有一個 nested state 但我並沒有在 href 處用全 url。 - <a href="#">{{:: $ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:24</span></small></li>
+				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
+			</ul>
+		</div>
+	</div>
+	<h4>4 個答案</h4>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<p>我覺得你似乎正在使用 nested state，那個叫「detail」的 state 是否應該有一個分離的 url，即全 url 是 url:'/detail{itemID}/zoom'？</p>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<p><span class="glyphicon glyphicon-arrow-up" title="這答案對我有幫助"></span>&nbsp;<strong>1</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down" title="這答案對我沒有幫助"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-star-empty"></span></p>
+					<p><a href="#">edit</a></p>
+				</div>
+				<div class="col-sm-9">
+					<div class="pull-right userBox">
+						<div class="row">
+							<div class="col-xs-3">
+								<img class="userBoxAvatar" src="{{:: $ctrl.users[1].avatar }}">
+							</div>
+							<div class="col-xs-9">
+								<p><small>答於 2013-08-02 08:30</small></p>
+								<p><small>{{:: $ctrl.users[1].username }}</small></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<ul class="list-group">
+				<li class="list-group-item"><small>是啊！這正是我漏了的！非常感謝！:) 當用上部份 url 時，我覺得有點混亂，當然，在 HTML 內，我一定會用全 url 的 - <a href="#">{{:: $ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:31</span></small></li>
+				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
+			</ul>
+		</div>
+	</div>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<p>試試:</p>
+			<pre class="pre-scrollable">
+$rootScope.$on('$stateChangeSuccess', function () {
+	alert('done transitioning!')
+});
+			</pre>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<p><span class="glyphicon glyphicon-arrow-up" title="這答案對我有幫助"></span>&nbsp;<strong>1</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down" title="這答案對我沒有幫助"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-star-empty"></span></p>
+					<p><a href="#">edit</a></p>
+				</div>
+				<div class="col-sm-9">
+					<div class="pull-right userBox">
+						<div class="row">
+							<div class="col-xs-3">
+								<img src="{{:: $ctrl.users[3].avatar }}" class="userBoxAvatar">
+							</div>
+							<div class="col-xs-9">
+								<p><small>答於 2015-05-05 13:00</small></p>
+								<p><small>{{:: $ctrl.users[3].username }}</small></p>
+							</div>
+						</div>
+					</div>
+					<div class="pull-right userBox">
+						<div class="row">
+							<div class="col-xs-3">
+								<img src="{{:: $ctrl.users[2].avatar }}" class="userBoxAvatar">
+							</div>
+							<div class="col-xs-9">
+								<p><small>修改於 2015-05-05 12:26</small></p>
+								<p><small>{{:: $ctrl.users[2].username }}</small></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<ul class="list-group">
+				<li class="list-group-item"><small>需然這可能是一個答案，若你加上解釋你的代碼為何能解決這問題，這將會是一個很大的改進。 - <a href="#">11684</a> <span class="text-muted">2015-05-05 13:08</span></small></li>
+				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
+			</ul>
+		</div>
+	</div>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<p>在你的指令裡，可否試試 scope.$apply()？</p>
+			<pre class="pre-scrollable">
+//in directive
+scope.$state.transitionTo('detail.zoon', { itemId: item.id});
+scope.$apply();
+			</pre>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<p><span class="glyphicon glyphicon-arrow-up" title="這答案對我有幫助"></span>&nbsp;<strong>0</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down" title="這答案對我沒有幫助"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-star-empty"></span></p>
+					<p><a href="#">edit</a></p>
+				</div>
+				<div class="col-sm-9">
+					<div class="pull-right userBox">
+						<div class="row">
+							<div class="col-xs-3">
+								<img class="userBoxAvatar" src="{{:: $ctrl.users[4].avatar }}">
+							</div>
+							<div class="col-xs-9">
+								<p><small>答於 2014-02-13 10:22</small></p>
+								<p><small>{{:: $ctrl.users[4].username }}</small></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<ul class="list-group">
+				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
+			</ul>
+		</div>
+	</div>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<p>你可用一個 ^ 符號縮少 nested URLs。</p>
+			<pre class="pre-scrollable">
+.state('detail.zoom', {
+	url: '^/zoom/{itemId}',
+	templateUrl: 'detail/zoom-partial.html'
+})
+
+&lt;a href="#/zoom/{{item.id}}" &gt;ZOOM IT!&lt;/a&gt;
+			</pre>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<p><span class="glyphicon glyphicon-arrow-up" title="這答案對我有幫助"></span>&nbsp;<strong>0</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down" title="這答案對我沒有幫助"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-star-empty"></span></p>
+					<p><a href="#">edit</a></p>
+				</div>
+				<div class="col-sm-9">
+					<div class="pull-right userBox">
+						<div class="row">
+							<div class="col-xs-3">
+								<img class="userBoxAvatar" src="{{:: $ctrl.users[5].avatar }}">
+							</div>
+							<div class="col-xs-9">
+								<p><small>答於 2013-08-02 08:22</small></p>
+								<p><small>{{:: $ctrl.users[5].username }}</small></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<ul class="list-group">
+				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
+			</ul>
+		</div>
+	</div>
+</div>
