@@ -6,3 +6,15 @@
 		display: none!important;
 	}
 }
+
+.userBox {
+	width: 200px;
+	padding: 2px;
+	margin: 2px;
+}
+
+.userBoxAvatar {
+	width: 48px;
+	height: 48px;
+	padding: 5px;
+}

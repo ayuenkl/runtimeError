@@ -52,6 +52,12 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		}
 	});
 
+	sp.state({
+		name: 'question',
+		url: '/question/{qid}',
+		template: '<question qid="ctrl.qid" />'
+	});
+
 	$urlRouterProvider.otherwise('/interest');
 
 });

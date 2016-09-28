@@ -66,13 +66,45 @@ reApp.component('questionsList', {
 			ctrl.questionsGroup = 'interest';
 		}
 
-		$timeout( function () {
+		$timeout(function () {
 
 			ctrl.questions = prototypeFactory.loadQuestions(ctrl.questionsGroup);
 			ctrl.isLoading = false;
 
-		}, 3000);
+		}, 1000);
 
 	}
 
+});
+
+reApp.component('question', {
+
+	templateUrl: '/templates/question.html',
+
+	bindings: {
+		qid: '@'
+	},
+
+	controller: function ($http, $q) {
+
+		var ctrl = this;
+		ctrl.isLoading = true;
+		ctrl.question = {};
+
+		// for mockup purpose, randomly generate user info
+		ctrl.users = [];
+		$http.get('http://api.randomuser.me/?results=6')
+		.then(function (response) {
+			for (var i = 0; i < response.data.results.length; i++) {
+				ctrl.users.push({
+					username: response.data.results[i].name.first,
+					avatar: response.data.results[i].picture.thumbnail
+				});
+			}
+		})
+		.finally(function () {
+			ctrl.isLoading = false;
+		});
+
+	}
 });
