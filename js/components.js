@@ -9,6 +9,10 @@ reApp.component('reNavbar', {
 		ctrl.appName = APPNAME;
 
 		ctrl.isCollapsed = false;
+
+		ctrl.searchQA = function () {
+			console.log('search box submited')
+		}
 	}
 
 });
