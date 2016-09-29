@@ -55,7 +55,23 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'question',
 		url: '/question/{qid}',
-		template: '<question qid="ctrl.qid" />'
+		template: '<question detail="{{$resolve.detail}}" />',
+		resolve: {
+			// get mockup data
+			detail: function ($q, $timeout) {
+				var p = $q.defer();
+				$timeout(function () {
+					p.resolve('在 href-transitioning 下， $stateChangeSuccess 不能被觸發。');
+				}, 1000);
+				return p.promise;
+			}
+		},
+		controller: function (detail) {
+			var ctrl = this;
+			ctrl.detail = 'test';
+			console.log('detail is ', ctrl.detail);
+		},
+		controllerAs: 'ctrl'
 	});
 
 	$urlRouterProvider.otherwise('/interest');
@@ -64,9 +80,18 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 
 reApp.run(function ($rootScope, SEOFactory) {
 
+	$rootScope.$on('$stateChangeStart', function (event, toState) {
+		$rootScope.isLoading = true;
+		console.log('on start');
+	});
+
 	$rootScope.$on('$stateChangeSuccess', function (event, toState) {
 
 		SEOFactory.setPageTitle(toState);
+
+		$rootScope.isLoading = false;
+
+		console.log('on success');
 
 	});
 

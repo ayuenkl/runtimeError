@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="MainApp">
+<head>
+	<title>Test</title>
+	<script src="/node_modules/angular/angular.js"></script>
+	<script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+	<script type="text/javascript">
+		angular.module('MainApp', ['ui.router'])
+		.config(function ($stateProvider) {
+			$stateProvider
+			.state({
+				name: 'custom',
+				url: '',
+				template: '<custom-tag msg="{{$resolve.msg}}" />',
+				resolve: {
+					msg: function ($q, $timeout) {
+						var p = $q.defer();
+						$timeout(function () {
+							p.resolve('Message from Resolve');
+						}, 1000);
+						return p.promise;
+					}
+				},
+				controller: function () {
+					var ctrl = this;
+					ctrl.msg = "Message from State";
+				},
+				controllerAs: 'ctrl'
+			})
+		})
+		.component('customTag', {
+			template: '<p>Test Result</p><p>{{$ctrl.msg}}</p>',
+			bindings: {
+				msg: '@'
+			},
+			controller: function () {
+				
+			}
+		});
+	</script>
+</head>
+<body>
+	<ui-view>Testing...</ui-view>
+</body>
+</html>

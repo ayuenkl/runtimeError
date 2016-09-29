@@ -82,14 +82,17 @@ reApp.component('question', {
 	templateUrl: '/templates/question.html',
 
 	bindings: {
-		qid: '@'
+		qid: '@',
+		detail: '@'
 	},
 
-	controller: function ($http, $q) {
+	controller: function ($http, $q, $state, $timeout) {
 
 		var ctrl = this;
 		ctrl.isLoading = true;
-		ctrl.question = {};
+		
+		console.log('at question controller ', ctrl.detail);
+
 
 		// for mockup purpose, randomly generate user info
 		ctrl.users = [];
