@@ -58,20 +58,16 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		template: '<question detail="{{$resolve.detail}}" />',
 		resolve: {
 			// get mockup data
-			detail: function ($q, $timeout) {
+			detail: function ($q, $timeout, $rootScope) {
 				var p = $q.defer();
 				$timeout(function () {
-					p.resolve('在 href-transitioning 下， $stateChangeSuccess 不能被觸發。');
+					var pageTitle = '在 href-transitioning 下， $stateChangeSuccess 不能被觸發。';
+					$rootScope.customPageTitle = pageTitle;
+					p.resolve(pageTitle);
 				}, 1000);
 				return p.promise;
 			}
-		},
-		controller: function (detail) {
-			var ctrl = this;
-			ctrl.detail = 'test';
-			console.log('detail is ', ctrl.detail);
-		},
-		controllerAs: 'ctrl'
+		}
 	});
 
 	$urlRouterProvider.otherwise('/interest');
@@ -85,17 +81,18 @@ reApp.run(function ($rootScope, SEOFactory) {
 		console.log('on start');
 	});
 
-	$rootScope.$on('$stateChangeSuccess', function (event, toState) {
+	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam) {
 
 		SEOFactory.setPageTitle(toState);
 
 		$rootScope.isLoading = false;
 
-		console.log('on success');
+		console.log('on success', toState, toParam);
 
 	});
 
 	$rootScope.pageTitle = 'Runtime Error';
+	$rootScope.customPageTitle = '';
 
 });
 

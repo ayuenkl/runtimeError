@@ -91,9 +91,6 @@ reApp.component('question', {
 		var ctrl = this;
 		ctrl.isLoading = true;
 		
-		console.log('at question controller ', ctrl.detail);
-
-
 		// for mockup purpose, randomly generate user info
 		ctrl.users = [];
 		$http.get('http://api.randomuser.me/?results=6')
