@@ -19,7 +19,7 @@ reApp.factory('SEOFactory', function($rootScope, APPNAME) {
 				case 'question':
 					pageTitle = $rootScope.customPageTitle;
 					break;
-				case 'QAList':
+				case 'searchResult':
 					pageTitle = $rootScope.customPageTitle + ' - 搜索結果';
 			}
 

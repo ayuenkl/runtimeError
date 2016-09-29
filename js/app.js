@@ -147,13 +147,14 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	sp.state({
-		name:'QAList',
+		name:'searchResult',
 		url: '/search/{searchString}',
-		templateUrl: '/templates/search.html',
+		templateUrl: '/templates/searchResult.html',
 		resolve: {
 			searchResult: function ($stateParams, $q, $timeout, $rootScope) {
 				// simulate a search
-				$rootScope.customPageTitle = $stateParams.searchString;
+				//$rootScope.customPageTitle = $stateParams.searchString;
+				$rootScope.customPageTitle = 'angularjs submit without pressing button';
 				var p = $q.defer();
 				$timeout(function () {
 					p.resolve();

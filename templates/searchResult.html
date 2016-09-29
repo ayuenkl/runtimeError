@@ -1,0 +1,39 @@
+<div style="margin: 10px; padding: 5px;">
+	<form class="form-inline" ng-submit="ctrl.searchQA()">
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Search Questions and Answers" model=ctrl.searchString style="width: 300px;">
+		</div>
+		<button type="submit" class="btn btn-primary">Search</button>
+	</form>
+</div>
+<h4>4 個結果</h4>
+<div class="panel panel-primary">
+	<div class="panel-body">
+		<p>To be implemented...</p>
+	</div>
+</div>
+<div class="list-group">
+	<a ui-sref="question({qid: 111})" class="list-group-item" ng-repeat="question in ctrl.questions">
+		<div class="row">
+			<div class="col-sm-10 col-sm-push-2">
+				<h4 class="list-group-item-heading">{{ question.title }}</h4>
+				<p class="list-group-item-text">
+					<span ng-repeat="tag in question.tags"><mark><small>{{:: tag }}</small></mark>&nbsp;&nbsp;</span>
+				</p>
+			</div>
+			<div class="col-sm-2 col-sm-pull-10">
+				<div class="row">
+					<div class="col-xs-1">
+						<span class="glyphicon glyphicon-thumbs-up" title="讚好"></span><br><small>{{:: question.votes | shortNumber: 0 }}</small>
+					</div>
+					<div class="col-xs-1">
+						<span class="glyphicon glyphicon-comment" title="答案"></span><br><small>{{:: question.answers | shortNumber: 0 }}</small>
+					</div>
+					<div class="col-xs-1">
+						<span class="glyphicon glyphicon-eye-open" title="看過"></span><br><small>{{:: question.views | shortNumber: 0 }}</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</a>
+</div>
