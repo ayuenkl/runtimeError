@@ -23,7 +23,10 @@
 <body>
 	<re-navbar></re-navbar>
 	<div class="container">
-		<ui-view></ui-view>
+		<div ng-show="$root.isLoading">
+			加載中...
+		</div>
+		<ui-view ng-hide="$root.isLoading"></ui-view>
 	</div>
 </body> 
 </html> 

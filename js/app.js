@@ -9,7 +9,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'home',
 		abstract: true,
-		template: '<home />'
+		templateUrl: '/templates/home.html'
 	});
 
 	sp.state({
@@ -17,10 +17,28 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		url: '/interest',
 		views: {
 			'homeNav': {
-				template: '<home-nav questions-group="interest" />'
+				templateUrl: '/templates/homeNav.html',
+				controller: function () {
+					var ctrl = this;
+					ctrl.activeTab = 0;
+				},
+				controllerAs: 'ctrl'
 			},
 			'homeQuestList': {
-				template: '<questions-list questions-group="interest" />'
+				templateUrl: '/templates/questionsList.html',
+				controller: function ($timeout, prototypeFactory) {
+
+					var ctrl = this;
+					ctrl.isLoading = true;
+					ctrl.questions = [];
+
+					$timeout(function () {
+						ctrl.questions = prototypeFactory.loadQuestions('interest');
+						ctrl.isLoading = false;
+					}, 1000);
+
+				},
+				controllerAs: 'ctrl'
 			}
 		}
 
@@ -31,10 +49,28 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		url: '/hot',
 		views: {
 			'homeNav': {
-				template: '<home-nav questions-group="hot" />'
+				templateUrl: '/templates/homeNav.html',
+				controller: function () {
+					var ctrl = this;
+					ctrl.activeTab = 1;
+				},
+				controllerAs: 'ctrl'
 			},
 			'homeQuestList': {
-				template: '<questions-list questions-group="hot" />'
+				templateUrl: '/templates/questionsList.html',
+				controller: function ($timeout, prototypeFactory) {
+
+					var ctrl = this;
+					ctrl.isLoading = true;
+					ctrl.questions = [];
+
+					$timeout(function () {
+						ctrl.questions = prototypeFactory.loadQuestions('hot');
+						ctrl.isLoading = false;
+					}, 1000);
+
+				},
+				controllerAs: 'ctrl'
 			}
 		}
 	});
@@ -44,10 +80,28 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		url: '/month',
 		views: {
 			'homeNav': {
-				template: '<home-nav questions-group="month" />'
+				templateUrl: '/templates/homeNav.html',
+				controller: function () {
+					var ctrl = this;
+					ctrl.activeTab = 2;
+				},
+				controllerAs: 'ctrl'
 			},
 			'homeQuestList': {
-				template: '<questions-list questions-group="month" />'
+				templateUrl: '/templates/questionsList.html',
+				controller: function ($timeout, prototypeFactory) {
+
+					var ctrl = this;
+					ctrl.isLoading = true;
+					ctrl.questions = [];
+
+					$timeout(function () {
+						ctrl.questions = prototypeFactory.loadQuestions('month');
+						ctrl.isLoading = false;
+					}, 1000);
+
+				},
+				controllerAs: 'ctrl'
 			}
 		}
 	});
@@ -55,7 +109,41 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'question',
 		url: '/question/{qid}',
-		template: '<question qid="ctrl.qid" />'
+		templateUrl: '/templates/question.html',
+		resolve: {
+			// get mockup data
+			Title: function ($q, $timeout, $rootScope) {
+				var p = $q.defer();
+				$timeout(function () {
+					var pageTitle = '在 href-transitioning 下， $stateChangeSuccess 不能被觸發。';
+					$rootScope.customPageTitle = pageTitle;
+					p.resolve(pageTitle);
+				}, 1000);
+				return p.promise;
+			}
+		},
+		controller: function ($http) {
+
+			var ctrl = this;
+			ctrl.isLoading = true;
+
+			// for mockup purpose, randomly generate user info
+			ctrl.users = [];
+			$http.get('http://api.randomuser.me/?results=6')
+			.then(function (response) {
+				for (var i = 0; i < response.data.results.length; i++) {
+					ctrl.users.push({
+						username: response.data.results[i].name.first,
+						avatar: response.data.results[i].picture.thumbnail
+					});
+				}
+			})
+			.finally(function () {
+				ctrl.isLoading = false;
+			});
+
+		},
+		controllerAs: 'ctrl'
 	});
 
 	$urlRouterProvider.otherwise('/interest');
@@ -64,13 +152,23 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 
 reApp.run(function ($rootScope, SEOFactory) {
 
-	$rootScope.$on('$stateChangeSuccess', function (event, toState) {
+	$rootScope.$on('$stateChangeStart', function (event, toState) {
+		$rootScope.isLoading = true;
+		console.log('on start');
+	});
+
+	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam) {
 
 		SEOFactory.setPageTitle(toState);
+
+		$rootScope.isLoading = false;
+
+		console.log('on success', toState, toParam);
 
 	});
 
 	$rootScope.pageTitle = 'Runtime Error';
+	$rootScope.customPageTitle = '';
 
 });
 

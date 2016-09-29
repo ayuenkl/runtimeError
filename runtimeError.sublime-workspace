@@ -71,39 +71,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "js/components.js",
-			"settings":
-			{
-				"buffer_size": 1847,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "css/app.css",
-			"settings":
-			{
-				"buffer_size": 263,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates/question.html",
-			"settings":
-			{
-				"buffer_size": 8232,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/app.js",
-			"settings":
-			{
-				"buffer_size": 1377,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -149,6 +116,11 @@
 	],
 	"file_history":
 	[
+		"/Users/AnthonyYuen/Documents/Projects/RuntimeError/runtimeError/index.html",
+		"/Users/AnthonyYuen/Documents/Projects/RuntimeError/runtimeError/js/components.js",
+		"/Users/AnthonyYuen/Documents/Projects/RuntimeError/runtimeError/css/app.css",
+		"/Users/AnthonyYuen/Documents/Projects/RuntimeError/runtimeError/templates/question.html",
+		"/Users/AnthonyYuen/Documents/Projects/RuntimeError/runtimeError/js/app.js",
 		"/Users/AnthonyYuen/Documents/Projects/RuntimeError/MockUp/package.json",
 		"/Users/AnthonyYuen/Documents/Projects/RuntimeError/MockUp/templates/navbar.html",
 		"/Users/AnthonyYuen/Documents/Projects/RuntimeError/MockUp/index.html",
@@ -271,12 +243,7 @@
 		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/example/directiveControllers.html",
 		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/example/controllers.js",
 		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/example/controllers.html",
-		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/example/forms.html",
-		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/example/controller.js",
-		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/sportstore/app/admin.html",
-		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/sportstore/app/views/adminLogin.html",
-		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/sportstore/app/views/adminProducts.html",
-		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/sportstore/app/views/adminMain.html"
+		"/Volumes/AnthonySD/Documents/angular.study/angularjs.pro/example/forms.html"
 	],
 	"find":
 	{
@@ -325,124 +292,8 @@
 	"groups":
 	[
 		{
-			"selected": 3,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "js/components.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1847,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1212,
-								1212
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 522.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "css/app.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 263,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								141,
-								141
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "templates/question.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8232,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8062,
-								8062
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "js/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1377,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 417.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

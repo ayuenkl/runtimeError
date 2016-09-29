@@ -16,6 +16,8 @@ reApp.factory('SEOFactory', function($rootScope, APPNAME) {
 				case 'home.month':
 					pageTitle = '本月熱門的問題';
 					break;
+				case 'question':
+					pageTitle = $rootScope.customPageTitle;
 			}
 
 			$rootScope.pageTitle = pageTitle? pageTitle + ' - ' + APPNAME : APPNAME;

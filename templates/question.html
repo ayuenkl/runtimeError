@@ -1,8 +1,8 @@
-<div ng-show="$ctrl.isLoading">
+<div ng-show="ctrl.isLoading">
 	加載中...
 </div>
 
-<div class="container-fluid" ng-hide="$ctrl.isLoading">
+<div class="container-fluid" ng-hide="ctrl.isLoading">
 	<h3>在 href-transitioning 下， $stateChangeSuccess 不能被觸發。</h3>
 	<div class="panel panel-primary">
 		<div class="panel-body">
@@ -35,11 +35,11 @@ $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 					<div class="pull-right userBox">
 						<div class="row">
 							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: $ctrl.users[0].avatar }}">
+								<img class="userBoxAvatar" src="{{:: ctrl.users[0].avatar }}">
 							</div>
 							<div class="col-xs-9">
 								<p class="text-muted"><small>問於 2013-08-02 08:02</small></p>
-								<p class="text-muted"><small>{{:: $ctrl.users[0].username }}</small></p>
+								<p class="text-muted"><small>{{:: ctrl.users[0].username }}</small></p>
 							</div>
 						</div>
 					</div>
@@ -68,11 +68,11 @@ $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 					<div class="pull-right userBox">
 						<div class="row">
 							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: $ctrl.users[1].avatar }}">
+								<img class="userBoxAvatar" src="{{:: ctrl.users[1].avatar }}">
 							</div>
 							<div class="col-xs-9">
 								<p class="text-muted"><small>答於 2013-08-02 08:02</small></p>
-								<p class="text-muted"><small>{{:: $ctrl.users[1].username }}</small></p>
+								<p class="text-muted"><small>{{:: ctrl.users[1].username }}</small></p>
 							</div>
 						</div>
 					</div>
@@ -103,22 +103,22 @@ $rootScope.$on('$stateChangeSuccess', function () {
 					<div class="pull-right userBox">
 						<div class="row">
 							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: $ctrl.users[2].avatar }}">
+								<img class="userBoxAvatar" src="{{:: ctrl.users[2].avatar }}">
 							</div>
 							<div class="col-xs-9">
 								<p class="text-muted"><small>答於 2015-05-05 12:26</small></p>
-								<p class="text-muted"><small>{{:: $ctrl.users[2].username }}</small></p>
+								<p class="text-muted"><small>{{:: ctrl.users[2].username }}</small></p>
 							</div>
 						</div>
 					</div>
 					<div class="pull-right userBox">
 						<div class="row">
 							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: $ctrl.users[3].avatar }}">
+								<img class="userBoxAvatar" src="{{:: ctrl.users[3].avatar }}">
 							</div>
 							<div class="col-xs-9">
 								<p><small class="text-muted">修改於 2015-05-05 13:00</small></p>
-								<p><small class="text-muted">{{:: $ctrl.users[3].username }}</small></p>
+								<p><small class="text-muted">{{:: ctrl.users[3].username }}</small></p>
 							</div>
 						</div>
 					</div>
@@ -149,11 +149,11 @@ scope.$apply();
 					<div class="pull-right userBox">
 						<div class="row">
 							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: $ctrl.users[4].avatar }}">
+								<img class="userBoxAvatar" src="{{:: ctrl.users[4].avatar }}">
 							</div>
 							<div class="col-xs-9">
 								<p><small class="text-muted">答於 2015-08-02 08:22</small></p>
-								<p><small class="text-muted">{{:: $ctrl.users[4].username }}</small></p>
+								<p><small class="text-muted">{{:: ctrl.users[4].username }}</small></p>
 							</div>
 						</div>
 					</div>
@@ -187,11 +187,11 @@ scope.$apply();
 					<div class="pull-right userBox">
 						<div class="row">
 							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: $ctrl.users[5].avatar }}">
+								<img class="userBoxAvatar" src="{{:: ctrl.users[5].avatar }}">
 							</div>
 							<div class="col-xs-9">
 								<p><small class="muted">答於 2013-02-13 10:22</small></p>
-								<p><small class="muted">{{:: $ctrl.users[5].username }}</small></p>
+								<p><small class="muted">{{:: ctrl.users[5].username }}</small></p>
 							</div>
 						</div>
 					</div>
