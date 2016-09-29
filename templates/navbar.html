@@ -16,7 +16,7 @@
 			</ul>
 			<form class="navbar-form navbar-right" ng-submit="$ctrl.searchQA()">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search Q & A">
+					<input type="text" class="form-control" placeholder="Search Q & A" ng-model="$ctrl.searchString">
 				</div>
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			</form>
@@ -25,7 +25,7 @@
 		<nav class="visible-xs" uib-collapse="!$ctrl.isCollapsed">
 			<form class="navbar-form" ng-submit="$ctrl.searchQA()">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search Q & A">
+					<input type="text" class="form-control" placeholder="Search Q & A" ng-model="$ctrl.earchString">
 				</div>
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			<ul class="nav navbar-nav">

@@ -146,6 +146,23 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		controllerAs: 'ctrl'
 	});
 
+	sp.state({
+		name:'QAList',
+		url: '/search/{searchString}',
+		templateUrl: '/templates/search.html',
+		resolve: {
+			searchResult: function ($stateParams, $q, $timeout, $rootScope) {
+				// simulate a search
+				$rootScope.customPageTitle = $stateParams.searchString;
+				var p = $q.defer();
+				$timeout(function () {
+					p.resolve();
+				}, 1000);
+				return p.promise;
+			}
+		}
+	})
+
 	$urlRouterProvider.otherwise('/interest');
 
 });

@@ -2,7 +2,7 @@ reApp.component('reNavbar', {
 
 	templateUrl: '/templates/navbar.html',
 
-	controller: function(APPNAME) {
+	controller: function(APPNAME, $state) {
 
 		var ctrl = this;
 
@@ -11,8 +11,9 @@ reApp.component('reNavbar', {
 		ctrl.isCollapsed = false;
 
 		ctrl.searchQA = function () {
-			console.log('search box submited')
+			$state.go('QAList', {searchString: ctrl.searchString});
 		}
+
 	}
 
 });
