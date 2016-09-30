@@ -18,6 +18,9 @@ reApp.factory('SEOFactory', function($rootScope, APPNAME) {
 					break;
 				case 'question':
 					pageTitle = $rootScope.customPageTitle;
+					break;
+				case 'searchResult':
+					pageTitle = $rootScope.customPageTitle + ' - 搜索結果';
 			}
 
 			$rootScope.pageTitle = pageTitle? pageTitle + ' - ' + APPNAME : APPNAME;
