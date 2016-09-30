@@ -162,9 +162,10 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				return p.promise;
 			}
 		},
-		controller: function (searchResult) {
+		controller: function (searchResult, $rootScope) {
 			var ctrl = this;
-			console.log('search result is ', searchResult);
+			//ctrl.searchString = $stateParams.searchString;
+			ctrl.searchString = 'angularjs submit without pressing button';
 			ctrl.searchResult = searchResult;
 		},
 		controllerAs: 'ctrl'

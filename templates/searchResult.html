@@ -1,7 +1,7 @@
 <div style="margin: 10px; padding: 5px;">
 	<form class="form-inline" ng-submit="ctrl.searchQA()">
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Search Questions and Answers" model=ctrl.searchString style="width: 300px;">
+			<input type="text" class="form-control" placeholder="Search Questions and Answers" ng-model="ctrl.searchString" style="width: 300px;">
 		</div>
 		<button type="submit" class="btn btn-primary">Search</button>
 	</form>
@@ -11,14 +11,16 @@
 	<div class="list-group-item" ng-repeat="result in ctrl.searchResult">
 		<div class="row">
 			<div class="col-sm-11 col-sm-push-1">
-				<a ui-sref="question({qid: 111})"><h4 class="list-group-item-heading">{{:: result.title }}</h4></a>
+				<a ui-sref="question({qid: 111})"><h4 class="list-group-item-heading">{{:: (result.type == 'Q')? '問' : '答' }}: {{:: result.title }}</h4></a>
 				<p class="list-group-item-text" ng-bind-html="result.content"></p>
-
+				<p class="list-group-item-text">
+					<span ng-repeat="tag in result.tags"><mark><small>{{:: tag }}</small></mark>&nbsp;&nbsp;</span>
+				</p>
 				<p class="list-group-item-text pull-right">{{:: (result.type == 'Q')? '問' : '答'}}於 {{:: result.time }} by <a href="#">{{:: result.username }}</a></p>
 			</div>
 			<div class="col-sm-1 col-sm-pull-11">
-				<h4 class="glyphicon glyphicon-thumbs-up" title="讚好"> {{:: result.votes | shortNumber: 0 }}</h4>
-				<h4 class="glyphicon glyphicon-comment" title="答案" ng-hide="result.type == 'A'"> {{:: result.answers | shortNumber: 0 }}</h4>
+				<h4 class="glyphicon glyphicon-thumbs-up text-info" title="讚好"> {{:: result.votes | shortNumber: 0 }}</h4>
+				<h4 class="glyphicon glyphicon-comment text-info" title="答案" ng-hide="result.type == 'A'"> {{:: result.answers | shortNumber: 0 }}</h4>
 			</div>
 		</div>
 	</div>
