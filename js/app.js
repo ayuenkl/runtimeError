@@ -1,4 +1,4 @@
-var reApp = angular.module('reApp', ['ui.router', 'ui.bootstrap', 'ngTouch', 'ngAnimate', 'ayUtils']);
+var reApp = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngTouch', 'ngAnimate', 'ayUtils']);
 
 reApp.constant('APPNAME', 'Runtime Error');
 
@@ -151,17 +151,23 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		url: '/search/{searchString}',
 		templateUrl: '/templates/searchResult.html',
 		resolve: {
-			searchResult: function ($stateParams, $q, $timeout, $rootScope) {
+			searchResult: function ($stateParams, $q, $timeout, $rootScope, prototypeFactory) {
 				// simulate a search
 				//$rootScope.customPageTitle = $stateParams.searchString;
 				$rootScope.customPageTitle = 'angularjs submit without pressing button';
 				var p = $q.defer();
 				$timeout(function () {
-					p.resolve();
+					p.resolve(prototypeFactory.loadSearchResult());
 				}, 1000);
 				return p.promise;
 			}
-		}
+		},
+		controller: function (searchResult) {
+			var ctrl = this;
+			console.log('search result is ', searchResult);
+			ctrl.searchResult = searchResult;
+		},
+		controllerAs: 'ctrl'
 	})
 
 	$urlRouterProvider.otherwise('/interest');

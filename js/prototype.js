@@ -64,6 +64,18 @@ reApp.factory('prototypeFactory', function() {
 			
 			return questions;
 
+		},
+
+		loadSearchResult: function () {
+
+			return [{
+				type: 'A',
+				title: '在 Angular JS 的 Submit form 處按 Enter',
+				content: '/&gt;&lt;input type="text" ng-model="email"/&gt; &lt;/form&gt; EDIT: 對應那個關於 <b>submit button</b> 的評語，請看 「提交一個 form 而不需按 <b>submit button</b>」這篇文章，那處有關於 &lt;input ... type="<b>submit</b>" style="position: abosolute; left: -9999px; width: 1px; height: 1px;"/&gt; 的方案，如你不喜歡隱藏 <b>submit button</b> 的方案，你便應該把 Enter 絪綁到一個 controller function ...',
+				time: '2013-03-14',
+				username: 'eterps',
+				votes: 383
+			}]
 		}
 
 	}
