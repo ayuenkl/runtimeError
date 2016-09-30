@@ -179,7 +179,6 @@ reApp.run(function ($rootScope, SEOFactory) {
 
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
 		$rootScope.isLoading = true;
-		console.log('on start');
 	});
 
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam) {
@@ -187,8 +186,6 @@ reApp.run(function ($rootScope, SEOFactory) {
 		SEOFactory.setPageTitle(toState);
 
 		$rootScope.isLoading = false;
-
-		console.log('on success', toState, toParam);
 
 	});
 

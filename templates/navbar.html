@@ -12,7 +12,7 @@
 
 		<nav class="hidden-xs">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Log in</a></li>
+				<li><a href="#">登錄</a></li>
 			</ul>
 			<form class="navbar-form navbar-right" ng-submit="$ctrl.searchQA()">
 				<div class="form-group">
@@ -20,6 +20,10 @@
 				</div>
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			</form>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a ui-sref="home.interest">看問題</a></li>
+				<li><a href="#">問問題</a></li>
+			</ul>
 		</nav>
 
 		<nav class="visible-xs" uib-collapse="!$ctrl.isCollapsed">
@@ -29,9 +33,20 @@
 				</div>
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			<ul class="nav navbar-nav">
+				<li><a ui-sref="home.interest" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">看問題</a></li>
+				<li><a href="#">問問題</a></li>
 				<li><a href="#">Log in</a></li>
 			</ul>
 		</nav>
 
 	</div>
 </header>
+<div class="hidden-xs">
+	<div class="container">
+		<uib-tabset type="pills">
+			<uib-tab index="0" heading="看問題" ui-sref="home.interest"></uib-tab>
+			<uib-tab index="1" heading="問問題" href="#"></uib-tab>
+		</uib-tabset>
+	</div>
+</div>
+<p></p>

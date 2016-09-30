@@ -11,7 +11,9 @@ reApp.component('reNavbar', {
 		ctrl.isCollapsed = false;
 
 		ctrl.searchQA = function () {
+			ctrl.isCollapsed = false;
 			$state.go('searchResult', {searchString: ctrl.searchString});
+			ctrl.searchString = '';
 		}
 
 	}
