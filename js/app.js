@@ -1,6 +1,6 @@
 var reApp = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngTouch', 'ngAnimate', 'ayUtils']);
 
-reApp.constant('APPNAME', 'Runtime Error');
+reApp.constant('APPNAME', 'Hackga');
 
 reApp.config(function($stateProvider, $urlRouterProvider) {
 
@@ -9,7 +9,12 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'home',
 		abstract: true,
-		templateUrl: '/templates/home.html'
+		templateUrl: '/templates/home.html',
+		controller: function (APPNAME) {
+			var ctrl = this;
+			ctrl.appName = APPNAME;
+		},
+		controllerAs: 'ctrl'
 	});
 
 	sp.state({
