@@ -9,6 +9,7 @@ reApp.component('reNavbar', {
 		ctrl.appName = APPNAME;
 
 		ctrl.isCollapsed = false;
+		ctrl.active = 0;
 
 		ctrl.searchQA = function () {
 			ctrl.isCollapsed = false;

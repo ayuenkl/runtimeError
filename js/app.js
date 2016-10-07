@@ -174,13 +174,19 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			ctrl.searchResult = searchResult;
 		},
 		controllerAs: 'ctrl'
-	})
+	});
+
+	sp.state({
+		name: "login",
+		url: '/login',
+		templateUrl: '/templates/authUser.html'
+	});
 
 	$urlRouterProvider.otherwise('/interest');
 
 });
 
-reApp.run(function ($rootScope, SEOFactory) {
+reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
 		$rootScope.isLoading = true;
@@ -189,12 +195,13 @@ reApp.run(function ($rootScope, SEOFactory) {
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam) {
 
 		SEOFactory.setPageTitle(toState);
+		NavFactory.setNavTab(toState);
 
 		$rootScope.isLoading = false;
 
 	});
 
-	$rootScope.pageTitle = 'Runtime Error';
+	$rootScope.pageTitle = APPNAME;
 	$rootScope.customPageTitle = '';
 
 });
