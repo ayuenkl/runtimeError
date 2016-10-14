@@ -177,10 +177,46 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	sp.state({
-		name: "login",
-		url: '/login',
+		name: 'authUser',
+		abstract: true,
 		templateUrl: '/templates/authUser.html'
+	})
+
+	sp.state({
+		name: 'authUser.login',
+		url: '/login',
+		views: {
+			authNav: {
+				templateUrl: '/templates/authUserNav.html',
+				controller: function () {
+					var ctrl = this;
+					ctrl.activeTab = 0;
+				},
+				controllerAs: 'ctrl'
+			},
+			authMain: {
+				templateUrl: '/templates/login.html',
+			}
+		}
 	});
+
+	sp.state({
+		name: 'authUser.signUp',
+		url: '/signUp',
+		views: {
+			authNav: {
+				templateUrl: '/templates/authUserNav.html',
+				controller: function () {
+					var ctrl = this;
+					ctrl.activeTab = 1;
+				},
+				controllrAs: 'ctrl'
+			},
+			authMain: {
+				templateUrl: '/templates/signUp.html'
+			}
+		}
+	})
 
 	$urlRouterProvider.otherwise('/interest');
 
