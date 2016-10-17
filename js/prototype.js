@@ -1,4 +1,4 @@
-reApp.factory('prototypeFactory', function() {
+reApp.factory('prototypeFactory', function($rootScope, $q, $timeout) {
 
 	return {
 
@@ -103,6 +103,16 @@ reApp.factory('prototypeFactory', function() {
 				votes: 39,
 				answers: 2
 			}]
+		},
+
+		login: function () {
+
+			var p = $q.defer();
+			$timeout(function () {
+				p.resolve(true);
+			}, 1000)
+			return p.promise;
+
 		}
 
 	}

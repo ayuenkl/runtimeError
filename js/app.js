@@ -188,9 +188,13 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		views: {
 			authNav: {
 				templateUrl: '/templates/authUserNav.html',
-				controller: function () {
+				controller: function (prototypeFactory) {
 					var ctrl = this;
 					ctrl.activeTab = 0;
+
+					ctrl.userLogin = function ($state) {
+						$state.go(doLogin);
+					}
 				},
 				controllerAs: 'ctrl'
 			},
@@ -199,6 +203,21 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			}
 		}
 	});
+
+	sp.state({
+		name: 'doLogin',
+		resolve: {
+			loggedIn: function (prototypeFactory) {
+				return prototypeFactory.login();
+			}
+		},
+		controller: function (loggedIn, $rootScope) {
+			if (loggedIn) {
+				$rootScope.isLoggedIn = true;
+				$state.go($rootScope.prevState);
+			}
+		}
+	})
 
 	sp.state({
 		name: 'authUser.signUp',
@@ -228,8 +247,9 @@ reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 		$rootScope.isLoading = true;
 	});
 
-	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam) {
+	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState) {
 
+		$rootScope.prevState = fromState;
 		SEOFactory.setPageTitle(toState);
 		NavFactory.setNavTab(toState);
 
@@ -239,6 +259,7 @@ reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.pageTitle = APPNAME;
 	$rootScope.customPageTitle = '';
+	$rootScope.isLoading = false;
 
 });
 
