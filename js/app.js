@@ -187,19 +187,19 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		url: '/login',
 		views: {
 			authNav: {
-				templateUrl: '/templates/authUserNav.html',
-				controller: function (prototypeFactory) {
-					var ctrl = this;
-					ctrl.activeTab = 0;
-
-					ctrl.userLogin = function ($state) {
-						$state.go(doLogin);
-					}
-				},
-				controllerAs: 'ctrl'
+				templateUrl: '/templates/authUserNav.html'
 			},
 			authMain: {
 				templateUrl: '/templates/login.html',
+				controller: function (prototypeFactory, $state) {
+					var ctrl = this;
+					ctrl.activeTab = 0;
+
+					ctrl.userLogin = function () {
+						$state.go('doLogin');
+					}
+				},
+				controllerAs: 'ctrl'
 			}
 		}
 	});
@@ -209,11 +209,16 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		resolve: {
 			loggedIn: function (prototypeFactory) {
 				return prototypeFactory.login();
+			},
+			user: function ($http) {
+				return $http.get('https://randomuser.me/api/')
 			}
 		},
-		controller: function (loggedIn, $rootScope) {
+		controller: function (loggedIn, user, $rootScope, $state) {
 			if (loggedIn) {
 				$rootScope.isLoggedIn = true;
+				console.log(user);
+				$rootScope.userAvatar = user.data.results[0].picture.thumbnail;
 				$state.go($rootScope.prevState);
 			}
 		}
@@ -249,11 +254,17 @@ reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState) {
 
-		$rootScope.prevState = fromState;
+		console.log('From State = ', fromState.name, ', To State = ', toState.name);
+
+		if ((fromState.name != 'authUser.login') && (fromState.name != 'authUser.signUp') && (fromState.name != 'doLogin')) {
+			$rootScope.prevState = fromState;
+		}
 		SEOFactory.setPageTitle(toState);
 		NavFactory.setNavTab(toState);
 
 		$rootScope.isLoading = false;
+
+		console.log('prevState = ', $rootScope.prevState.name);
 
 	});
 

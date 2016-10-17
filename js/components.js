@@ -21,3 +21,8 @@ reApp.component('reNavbar', {
 
 });
 
+reApp.component('navUserBox', {
+
+	templateUrl: '/templates/navUserBox.html'
+	
+})
