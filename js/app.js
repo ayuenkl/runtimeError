@@ -223,7 +223,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				$state.go($rootScope.prevState);
 			}
 		}
-	})
+	});
 
 	sp.state({
 		name: 'authUser.signUp',
@@ -239,14 +239,21 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			},
 			authMain: {
 				templateUrl: '/templates/signUp.html',
-				controller: function () {
+				controller: function (prototypeFactory) {
 					var ctrl = this;
 					ctrl.userSignUp = function () {
 						prototypeFactory.userSignUp();
 					}
-				}
+				},
+				controllerAs: 'ctrl'
 			}
 		}
+	});
+
+	sp.state({
+		name: 'userSignedUp',
+		url: '/signedUp',
+		templateUrl: '/templates/signedUp.html'
 	})
 
 	$urlRouterProvider.otherwise('/interest');

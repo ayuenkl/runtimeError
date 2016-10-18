@@ -1,4 +1,4 @@
-reApp.factory('prototypeFactory', function($rootScope, $q, $timeout) {
+reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 
 	return {
 
@@ -126,6 +126,9 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout) {
 
 		userSignUp: function () {
 			
+			$rootScope.prevState = 'userSignedUp';
+			$state.go('doLogin');
+
 		}
 
 	}
