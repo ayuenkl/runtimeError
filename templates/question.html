@@ -32,24 +32,14 @@ $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 					<p><a href="#">edit</a>
 				</div>
 				<div class="col-sm-9">
-					<div class="pull-right userBox">
-						<div class="row">
-							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: ctrl.users[0].avatar }}">
-							</div>
-							<div class="col-xs-9">
-								<p class="text-muted"><small>問於 2013-08-02 08:02</small></p>
-								<p class="text-muted"><small>{{:: ctrl.users[0].username }}</small></p>
-							</div>
-						</div>
-					</div>
+					<user-box class="pull-right" qa-type="問" qa-time="2013-08-02 08:02" user="ctrl.users[0]"></user-box>
 				</div>
 			</div>
 			<hr>
 			<ul class="list-group">
 				<li class="list-group-item"><small class="text-muted">或許你應該試試 $routeChangeSuccess - <a href="#">CodeHater</a> <span class="text-muted">2013-08-02 08:06</span></small></li>
-				<li class="list-group-item"><small class="text-muted">@Codezilla, 我可以試，但我很懷疑，因我用的是 angular-ui/ui-router，一個不同於 angularjs 的類，不是默認的 routeProvider。 - <a href="#">{{:: $ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:18</span></small></li>
-				<li class="list-group-item"><small class="text-muted">噢，我知道我犯了甚麼錯了，我有一個 nested state 但我並沒有在 href 處用全 url。 - <a href="#">{{:: $ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:24</span></small></li>
+				<li class="list-group-item"><small class="text-muted">@Codezilla, 我可以試，但我很懷疑，因我用的是 angular-ui/ui-router，一個不同於 angularjs 的類，不是默認的 routeProvider。 - <a href="#">{{:: ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:18</span></small></li>
+				<li class="list-group-item"><small class="text-muted">噢，我知道我犯了甚麼錯了，我有一個 nested state 但我並沒有在 href 處用全 url。 - <a href="#">{{:: ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:24</span></small></li>
 				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
 			</ul>
 		</div>
@@ -65,22 +55,14 @@ $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 					<p><a href="#">edit</a>
 				</div>
 				<div class="col-sm-9">
-					<div class="pull-right userBox">
-						<div class="row">
-							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: ctrl.users[1].avatar }}">
-							</div>
-							<div class="col-xs-9">
-								<p class="text-muted"><small>答於 2013-08-02 08:02</small></p>
-								<p class="text-muted"><small>{{:: ctrl.users[1].username }}</small></p>
-							</div>
-						</div>
+					<div class="pull-right">
+						<user-box qa-type="答" qa-time="2013-08-02 08:02" user="ctrl.users[1]"></user-box>
 					</div>
 				</div>
 			</div>
 			<hr>
 			<ul class="list-group">
-				<li class="list-group-item"><small class="text-muted">對，這正是我所錯的，謝謝！我對以部份 url 設置 state 設定有些混亂，在 html 內，當然是會使用全 url 的。 - <a href="#">{{:: $ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:31</span></small></li>
+				<li class="list-group-item"><small class="text-muted">對，這正是我所錯的，謝謝！我對以部份 url 設置 state 設定有些混亂，在 html 內，當然是會使用全 url 的。 - <a href="#">{{:: ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:31</span></small></li>
 				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
 			</ul>
 		</div>
@@ -100,27 +82,11 @@ $rootScope.$on('$stateChangeSuccess', function () {
 					<p><a href="#">edit</a>
 				</div>
 				<div class="col-sm-9">
-					<div class="pull-right userBox">
-						<div class="row">
-							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: ctrl.users[2].avatar }}">
-							</div>
-							<div class="col-xs-9">
-								<p class="text-muted"><small>答於 2015-05-05 12:26</small></p>
-								<p class="text-muted"><small>{{:: ctrl.users[2].username }}</small></p>
-							</div>
-						</div>
+					<div class="pull-right">
+						<user-box qa-type="答" qa-time="2015-05-05 12:26" user="ctrl.users[2]"></user-box>
 					</div>
-					<div class="pull-right userBox">
-						<div class="row">
-							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: ctrl.users[3].avatar }}">
-							</div>
-							<div class="col-xs-9">
-								<p><small class="text-muted">修改於 2015-05-05 13:00</small></p>
-								<p><small class="text-muted">{{:: ctrl.users[3].username }}</small></p>
-							</div>
-						</div>
+					<div class="pull-right">
+						<user-box qa-type="修改" qa-time="2015-05-05 13:00" user="ctrl.users[3]"></user-box>
 					</div>
 				</div>
 			</div>
@@ -146,22 +112,14 @@ scope.$apply();
 					<p><a href="#">edit</a>
 				</div>
 				<div class="col-sm-9">
-					<div class="pull-right userBox">
-						<div class="row">
-							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: ctrl.users[4].avatar }}">
-							</div>
-							<div class="col-xs-9">
-								<p><small class="text-muted">答於 2015-08-02 08:22</small></p>
-								<p><small class="text-muted">{{:: ctrl.users[4].username }}</small></p>
-							</div>
-						</div>
+					<div class="pull-right">
+						<user-box qa-type="答" qa-time="2015-08-02 08:22" user="ctrl.users[4]"></user-box>
 					</div>
 				</div>
 			</div>
 			<hr>
 			<ul class="list-group">
-				<li class="list-group-item"><small class="text-muted">scope.$state.transitionTo 沒有問題，所以不需要 $apply()，只是那個 href 不能啟動事件。謝謝！ - <a href="#">{{:: $ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:31</span></small></li>
+				<li class="list-group-item"><small class="text-muted">scope.$state.transitionTo 沒有問題，所以不需要 $apply()，只是那個 href 不能啟動事件。謝謝！ - <a href="#">{{:: ctrl.users[0].username }}</a> <span class="text-muted">2013-08-02 08:31</span></small></li>
 				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
 			</ul>
 		</div>
@@ -184,16 +142,8 @@ scope.$apply();
 					<p><a href="#">edit</a>
 				</div>
 				<div class="col-sm-9">
-					<div class="pull-right userBox">
-						<div class="row">
-							<div class="col-xs-3">
-								<img class="userBoxAvatar" src="{{:: ctrl.users[5].avatar }}">
-							</div>
-							<div class="col-xs-9">
-								<p><small class="muted">答於 2013-02-13 10:22</small></p>
-								<p><small class="muted">{{:: ctrl.users[5].username }}</small></p>
-							</div>
-						</div>
+					<div class="pull-right">
+						<user-box qa-type="答" qa-time="2013-02-13 10:22" user="ctrl.users[5]"></user-box>
 					</div>
 				</div>
 			</div>

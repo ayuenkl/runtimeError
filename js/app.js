@@ -127,7 +127,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				return p.promise;
 			}
 		},
-		controller: function ($http) {
+		controller: function ($http, prototypeFactory) {
 
 			var ctrl = this;
 			ctrl.isLoading = true;
@@ -139,7 +139,9 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				for (var i = 0; i < response.data.results.length; i++) {
 					ctrl.users.push({
 						username: response.data.results[i].name.first,
-						avatar: response.data.results[i].picture.thumbnail
+						avatar: response.data.results[i].picture.thumbnail,
+						reputation: prototypeFactory.getReputation(),
+						numOfBadges: prototypeFactory.getNumOfBadges()
 					});
 				}
 			})
@@ -217,7 +219,6 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		controller: function (loggedIn, user, $rootScope, $state) {
 			if (loggedIn) {
 				$rootScope.isLoggedIn = true;
-				console.log(user);
 				$rootScope.userAvatar = user.data.results[0].picture.thumbnail;
 				$state.go($rootScope.prevState);
 			}
@@ -249,12 +250,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
-		$rootScope.isLoading = true;
+		if (toState.name == 'doLogin') {
+			$rootScope.isLoggingIn = true;
+		} else {
+			$rootScope.isLoggingIn = false;
+			$rootScope.isLoading = true;
+		}
 	});
 
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState) {
-
-		console.log('From State = ', fromState.name, ', To State = ', toState.name);
 
 		if ((fromState.name != 'authUser.login') && (fromState.name != 'authUser.signUp') && (fromState.name != 'doLogin')) {
 			$rootScope.prevState = fromState;
@@ -263,8 +267,6 @@ reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 		NavFactory.setNavTab(toState);
 
 		$rootScope.isLoading = false;
-
-		console.log('prevState = ', $rootScope.prevState.name);
 
 	});
 
