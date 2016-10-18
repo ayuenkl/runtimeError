@@ -27,3 +27,27 @@ reApp.factory('SEOFactory', function($rootScope, APPNAME) {
 		}
 	}
 });
+
+reApp.factory('NavFactory', function ($rootScope) {
+
+	return {
+
+		setNavTab: function (currState) {
+
+			switch (currState.name) {
+				case 'home.interest':
+				case 'home.hot':
+				case 'home.month':
+				case 'question':
+				case 'searchResult':
+					$rootScope.activeTab = 0;
+					break;
+				case 'authUser.login':
+				case 'authUser.signUp':
+					$rootScope.activeTab = 2;
+					break;
+			}
+
+		}
+	}
+})

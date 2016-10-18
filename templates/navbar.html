@@ -11,12 +11,15 @@
 		</div>
 
 		<nav class="hidden-xs">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">登錄</a></li>
+			<ul class="nav navbar-nav navbar-right" ng-hide="$root.isLoggedIn">
+				<li><a ui-sref="authUser.login">登錄 | 注冊</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" ng-show="$root.isLoggedIn">
+				<li><a href="#"><nav-user-box /></a></li>
 			</ul>
 			<form class="navbar-form navbar-right" ng-submit="$ctrl.searchQA()">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search Q & A" ng-model="$ctrl.searchString">
+					<input type="text" class="form-control" placeholder="搜索問題與答案" ng-model="$ctrl.searchString">
 				</div>
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			</form>
@@ -33,9 +36,10 @@
 				</div>
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			<ul class="nav navbar-nav">
-				<li><a ui-sref="home.interest" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">看問題</a></li>
+				<li><a ui-sref="home.interest" ng-click="$ctrl.toggleCollapse()">看問題</a></li>
 				<li><a href="#">問問題</a></li>
-				<li><a href="#">Log in</a></li>
+				<li ng-hide="$root.isLoggedIn"><a ui-sref="authUser.login" ng-click="$ctrl.toggleCollapse()">登錄 | 注冊</a></li>
+				<li ng-show="$root.isLoggedIn"><a href="#" ng-click="$ctrl.toggleCollapse()"><nav-user-box /></a></li>
 			</ul>
 		</nav>
 
@@ -43,9 +47,10 @@
 </header>
 <div class="hidden-xs">
 	<div class="container">
-		<uib-tabset type="pills">
+		<uib-tabset type="pills" active="$root.activeTab">
 			<uib-tab index="0" heading="看問題" ui-sref="home.interest"></uib-tab>
 			<uib-tab index="1" heading="問問題" href="#"></uib-tab>
+			<uib-tab index="2" heading="用戶" href="#"></uib-tab>
 		</uib-tabset>
 	</div>
 </div>

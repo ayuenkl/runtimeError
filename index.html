@@ -5,6 +5,7 @@
 
 	<link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 	<link href="/css/app.css" rel="stylesheet" />
+	<link href="/css/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
 
 	<script src="/node_modules/angular/angular.js"></script> 
 	<script src="/node_modules/angular-animate/angular-animate.js"></script>
@@ -27,7 +28,10 @@
 		<div ng-show="$root.isLoading">
 			加載中...
 		</div>
-		<ui-view ng-hide="$root.isLoading"></ui-view>
+		<div ng-show="$root.isLoggingIn">
+			登錄中...
+		</div>
+		<ui-view ng-hide="$root.isLoading || $root.isLoggingIn"></ui-view>
 	</div>
 </body> 
 </html> 

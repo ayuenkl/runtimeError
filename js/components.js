@@ -9,6 +9,7 @@ reApp.component('reNavbar', {
 		ctrl.appName = APPNAME;
 
 		ctrl.isCollapsed = false;
+		ctrl.active = 0;
 
 		ctrl.searchQA = function () {
 			ctrl.isCollapsed = false;
@@ -16,7 +17,28 @@ reApp.component('reNavbar', {
 			ctrl.searchString = '';
 		}
 
+		ctrl.toggleCollapse = function () {
+			ctrl.isCollapsed = !ctrl.isCollapsed;
+		}
+
 	}
 
 });
 
+reApp.component('navUserBox', {
+
+	templateUrl: '/templates/navUserBox.html'
+	
+});
+
+reApp.component('userBox', {
+
+	templateUrl: '/templates/userBox.html',
+
+	bindings: {
+		qaType: '@',
+		qaTime: '@',
+		user: '<'
+	}
+
+});

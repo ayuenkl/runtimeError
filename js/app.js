@@ -127,7 +127,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				return p.promise;
 			}
 		},
-		controller: function ($http) {
+		controller: function ($http, prototypeFactory) {
 
 			var ctrl = this;
 			ctrl.isLoading = true;
@@ -139,7 +139,9 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				for (var i = 0; i < response.data.results.length; i++) {
 					ctrl.users.push({
 						username: response.data.results[i].name.first,
-						avatar: response.data.results[i].picture.thumbnail
+						avatar: response.data.results[i].picture.thumbnail,
+						reputation: prototypeFactory.getReputation(),
+						numOfBadges: prototypeFactory.getNumOfBadges()
 					});
 				}
 			})
@@ -174,28 +176,103 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			ctrl.searchResult = searchResult;
 		},
 		controllerAs: 'ctrl'
+	});
+
+	sp.state({
+		name: 'authUser',
+		abstract: true,
+		templateUrl: '/templates/authUser.html'
+	})
+
+	sp.state({
+		name: 'authUser.login',
+		url: '/login',
+		views: {
+			authNav: {
+				templateUrl: '/templates/authUserNav.html'
+			},
+			authMain: {
+				templateUrl: '/templates/login.html',
+				controller: function (prototypeFactory, $state) {
+					var ctrl = this;
+					ctrl.activeTab = 0;
+
+					ctrl.userLogin = function () {
+						$state.go('doLogin');
+					}
+				},
+				controllerAs: 'ctrl'
+			}
+		}
+	});
+
+	sp.state({
+		name: 'doLogin',
+		resolve: {
+			loggedIn: function (prototypeFactory) {
+				return prototypeFactory.login();
+			},
+			user: function ($http) {
+				return $http.get('https://randomuser.me/api/')
+			}
+		},
+		controller: function (loggedIn, user, $rootScope, $state) {
+			if (loggedIn) {
+				$rootScope.isLoggedIn = true;
+				$rootScope.userAvatar = user.data.results[0].picture.thumbnail;
+				$state.go($rootScope.prevState);
+			}
+		}
+	})
+
+	sp.state({
+		name: 'authUser.signUp',
+		url: '/signUp',
+		views: {
+			authNav: {
+				templateUrl: '/templates/authUserNav.html',
+				controller: function () {
+					var ctrl = this;
+					ctrl.activeTab = 1;
+				},
+				controllrAs: 'ctrl'
+			},
+			authMain: {
+				templateUrl: '/templates/signUp.html'
+			}
+		}
 	})
 
 	$urlRouterProvider.otherwise('/interest');
 
 });
 
-reApp.run(function ($rootScope, SEOFactory) {
+reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
-		$rootScope.isLoading = true;
+		if (toState.name == 'doLogin') {
+			$rootScope.isLoggingIn = true;
+		} else {
+			$rootScope.isLoggingIn = false;
+			$rootScope.isLoading = true;
+		}
 	});
 
-	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam) {
+	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState) {
 
+		if ((fromState.name != 'authUser.login') && (fromState.name != 'authUser.signUp') && (fromState.name != 'doLogin')) {
+			$rootScope.prevState = fromState;
+		}
 		SEOFactory.setPageTitle(toState);
+		NavFactory.setNavTab(toState);
 
 		$rootScope.isLoading = false;
 
 	});
 
-	$rootScope.pageTitle = 'Runtime Error';
+	$rootScope.pageTitle = APPNAME;
 	$rootScope.customPageTitle = '';
+	$rootScope.isLoading = false;
 
 });
 
