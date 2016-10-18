@@ -122,6 +122,10 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout) {
 			}, 1000)
 			return p.promise;
 
+		},
+
+		userSignUp: function () {
+			
 		}
 
 	}

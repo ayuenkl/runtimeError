@@ -31,15 +31,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			},
 			'homeQuestList': {
 				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory) {
+				controller: function ($timeout, prototypeFactory, $rootScope) {
 
 					var ctrl = this;
-					ctrl.isLoading = true;
+					$rootScope.isLoading = true;
 					ctrl.questions = [];
 
 					$timeout(function () {
 						ctrl.questions = prototypeFactory.loadQuestions('interest');
-						ctrl.isLoading = false;
+						$rootScope.isLoading = false;
 					}, 1000);
 
 				},
@@ -63,15 +63,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			},
 			'homeQuestList': {
 				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory) {
+				controller: function ($timeout, prototypeFactory, $rootScope) {
 
 					var ctrl = this;
-					ctrl.isLoading = true;
+					$rootScope.isLoading = true;
 					ctrl.questions = [];
 
 					$timeout(function () {
 						ctrl.questions = prototypeFactory.loadQuestions('hot');
-						ctrl.isLoading = false;
+						$rootScope.isLoading = false;
 					}, 1000);
 
 				},
@@ -94,15 +94,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			},
 			'homeQuestList': {
 				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory) {
+				controller: function ($timeout, prototypeFactory,$rootScope) {
 
 					var ctrl = this;
-					ctrl.isLoading = true;
+					$rootScope.isLoading = true;
 					ctrl.questions = [];
 
 					$timeout(function () {
 						ctrl.questions = prototypeFactory.loadQuestions('month');
-						ctrl.isLoading = false;
+						$rootScope.isLoading = false;
 					}, 1000);
 
 				},
@@ -127,10 +127,10 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				return p.promise;
 			}
 		},
-		controller: function ($http, prototypeFactory) {
+		controller: function ($http, prototypeFactory, $rootScope) {
 
 			var ctrl = this;
-			ctrl.isLoading = true;
+			$rootScope.isLoading = true;
 
 			// for mockup purpose, randomly generate user info
 			ctrl.users = [];
@@ -146,7 +146,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				}
 			})
 			.finally(function () {
-				ctrl.isLoading = false;
+				$rootScope.isLoading = false;
 			});
 
 		},
@@ -238,7 +238,13 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				controllrAs: 'ctrl'
 			},
 			authMain: {
-				templateUrl: '/templates/signUp.html'
+				templateUrl: '/templates/signUp.html',
+				controller: function () {
+					var ctrl = this;
+					ctrl.userSignUp = function () {
+						prototypeFactory.userSignUp();
+					}
+				}
 			}
 		}
 	})
@@ -250,12 +256,9 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
-		if (toState.name == 'doLogin') {
-			$rootScope.isLoggingIn = true;
-		} else {
-			$rootScope.isLoggingIn = false;
-			$rootScope.isLoading = true;
-		}
+
+		$rootScope.isLoading = true;
+		
 	});
 
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState) {

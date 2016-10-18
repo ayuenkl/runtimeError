@@ -1,7 +1,4 @@
-<div ng-show="ctrl.isLoading">
-	加載中...
-</div>
-<div class="list-group" ng-hide="ctrl.isLoading">
+<div class="list-group">
 	<a ui-sref="question({qid: 111})" class="list-group-item" ng-repeat="question in ctrl.questions">
 		<div class="row">
 			<div class="col-sm-1 hidden-xs">

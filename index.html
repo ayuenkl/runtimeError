@@ -25,13 +25,12 @@
 <body>
 	<re-navbar></re-navbar>
 	<div class="container">
-		<div ng-show="$root.isLoading">
-			加載中...
+		<div class="backdrop" ng-show="$root.isLoading">
+			<div class="loading">
+				<i class="fa fa-spinner fa-pulse fa-fw" style="font-size: 4em;"></i>
+			</div>
 		</div>
-		<div ng-show="$root.isLoggingIn">
-			登錄中...
-		</div>
-		<ui-view ng-hide="$root.isLoading || $root.isLoggingIn"></ui-view>
+		<ui-view></ui-view>
 	</div>
 </body> 
 </html> 
