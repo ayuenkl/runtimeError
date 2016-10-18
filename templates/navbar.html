@@ -11,9 +11,11 @@
 		</div>
 
 		<nav class="hidden-xs">
-			<ul class="nav navbar-nav navbar-right">
-				<li ng-hide="$root.isLoggedIn"><a ui-sref="authUser.login">登錄 | 注冊</a></li>
-				<li ng-show="$root.isLoggedIn"><a href="#"><nav-user-box /></a></li>
+			<ul class="nav navbar-nav navbar-right" ng-hide="$root.isLoggedIn">
+				<li><a ui-sref="authUser.login">登錄 | 注冊</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" ng-show="$root.isLoggedIn">
+				<li><a href="#"><nav-user-box /></a></li>
 			</ul>
 			<form class="navbar-form navbar-right" ng-submit="$ctrl.searchQA()">
 				<div class="form-group">
