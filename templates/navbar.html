@@ -25,7 +25,7 @@
 			</form>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a ui-sref="home.interest">看問題</a></li>
-				<li><a href="#">問問題</a></li>
+				<li><a ui-sref="ask.advice">問問題</a></li>
 			</ul>
 		</nav>
 
@@ -37,7 +37,7 @@
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			<ul class="nav navbar-nav">
 				<li><a ui-sref="home.interest" ng-click="$ctrl.toggleCollapse()">看問題</a></li>
-				<li><a href="#">問問題</a></li>
+				<li><a ui-sref="ask.advice" ng-click="$ctrl.toggleCollapse()">問問題</a></li>
 				<li ng-hide="$root.isLoggedIn"><a ui-sref="authUser.login" ng-click="$ctrl.toggleCollapse()">登錄 | 注冊</a></li>
 				<li ng-show="$root.isLoggedIn"><a href="#" ng-click="$ctrl.toggleCollapse()"><nav-user-box /></a></li>
 			</ul>
@@ -49,7 +49,7 @@
 	<div class="container">
 		<uib-tabset type="pills" active="$root.activeTab">
 			<uib-tab index="0" heading="看問題" ui-sref="home.interest"></uib-tab>
-			<uib-tab index="1" heading="問問題" href="#"></uib-tab>
+			<uib-tab index="1" heading="問問題" ui-sref="ask.advice"></uib-tab>
 			<uib-tab index="2" heading="用戶" href="#"></uib-tab>
 		</uib-tabset>
 	</div>

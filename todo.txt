@@ -1,3 +1,5 @@
 Ask Question
 Answer Box of Quesiton page (after logged in)
 Signed up page (draft detailed articles and contents)
+Draft suggest to sign up first at ask Question Advice
+Draft Ask Question Advices
