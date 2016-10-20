@@ -1,4 +1,4 @@
-var reApp = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngTouch', 'ngAnimate', 'ayUtils']);
+var reApp = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.tinymce', 'ngTouch', 'ngAnimate', 'ayUtils']);
 
 reApp.constant('APPNAME', 'Hackga');
 
@@ -281,7 +281,14 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'ask.question',
 		url: '/question',
-		templateUrl: '/templates/askQuestion.html'
+		templateUrl: '/templates/askQuestion.html',
+		controller: function () {
+			var ctrl = this;
+			ctrl.tinymceOptions = {
+				height: 300
+			}
+		},
+		controllerAs: 'ctrl'
 	})
 
 	$urlRouterProvider.otherwise('/interest');
