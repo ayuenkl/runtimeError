@@ -149,6 +149,24 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				$rootScope.isLoading = false;
 			});
 
+			ctrl.tinymceOptions = {
+				setup: function (editor) {
+					editor.on("focus", function () {
+						ctrl.showAnswerTips = true;
+					});
+					editor.on("blur", function () {
+						ctrl.showAnswerTips = false;
+					});
+				},
+				height: 200
+			};
+
+			ctrl.submitAnswer = function () {
+				var d = new Date();
+				ctrl.answerTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+				ctrl.isAnswered = true;
+			}			
+
 		},
 		controllerAs: 'ctrl'
 	});
@@ -216,10 +234,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				return $http.get('https://randomuser.me/api/')
 			}
 		},
-		controller: function (loggedIn, user, $rootScope, $state) {
+		controller: function (loggedIn, user, $rootScope, $state, prototypeFactory) {
 			if (loggedIn) {
 				$rootScope.isLoggedIn = true;
-				$rootScope.userAvatar = user.data.results[0].picture.thumbnail;
+				$rootScope.user = {
+					username: user.data.results[0].name.first,
+					avatar: user.data.results[0].picture.thumbnail,
+					reputation: prototypeFactory.getReputation(),
+					numOfBadges: prototypeFactory.getNumOfBadges()
+				};
 				$state.go($rootScope.prevState);
 			}
 		}

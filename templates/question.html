@@ -25,7 +25,7 @@ $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 			<div class="row">
 				<div class="col-sm-3">
 					<p><span class="glyphicon glyphicon-arrow-up text-primary" title="這問題對我有幫助"></span>&nbsp;<strong class="text-info">1</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down text-primary" title="這問題對我沒有幫助"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-star-empty text-warning"></span></p>
-					<p><a href="#">edit</a>
+					<button class="btn btn-default btn-xs">修改</button>
 				</div>
 				<div class="col-sm-9">
 					<user-box class="pull-right" qa-type="問" qa-time="2013-08-02 08:02" user="ctrl.users[0]"></user-box>
@@ -48,7 +48,7 @@ $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 			<div class="row">
 				<div class="col-sm-3">
 					<p><span class="glyphicon glyphicon-arrow-up text-primary" title="這答案對我有幫助"></span>&nbsp;<strong class="text-info">1</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down text-primary" title="這答案對我沒有幫助"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-ok text-danger"></span></p>
-					<p><a href="#">edit</a>
+					<button class="btn btn-default btn-xs">修改</button>
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
@@ -75,7 +75,7 @@ $rootScope.$on('$stateChangeSuccess', function () {
 			<div class="row">
 				<div class="col-sm-3">
 					<p><span class="glyphicon glyphicon-arrow-up text-primary" title="這答案對我有幫助"></span>&nbsp;<strong class="text-info">1</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down text-primary" title="這答案對我沒有幫助"></span></p>
-					<p><a href="#">edit</a>
+					<button class="btn btn-default btn-xs">修改</button>
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
@@ -105,7 +105,7 @@ scope.$apply();
 			<div class="row">
 				<div class="col-sm-3">
 					<p><span class="glyphicon glyphicon-arrow-up text-primary" title="這答案對我有幫助"></span>&nbsp;<strong class="text-info">0</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down text-primary" title="這答案對我沒有幫助"></span></p>
-					<p><a href="#">edit</a>
+					<button class="btn btn-default btn-xs">修改</button>
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
@@ -135,7 +135,7 @@ scope.$apply();
 			<div class="row">
 				<div class="col-sm-3">
 					<p><span class="glyphicon glyphicon-arrow-up text-primary" title="這答案對我有幫助"></span>&nbsp;<strong class="text-info">0</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down text-primary" title="這答案對我沒有幫助"></span></p>
-					<p><a href="#">edit</a>
+					<button class="btn btn-default btn-xs">修改</button>
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
@@ -149,4 +149,55 @@ scope.$apply();
 			</ul>
 		</div>
 	</div>
+
+	<div ng-hide="$root.isLoggedIn || ctrl.isAnswered">
+		<h4>提供你的答案？請先<a ui-sref="authUser.login">登錄/注冊</a>。</h4>
+	</div>
+
+	<div class="panel panel-primary" ng-show="$root.isLoggedIn && !ctrl.isAnswered">
+		<div class="panel-body">
+			<h4>您的答案</h4>
+			<form>
+				<div class="alert alert-success" role="alert" ng-show="ctrl.showAnswerTips">
+					<h5>怎樣寫答案</h5>
+					<p>How to write answer tips line 1</p>
+					<p>How to write answer tips line 2</p>
+					<p>How to write answer tips line 3</p>
+					<p>How to write answer tips line 4</p>
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" ui-tinymce="ctrl.tinymceOptions" ng-model=ctrl.answer></textarea>
+				</div>
+				<button class="btn btn-primary" ng-click="ctrl.submitAnswer()">提交</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="panel panel-primary" ng-show="ctrl.isAnswered">
+		<div class="panel-body">
+			<div ng-bind-html="ctrl.answer"></div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<p><span class="glyphicon glyphicon-arrow-up text-primary" title="這答案對我有幫助"></span>&nbsp;<strong class="text-info">0</strong>&nbsp;<span class="glyphicon glyphicon-arrow-down text-primary" title="這答案對我沒有幫助"></span></p>
+					<button class="btn btn-default btn-xs">修改</button>
+					<button class="btn btn-default btn-xs">刪除</button>
+				</div>
+				<div class="col-sm-9">
+					<div class="pull-right">
+						<user-box qa-type="答" qa-time="{{:: ctrl.answerTime }}" user="$root.user"></user-box>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<ul class="list-group">
+				<li class="list-group-item"><small><a href="#" class="text-muted">加入評語</a></small></li>
+			</ul>
+		</div>
+	</div>
+
+	<div ng-show="ctrl.isAnswered">
+		<button class="btn btn-primary">添加一個答案</button>
+	</div>
+
 </div>
