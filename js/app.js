@@ -134,7 +134,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 
 			// for mockup purpose, randomly generate user info
 			ctrl.users = [];
-			$http.get('http://api.randomuser.me/?results=6')
+			$http.get('https://api.randomuser.me/?results=6')
 			.then(function (response) {
 				for (var i = 0; i < response.data.results.length; i++) {
 					ctrl.users.push({
@@ -266,6 +266,17 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			if (!$rootScope.isLoggedIn) {
 				$state.go('authUser.login');
 			}
+			ctrl.tinymceOptions = {
+				setup: function (editor) {
+					editor.on("focus", function () {
+						ctrl.showDetailsTips = true;
+					});
+					editor.on("blur", function () {
+						ctrl.showDetailsTips = false;
+					});
+				},
+				height: 200
+			};
 		},
 		controllerAs: 'ctrl'
 	})
