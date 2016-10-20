@@ -1,0 +1,39 @@
+
+	<form>
+
+		<div class="form-group">
+			<label for="questionTitle">問題</label>
+			<input class="form-control" id="questionTitle" ng-focus="ctrl.showTitleTips = true" ng-blur="ctrl.showTitleTips = false" placeholder="請以一簡單句子清楚標明你的問題是其麼" />
+		</div>
+
+		<div class="alert alert-info" role="alert" ng-show="ctrl.showTitleTips">
+			<p>Tips for title line 1</p>
+			<p>Tips for title line 2</p>
+			<p>Tips for title line 3</p>
+		</div>
+
+		<div class="alert alert-success" role="alert" ng-show="ctrl.showDetailsTips">
+			<p>Tips for Details Input line 1</p>
+			<p>Tips for Details Input line 2</p>
+			<p>Tips for Details Input line 3</p>
+		</div>
+
+		<div class="form-group">
+			<label>問題描述</label>
+			<textarea class="form-control" ui-tinymce="ctrl.tinymceOptions" ng-model="ctrl.question"></textarea>
+		</div>
+
+		<div class="alert alert-info" role="alert" ng-show="ctrl.showTagsTips">
+			<p>Tips for Tags line 1</p>
+			<p>Tips for Tags line 2</p>
+			<p>Tips for Tags line 3</p>
+		</div>
+
+		<div class="form-group">
+			<label for="questionTags">標籤</label>
+			<input class="form-control" id="questionTags" ng-focus="ctrl.showTagsTips = true" ng-blur="ctrl.showTagsTips = false" placeholder="最少一個標籤，（例: angularjs, .net），最多五個" />
+		</div>
+
+		<button class="btn btn-primary" ui-sref="question({qid: 111})">提交</button>
+
+	</form>

@@ -1,4 +1,4 @@
-var reApp = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngTouch', 'ngAnimate', 'ayUtils']);
+var reApp = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.tinymce', 'ngTouch', 'ngAnimate', 'ayUtils']);
 
 reApp.constant('APPNAME', 'Hackga');
 
@@ -31,15 +31,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			},
 			'homeQuestList': {
 				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory) {
+				controller: function ($timeout, prototypeFactory, $rootScope) {
 
 					var ctrl = this;
-					ctrl.isLoading = true;
+					$rootScope.isLoading = true;
 					ctrl.questions = [];
 
 					$timeout(function () {
 						ctrl.questions = prototypeFactory.loadQuestions('interest');
-						ctrl.isLoading = false;
+						$rootScope.isLoading = false;
 					}, 1000);
 
 				},
@@ -63,15 +63,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			},
 			'homeQuestList': {
 				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory) {
+				controller: function ($timeout, prototypeFactory, $rootScope) {
 
 					var ctrl = this;
-					ctrl.isLoading = true;
+					$rootScope.isLoading = true;
 					ctrl.questions = [];
 
 					$timeout(function () {
 						ctrl.questions = prototypeFactory.loadQuestions('hot');
-						ctrl.isLoading = false;
+						$rootScope.isLoading = false;
 					}, 1000);
 
 				},
@@ -94,15 +94,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			},
 			'homeQuestList': {
 				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory) {
+				controller: function ($timeout, prototypeFactory,$rootScope) {
 
 					var ctrl = this;
-					ctrl.isLoading = true;
+					$rootScope.isLoading = true;
 					ctrl.questions = [];
 
 					$timeout(function () {
 						ctrl.questions = prototypeFactory.loadQuestions('month');
-						ctrl.isLoading = false;
+						$rootScope.isLoading = false;
 					}, 1000);
 
 				},
@@ -127,14 +127,14 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				return p.promise;
 			}
 		},
-		controller: function ($http, prototypeFactory) {
+		controller: function ($http, prototypeFactory, $rootScope) {
 
 			var ctrl = this;
-			ctrl.isLoading = true;
+			$rootScope.isLoading = true;
 
 			// for mockup purpose, randomly generate user info
 			ctrl.users = [];
-			$http.get('http://api.randomuser.me/?results=6')
+			$http.get('https://api.randomuser.me/?results=6')
 			.then(function (response) {
 				for (var i = 0; i < response.data.results.length; i++) {
 					ctrl.users.push({
@@ -146,8 +146,26 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				}
 			})
 			.finally(function () {
-				ctrl.isLoading = false;
+				$rootScope.isLoading = false;
 			});
+
+			ctrl.tinymceOptions = {
+				setup: function (editor) {
+					editor.on("focus", function () {
+						ctrl.showAnswerTips = true;
+					});
+					editor.on("blur", function () {
+						ctrl.showAnswerTips = false;
+					});
+				},
+				height: 200
+			};
+
+			ctrl.submitAnswer = function () {
+				var d = new Date();
+				ctrl.answerTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+				ctrl.isAnswered = true;
+			}			
 
 		},
 		controllerAs: 'ctrl'
@@ -216,14 +234,19 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				return $http.get('https://randomuser.me/api/')
 			}
 		},
-		controller: function (loggedIn, user, $rootScope, $state) {
+		controller: function (loggedIn, user, $rootScope, $state, prototypeFactory) {
 			if (loggedIn) {
 				$rootScope.isLoggedIn = true;
-				$rootScope.userAvatar = user.data.results[0].picture.thumbnail;
+				$rootScope.user = {
+					username: user.data.results[0].name.first,
+					avatar: user.data.results[0].picture.thumbnail,
+					reputation: prototypeFactory.getReputation(),
+					numOfBadges: prototypeFactory.getNumOfBadges()
+				};
 				$state.go($rootScope.prevState);
 			}
 		}
-	})
+	});
 
 	sp.state({
 		name: 'authUser.signUp',
@@ -238,9 +261,47 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				controllrAs: 'ctrl'
 			},
 			authMain: {
-				templateUrl: '/templates/signUp.html'
+				templateUrl: '/templates/signUp.html',
+				controller: function (prototypeFactory) {
+					var ctrl = this;
+					ctrl.userSignUp = function () {
+						prototypeFactory.userSignUp();
+					}
+				},
+				controllerAs: 'ctrl'
 			}
 		}
+	});
+
+	sp.state({
+		name: 'userSignedUp',
+		url: '/signedUp',
+		templateUrl: '/templates/signedUp.html'
+	});
+
+	sp.state({
+		name: 'askQuestion',
+		url: '/askquestion',
+		templateUrl: 'templates/askQuestion.html',
+		controller: function ($rootScope, $state) {
+			var ctrl = this;
+			ctrl.stage = 1;
+			if (!$rootScope.isLoggedIn) {
+				$state.go('authUser.login');
+			}
+			ctrl.tinymceOptions = {
+				setup: function (editor) {
+					editor.on("focus", function () {
+						ctrl.showDetailsTips = true;
+					});
+					editor.on("blur", function () {
+						ctrl.showDetailsTips = false;
+					});
+				},
+				height: 200
+			};
+		},
+		controllerAs: 'ctrl'
 	})
 
 	$urlRouterProvider.otherwise('/interest');
@@ -250,12 +311,9 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
-		if (toState.name == 'doLogin') {
-			$rootScope.isLoggingIn = true;
-		} else {
-			$rootScope.isLoggingIn = false;
-			$rootScope.isLoading = true;
-		}
+
+		$rootScope.isLoading = true;
+		
 	});
 
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState) {

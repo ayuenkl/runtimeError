@@ -1,0 +1,7 @@
+<div ng-if="!ctrl.stage || ctrl.stage == 1">
+	<ng-include src="'/templates/askAdvice.html'"></ng-include>
+</div>
+
+<div ng-if="ctrl.stage == 2">
+	<ng-include src="'/templates/askInput.html'"></ng-include>
+</div>

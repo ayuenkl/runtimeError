@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="MainApp">
+<head>
+	<title>Test Editor</title>
+	<script src="/node_modules/tinymce/tinymce.min.js"></script>
+	<script src="/node_modules/angular/angular.js"></script>
+	<script src="/node_modules/angular-ui-tinymce/dist/tinymce.min.js"></script>
+	
+	<script type="text/javascript">
+		angular.module('MainApp', ['ui.tinymce'])
+		.controller('MainCtrl', function () {
+			var ctrl = this;
+			ctrl.tinymceModel = "Hello, World!";
+			ctrl.tinymceOptions = {
+				toolbar: 'undo redo | bold italic | alignleft aligncenter alignright'
+			};
+		});
+	</script>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+	<h1>TinyMCE Quick Start Guide</h1>
+
+	<form method="post">
+		
+		<textarea ui-tinymce="ctrl.tinymceOptions" ng-model="ctrl.tinymceModel"></textarea>
+
+	</form>
+
+</body>
+</html>

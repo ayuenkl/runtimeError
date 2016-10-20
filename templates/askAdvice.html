@@ -1,0 +1,22 @@
+<div class="container-fluid">
+	<div class="panel panel-primary" ng-hide="$root.isLoggedIn">
+		<div class="panel-body">
+			<p>Please login first</p>
+		</div>
+	</div>
+	<div class="panel panel-primary" ng-show="$root.isLoggedIn">
+		<div class="panel-body">
+			<p>Advice to ask question line 1</p>
+			<p>Advice to ask question line 2</p>
+			<p>Advice to ask question line 3</p>
+			<form>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="ctrl.gotIt"> 知道了，我會記住這些問問題的建議。
+					</label>
+				</div>
+				<button class="btn btn-primary" ng-click="ctrl.stage = 2" ng-disabled="!ctrl.gotIt">繼續</button>
+			</form>
+		</div>
+	</div>
+</div>

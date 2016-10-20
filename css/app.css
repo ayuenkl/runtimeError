@@ -7,6 +7,26 @@
 	}
 }
 
+.backdrop {
+	background-color: rgba(0, 0, 0, 0.7);
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100%;
+	z-index: 1050;
+}
+
+.backdrop > .loading {
+	color: #FFF;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+}
+
 .userBox {
 	width: 200px;
 	padding: 2px;
