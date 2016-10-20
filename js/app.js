@@ -257,35 +257,14 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	sp.state({
-		name: 'ask',
-		url: '/ask',
-		abstrct: true,
-		template: '<ui-view></ui-view>'
-	});
-
-	sp.state({
-		name: 'ask.advice',
-		url: '/advice',
-		templateUrl: '/templates/askAdvice.html',
-		controller: function ($state) {
+		name: 'askQuestion',
+		url: '/askquestion',
+		templateUrl: 'templates/askQuestion.html',
+		controller: function ($rootScope, $state) {
 			var ctrl = this;
-			ctrl.proceed = function () {
-				if (ctrl.gotIt) {
-					$state.go('ask.question');
-				}
-			}
-		},
-		controllerAs: 'ctrl'
-	});
-
-	sp.state({
-		name: 'ask.question',
-		url: '/question',
-		templateUrl: '/templates/askQuestion.html',
-		controller: function () {
-			var ctrl = this;
-			ctrl.tinymceOptions = {
-				height: 300
+			ctrl.stage = 1;
+			if (!$rootScope.isLoggedIn) {
+				$state.go('authUser.login');
 			}
 		},
 		controllerAs: 'ctrl'

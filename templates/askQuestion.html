@@ -1,7 +1,7 @@
+<div ng-if="!ctrl.stage || ctrl.stage == 1">
+	<ng-include src="'/templates/askAdvice.html'"></ng-include>
+</div>
 
-	<form method="post">
-		
-		<textarea ui-tinymce="ctrl.tinymceOptions" ng-model="ctrl.question"></textarea>
-
-	</form>
-
+<div ng-if="ctrl.stage == 2">
+	<ng-include src="'/templates/askInput.html'"></ng-include>
+</div>

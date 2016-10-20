@@ -15,7 +15,7 @@
 						<input type="checkbox" ng-model="ctrl.gotIt"> 知道了，我會記住這些問問題的建議。
 					</label>
 				</div>
-				<button class="btn btn-primary" ng-click="ctrl.proceed()" ng-disabled="!ctrl.gotIt">繼續</button>
+				<button class="btn btn-primary" ng-click="ctrl.stage = 2" ng-disabled="!ctrl.gotIt">繼續</button>
 			</form>
 		</div>
 	</div>

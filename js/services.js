@@ -42,8 +42,7 @@ reApp.factory('NavFactory', function ($rootScope) {
 				case 'searchResult':
 					$rootScope.activeTab = 0;
 					break;
-				case 'ask.advice':
-				case 'ask.question':
+				case 'askQuestion':
 					$rootScope.activeTab = 1;
 					break;
 				case 'authUser.login':
