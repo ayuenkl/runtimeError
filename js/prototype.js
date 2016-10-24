@@ -111,7 +111,14 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 		},
 
 		getNumOfBadges: function () {
-			return Math.round(Math.random() * 1000);
+			var bronze = Math.round(Math.random() * 1000);
+			var silver = Math.round(Math.random() * bronze / 10);
+			var gold = Math.round(Math.random() * silver / 10);
+			return {
+				gold: gold,
+				silver: silver,
+				bronze: bronze
+			}
 		},
 
 		login: function () {
@@ -129,6 +136,25 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 			$rootScope.prevState = 'userSignedUp';
 			$state.go('doLogin');
 
+		},
+
+		loadSignInUser: function (user) {
+			var userData = user.data.results[0];
+			var loadedUser = {
+				username: userData.login.username,
+				name: {
+					first: userData.name.first,
+					last: userData.name.last
+				},
+				avatar: userData.picture.thumbnail,
+				avatarLarge: userData.picture.large,
+				jobTitle: 'CTO',
+				company: 'JDB Holdings Ltd.',
+				reputation: this.getReputation(),
+				numOfBadges: this.getNumOfBadges()
+
+			};
+			return loadedUser;
 		}
 
 	}

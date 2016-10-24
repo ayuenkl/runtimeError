@@ -138,7 +138,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			.then(function (response) {
 				for (var i = 0; i < response.data.results.length; i++) {
 					ctrl.users.push({
-						username: response.data.results[i].name.first,
+						username: response.data.results[i].login.username,
 						avatar: response.data.results[i].picture.thumbnail,
 						reputation: prototypeFactory.getReputation(),
 						numOfBadges: prototypeFactory.getNumOfBadges()
@@ -237,12 +237,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		controller: function (loggedIn, user, $rootScope, $state, prototypeFactory) {
 			if (loggedIn) {
 				$rootScope.isLoggedIn = true;
-				$rootScope.user = {
-					username: user.data.results[0].name.first,
-					avatar: user.data.results[0].picture.thumbnail,
-					reputation: prototypeFactory.getReputation(),
-					numOfBadges: prototypeFactory.getNumOfBadges()
-				};
+				$rootScope.user = prototypeFactory.loadSignInUser(user);
 				$state.go($rootScope.prevState);
 			}
 		}
@@ -302,7 +297,35 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			};
 		},
 		controllerAs: 'ctrl'
-	})
+	});
+
+	sp.state({
+		name: 'user',
+		url: '/user/{uid}',
+		templateUrl: '/templates/userProfile.html',
+		controller: function ($rootScope) {
+			var ctrl = this;
+			ctrl.user = $rootScope.user;
+			if (angular.isUndefined(ctrl.user) || angular.isUndefined(ctrl.user.avatarLarge) || !ctrl.user.avatarLarge) {
+				ctrl.editPicture = true;
+			}
+			ctrl.updatePicture = function () {
+				if (ctrl.user.avatarLarge) {
+					ctrl.editPicture = false;
+				}
+			}
+			if (!ctrl.user.name.first && !ctrl.user.name.last) {
+					ctrl.editName = true;
+			}
+			if (!ctrl.user.selfDesc) {
+				ctrl.editSelfDesc = true;
+			}
+			ctrl.tinymceOptions = {
+				height: 200
+			}
+		},
+		controllerAs: 'ctrl'
+	});
 
 	$urlRouterProvider.otherwise('/interest');
 

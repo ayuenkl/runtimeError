@@ -1,0 +1,63 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-4 col-md-3">
+			<div class="thumbnail" style="background-color: #DDDDDD; width: 200px;" ng-hide="ctrl.editPicture">
+				<img src="{{ ctrl.user.avatarLarge }}" style="width: 100%; height: auto" />
+				<div class="caption" style="background-color: #333333;">
+					<h4 style="color: white;">譽-{{:: ctrl.user.reputation }}</h4>
+					<h4><span style="color: gold;">金-{{:: ctrl.user.numOfBadges.gold }}</span>
+						<span style="color: silver;">銀-{{:: ctrl.user.numOfBadges.silver }}</span>
+						<span style="color: darkgoldenrod;">銅-{{:: ctrl.user.numOfBadges.bronze }}</span>
+				</div>
+			</div>
+			<form ng-show="ctrl.editPicture">
+				<div class="form-group">
+					<label>相片鏈結</label>
+					<input type="url" class="form-control" ng-model="ctrl.user.avatarLarge" />
+				</div>
+			</form>
+			<button class="btn btn-default btn-xs" ng-hide="ctrl.editPicture" ng-click="ctrl.editPicture = true">更改相片</button>
+			<button class="btn btn-default btn-xs" ng-show="ctrl.editPicture" ng-click="ctrl.updatePicture()">儲存相片</button>
+		</div>
+		<div class="col-sm-8 col-md-9">
+			<h2 style="margin-bottom: 0px;" ng-hide="ctrl.editName">
+				{{ ctrl.user.name.first }} {{ ctrl.user.name.last }}
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editName = true">修改姓名</button>
+			</h2>
+			<form class="form-inline" ng-show="ctrl.editName">
+				<div class="form-group">
+					<label>姓名</label>
+					<input class="form-control" ng-model="ctrl.user.name.first" placeholder="大文" />
+					<input class="form-control" ng-model="ctrl.user.name.last" placeholder="陳" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editName = false">儲存姓名</button>
+			</form>
+			<h2 style="margin-top: 0px; margin-bottom: 30px;" ng-hide="ctrl.editCompany">
+				<small>{{ ctrl.user.jobTitle }}{{ (ctrl.user.jobTitle && ctrl.user.company)? ' of ' : '' }}{{ ctrl.user.company }}</small>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editCompany = true">修改公司/職位</button>
+			</h2>
+			<form class="form-inline" ng-show="ctrl.editCompany">
+				<div class="form-group">
+					<label>職位</label>
+					<input class="form-control" ng-model="ctrl.user.jobTitle" placeholder="Java 開發員" />
+				</div>
+				<div class="form-group">
+					<label>公司</label>
+					<input class="form-control" ng-model="ctrl.user.company" placeholder="ABC 有限公司" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editCompany = false">儲存公司/職位</button>
+			</form>
+			<div ng-hide="ctrl.editSelfDesc">
+				<div ng-bind-html="ctrl.user.selfDesc"></div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editSelfDesc = true">修改自我介紹</button>
+			</div>
+			<form ng-show="ctrl.editSelfDesc">
+				<div class="form-group">
+					<label>自我介紹</label>
+					<textarea class="form-control" ui-tinymce="ctrl.tinymceOptions" ng-model="ctrl.user.selfDesc"></textarea>
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editSelfDesc = false">儲存自我介紹</button>
+			</form>
+		</div>
+	</h4>
+</div>
