@@ -43,3 +43,71 @@
 	width: 24px;
 	height: 24px;
 }
+
+.badge-heading {
+	clear: left;
+	padding-top: 10px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+.badge-heading-first {
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+.gold-badge {
+	padding: 3px;
+	margin: 2px;
+	background-color: gold;
+	font-size: 0.8em;
+	text-align: justify;
+	float: left;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.silver-badge {
+	padding: 3px;
+	margin: 2px;
+	background-color: silver;
+	font-size: 0.8em;
+	text-align: justify;
+	float: left;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.bronze-badge {
+	padding: 3px;
+	margin: 2px;
+	background-color: darkgoldenrod;
+	font-size: 0.8em;
+	color: #DDDDDD;
+	text-align: justify;
+	float: left;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.suggest-badge {
+	padding: 3px;
+	margin: 2px;
+	background-color: #333333;
+	font-size: 0.8em;
+	text-align: justify;
+	float: left;
+	border-radius: 5px;
+}
+
+.gold {
+	color: gold;
+}
+
+.silver {
+	color: silver;
+}
+
+.bronze {
+	color: darkgoldenrod;
+}

@@ -1,0 +1,276 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-4 col-md-3">
+			<div ng-hide="ctrl.editPicture">
+				<div class="thumbnail" style="background-color: #DDDDDD; width: 200px;">
+					<img src="{{ ctrl.user.avatarLarge }}" style="width: 100%; height: auto" />
+					<div class="caption" style="background-color: #333333;">
+						<h4 style="color: white;">譽-{{:: ctrl.user.reputation }}</h4>
+						<h4><span style="color: gold;">金-{{:: ctrl.user.numOfBadges.gold }}</span>
+							<span style="color: silver;">銀-{{:: ctrl.user.numOfBadges.silver }}</span>
+							<span style="color: darkgoldenrod;">銅-{{:: ctrl.user.numOfBadges.bronze }}</span>
+						</h4>
+					</div>
+				</div>
+				<button class="btn btn-default btn-xs" ng-show="ctrl.isLoginUser" ng-click="ctrl.editPicture = true">更改相片</button>
+			</div>
+			<form ng-show="ctrl.editPicture">
+				<div class="form-group">
+					<label>相片鏈結</label>
+					<input type="url" class="form-control" ng-model="ctrl.user.avatarLarge" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.updatePicture()">儲存相片</button>
+			</form>
+		</div>
+		<div class="col-sm-8 col-md-9">
+			<h2 style="margin-bottom: 0px;" ng-hide="ctrl.editName">
+				{{ ctrl.user.name.first }} {{ ctrl.user.name.last }}
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editName = true" ng-show="ctrl.isLoginUser">修改姓名</button>
+			</h2>
+			<form class="form-inline" ng-show="ctrl.editName">
+				<div class="form-group">
+					<label>姓名</label>
+					<input class="form-control" ng-model="ctrl.user.name.first" placeholder="大文" />
+					<input class="form-control" ng-model="ctrl.user.name.last" placeholder="陳" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editName = false">儲存姓名</button>
+			</form>
+			<h2 style="margin-top: 0px; margin-bottom: 30px;" ng-hide="ctrl.editCompany">
+				<small>{{ ctrl.user.jobTitle }}{{ (ctrl.user.jobTitle && ctrl.user.company)? ' of ' : '' }}{{ ctrl.user.company }}</small>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editCompany = true" ng-show="ctrl.isLoginUser">修改公司/職位</button>
+			</h2>
+			<form class="form-inline" ng-show="ctrl.editCompany">
+				<div class="form-group">
+					<label>職位</label>
+					<input class="form-control" ng-model="ctrl.user.jobTitle" placeholder="Java 開發員" />
+				</div>
+				<div class="form-group">
+					<label>公司</label>
+					<input class="form-control" ng-model="ctrl.user.company" placeholder="ABC 有限公司" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editCompany = false">儲存公司/職位</button>
+			</form>
+			<hr />
+			<div ng-hide="ctrl.editEmail">
+				<p>電郵: {{ ctrl.user.email }}
+					<button class="btn btn-default btn-xs" ng-click="ctrl.editEmail = true" ng-show="ctrl.isLoginUser">修改電郵</button>
+				</p>
+			</div>
+			<form class="form-inline" ng-show="ctrl.editEmail">
+				<div class="form-group">
+					<label>電郵</label>
+					<input type="email" class="form-control" ng-model="ctrl.user.email" placeholder="user@domain.com" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editEmail = false">儲存電郵</button>
+			</form>
+			<p class="text-info"><small>(只作內部用途，不會公開展示。)</small></p>
+			<hr />
+			<div ng-hide="ctrl.editCity">
+				<p>居住在{{ ctrl.user.city }}
+					<button class="btn btn-default btn-xs" ng-click="ctrl.editCity = true" ng-show="ctrl.isLoginUser">修改居住城市</button>
+				</p>
+			</div>
+			<form class="form-inline" ng-show="ctrl.editCity">
+				<div class="form-group">
+					<label>居住城市</label>
+					<input class="form-control" ng-model="ctrl.user.city" placeholder="香港" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editCity = false">儲存居住城市</button>
+			</form>
+			<hr />
+			<div ng-hide="ctrl.editSelfDesc">
+				<div ng-bind-html="ctrl.user.selfDesc"></div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editSelfDesc = true" ng-show="ctrl.isLoginUser">修改自我介紹</button>
+			</div>
+			<form ng-show="ctrl.editSelfDesc">
+				<div class="form-group">
+					<label>自我介紹</label>
+					<textarea class="form-control" ui-tinymce="ctrl.tinymceOptions" ng-model="ctrl.user.selfDesc"></textarea>
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editSelfDesc = false">儲存自我介紹</button>
+			</form>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-4 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>聲譽 - {{:: ctrl.user.reputation }}</h3>
+				</div>
+				<div class="panel-body">
+					<p>最近增減的記錄</p>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>增/減</th>
+								<th><span class="glyphicon glyphicon-arrow-up"></span></th>
+								<th><span class="glyphicon glyphicon-arrow-down"></span></th>
+								<th>問題/答案</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>30</td>
+								<td>2</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第一條問題</a></td>
+							</tr>
+							<tr>
+								<td>45</td>
+								<td>3</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第二條問題</a></td>
+							</tr>
+							<tr>
+								<td>60</td>
+								<td>4</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第三條問題</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>權限</h3>
+				</div>
+				<div class="panel-body">
+					<p>你的權限</p>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>聲譽</th>
+								<th>權限</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="color: #AAAAAA;">
+								<td>100</td>
+								<td>權限 10</td>
+							</tr>
+							<tr style="color: #AAAAAA;">
+								<td>90</td>
+								<td>權限 9</td>
+							</tr>
+							<tr class="success">
+								<td>80</td>
+								<td>權限 8</td>
+							</tr>
+							<tr class="info">
+								<td>70</td>
+								<td>權限 7</td>
+							</tr>
+							<tr class="info">
+								<td>60</td>
+								<td>權限 6</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>奬章</h3>
+				</div>
+				<div class="panel-body">
+					<h5 class="badge-heading-first">建議的下一個奬章</h5>
+					<div class="suggest-badge" ng-class="ctrl.nextBadgeType">{{:: ctrl.nextBadgeName }}</div>
+					<div ng-show="ctrl.user.numOfBadges.gold">
+						<h5 class="badge-heading">金章: {{:: ctrl.user.numOfBadges.gold }} 個</h5>
+						<div ng-repeat="i in ctrl.numArray(ctrl.user.numOfBadges.gold)">
+							<div class="gold-badge">金章 {{:: i }} 號</div>
+						</div>
+					</div>
+					<div ng-show="ctrl.user.numOfBadges.silver">
+						<h5 class="badge-heading">銀章: {{:: ctrl.user.numOfBadges.silver }} 個</h5>
+						<div ng-repeat="i in ctrl.numArray(ctrl.user.numOfBadges.silver)">
+							<div class="silver-badge">銀章 {{:: i }} 號</div>
+						</div>
+					</div>
+					<div ng-show="ctrl.user.numOfBadges.bronze">
+						<h5 class="badge-heading">銅章: {{:: ctrl.user.numOfBadges.bronze }} 個</h5>
+						<div ng-repeat="i in ctrl.numArray(ctrl.user.numOfBadges.bronze)">
+							<div class="bronze-badge">銅章 {{:: i }} 號</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>過去的問題 (4)</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th><span class="glyphicon glyphicon-arrow-up"></span></th>
+								<th><span class="glyphicon glyphicon-arrow-down"></span></th>
+								<th>問題</th>
+							</tr>
+						<tbody>
+							<tr>
+								<td>2</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第一條問題</a></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第二條問題</a></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第三條問題</a></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>1</td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第四條問題</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>過去的答案 (2)</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th><span class="glyphicon glyphicon-arrow-up"></span></th>
+								<th><span class="glyphicon glyphicon-arrow-down"></span></th>
+								<th>答案</th>
+							</tr>
+						<tbody>
+							<tr>
+								<td>2</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶答過的第一條答案</a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶答過的第二條答案</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

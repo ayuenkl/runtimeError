@@ -48,6 +48,7 @@ reApp.factory('NavFactory', function ($rootScope) {
 				case 'authUser.login':
 				case 'authUser.signUp':
 				case 'userSignnedUp':
+				case 'user':
 					$rootScope.activeTab = 2;
 					break;
 			}

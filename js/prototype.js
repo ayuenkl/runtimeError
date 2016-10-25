@@ -107,11 +107,18 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 
 		getReputation: function () {
 
-			return Math.round(Math.random() * 10000);
+			return Math.round(Math.random() * 2000);
 		},
 
 		getNumOfBadges: function () {
-			return Math.round(Math.random() * 1000);
+			var bronze = Math.round(Math.random() * 100);
+			var silver = Math.round(Math.random() * bronze / 10);
+			var gold = Math.round(Math.random() * silver);
+			return {
+				gold: gold,
+				silver: silver,
+				bronze: bronze
+			}
 		},
 
 		login: function () {
@@ -129,6 +136,26 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 			$rootScope.prevState = 'userSignedUp';
 			$state.go('doLogin');
 
+		},
+
+		loadUser: function (user) {
+			var loadedUser = {
+				username: user.login.username,
+				name: {
+					first: user.name.first,
+					last: user.name.last
+				},
+				avatar: user.picture.thumbnail,
+				avatarLarge: user.picture.large,
+				jobTitle: 'CTO',
+				company: 'JDB Holdings Ltd.',
+				email: user.email,
+				reputation: this.getReputation(),
+				numOfBadges: this.getNumOfBadges(),
+				city: '香港',
+				selfDesc: '<p>我是 <a href="http://www.jobsdb.com">JobsDB.com</a> <b>偉大創辦人兼前首席科技總監</b>的繼承人。</p><p>在我在任期間，我把 JobsDB.com 的系統成功改寫為以 AngularJS 為前端及以 Sails.js 為後端的系統。</p>' 
+			};
+			return loadedUser;
 		}
 
 	}
