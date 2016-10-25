@@ -137,15 +137,11 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			$http.get('https://api.randomuser.me/?results=6')
 			.then(function (response) {
 				for (var i = 0; i < response.data.results.length; i++) {
-					ctrl.users.push({
-						username: response.data.results[i].login.username,
-						avatar: response.data.results[i].picture.thumbnail,
-						reputation: prototypeFactory.getReputation(),
-						numOfBadges: prototypeFactory.getNumOfBadges()
-					});
+					ctrl.users.push(prototypeFactory.loadUser(response.data.results[i]));
 				}
 			})
 			.finally(function () {
+				$rootScope.otherUsers = ctrl.users;
 				$rootScope.isLoading = false;
 			});
 
@@ -237,8 +233,8 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		controller: function (loggedIn, user, $rootScope, $state, prototypeFactory) {
 			if (loggedIn) {
 				$rootScope.isLoggedIn = true;
-				$rootScope.user = prototypeFactory.loadSignInUser(user);
-				$state.go($rootScope.prevState);
+				$rootScope.user = prototypeFactory.loadUser(user.data.results[0]);
+				$state.go($rootScope.prevState, $rootScope.prevParam);
 			}
 		}
 	});
@@ -303,9 +299,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		name: 'user',
 		url: '/user/{uid}',
 		templateUrl: '/templates/userProfile.html',
-		controller: function ($rootScope) {
+		controller: function ($rootScope, utilFactory, $stateParams) {
 			var ctrl = this;
-			ctrl.user = $rootScope.user;
+			if ($stateParams.uid == 0) {
+				ctrl.user = $rootScope.user;
+				ctrl.isLoginUser = true;
+			} else {
+				ctrl.user = $rootScope.otherUsers[$stateParams.uid - 1];
+				ctrl.isLoginUser = false;
+			}
 			if (angular.isUndefined(ctrl.user) || angular.isUndefined(ctrl.user.avatarLarge) || !ctrl.user.avatarLarge) {
 				ctrl.editPicture = true;
 			}
@@ -326,6 +328,19 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			ctrl.tinymceOptions = {
 				height: 200
 			}
+			ctrl.numArray = function (number) {
+				return utilFactory.numArray(number);
+			}
+			if (ctrl.user.numOfBadges.gold) {
+				ctrl.nextBadgeType = 'gold';
+				ctrl.nextBadgeName = '金章 ' + (ctrl.user.numOfBadges.gold + 1) + ' 號';
+			} else if (ctrl.user.numOfBadges.silver) {
+				ctrl.nextBadgeType = 'silver';
+				ctrl.nextBadgeName = '銀章 ' + (ctrl.user.numOfBadges.silver + 1) + ' 號';
+			} else {
+				ctrl.nextBadgeType = 'bronze';
+				ctrl.nextBadgeName = '銅章 ' + (ctrl.user.numOfBadges.bronze + 1) + ' 號';
+			}
 		},
 		controllerAs: 'ctrl'
 	});
@@ -342,10 +357,11 @@ reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 		
 	});
 
-	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState) {
+	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState, fromParam) {
 
 		if ((fromState.name != 'authUser.login') && (fromState.name != 'authUser.signUp') && (fromState.name != 'doLogin')) {
 			$rootScope.prevState = fromState;
+			$rootScope.prevParam = fromParam;
 		}
 		SEOFactory.setPageTitle(toState);
 		NavFactory.setNavTab(toState);

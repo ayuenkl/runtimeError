@@ -107,13 +107,13 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 
 		getReputation: function () {
 
-			return Math.round(Math.random() * 10000);
+			return Math.round(Math.random() * 2000);
 		},
 
 		getNumOfBadges: function () {
-			var bronze = Math.round(Math.random() * 1000);
+			var bronze = Math.round(Math.random() * 100);
 			var silver = Math.round(Math.random() * bronze / 10);
-			var gold = Math.round(Math.random() * silver / 10);
+			var gold = Math.round(Math.random() * silver);
 			return {
 				gold: gold,
 				silver: silver,
@@ -138,19 +138,18 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 
 		},
 
-		loadSignInUser: function (user) {
-			var userData = user.data.results[0];
+		loadUser: function (user) {
 			var loadedUser = {
-				username: userData.login.username,
+				username: user.login.username,
 				name: {
-					first: userData.name.first,
-					last: userData.name.last
+					first: user.name.first,
+					last: user.name.last
 				},
-				avatar: userData.picture.thumbnail,
-				avatarLarge: userData.picture.large,
+				avatar: user.picture.thumbnail,
+				avatarLarge: user.picture.large,
 				jobTitle: 'CTO',
 				company: 'JDB Holdings Ltd.',
-				email: userData.email,
+				email: user.email,
 				reputation: this.getReputation(),
 				numOfBadges: this.getNumOfBadges(),
 				city: '香港',

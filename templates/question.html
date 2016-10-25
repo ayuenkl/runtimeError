@@ -28,7 +28,7 @@ $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 					<button class="btn btn-default btn-xs">修改</button>
 				</div>
 				<div class="col-sm-9">
-					<user-box class="pull-right" qa-type="問" qa-time="2013-08-02 08:02" user="ctrl.users[0]"></user-box>
+					<a ui-sref="user({uid: 1})"><user-box class="pull-right" qa-type="問" qa-time="2013-08-02 08:02" user="ctrl.users[0]"></user-box></a>
 				</div>
 			</div>
 			<hr>
@@ -52,7 +52,7 @@ $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
-						<user-box qa-type="答" qa-time="2013-08-02 08:02" user="ctrl.users[1]"></user-box>
+						<a ui-sref="user({uid: 2})"><user-box qa-type="答" qa-time="2013-08-02 08:02" user="ctrl.users[1]"></user-box></a>
 					</div>
 				</div>
 			</div>
@@ -79,10 +79,10 @@ $rootScope.$on('$stateChangeSuccess', function () {
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
-						<user-box qa-type="答" qa-time="2015-05-05 12:26" user="ctrl.users[2]"></user-box>
+						<a ui-sref="user({uid: 3})"><user-box qa-type="答" qa-time="2015-05-05 12:26" user="ctrl.users[2]"></user-box></a>
 					</div>
 					<div class="pull-right">
-						<user-box qa-type="修改" qa-time="2015-05-05 13:00" user="ctrl.users[3]"></user-box>
+						<a ui-sref="user({uid: 4})"><user-box qa-type="修改" qa-time="2015-05-05 13:00" user="ctrl.users[3]"></user-box></a>
 					</div>
 				</div>
 			</div>
@@ -109,7 +109,7 @@ scope.$apply();
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
-						<user-box qa-type="答" qa-time="2015-08-02 08:22" user="ctrl.users[4]"></user-box>
+						<a ui-sref="user({uid: 5})"><user-box qa-type="答" qa-time="2015-08-02 08:22" user="ctrl.users[4]"></user-box></a>
 					</div>
 				</div>
 			</div>
@@ -139,7 +139,7 @@ scope.$apply();
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
-						<user-box qa-type="答" qa-time="2013-02-13 10:22" user="ctrl.users[5]"></user-box>
+						<a ui-sref="user({uid: 6})"><user-box qa-type="答" qa-time="2013-02-13 10:22" user="ctrl.users[5]"></user-box></a>
 					</div>
 				</div>
 			</div>
@@ -185,7 +185,7 @@ scope.$apply();
 				</div>
 				<div class="col-sm-9">
 					<div class="pull-right">
-						<user-box qa-type="答" qa-time="{{:: ctrl.answerTime }}" user="$root.user"></user-box>
+						<a ui-sref="user({uid: 0})"><user-box qa-type="答" qa-time="{{:: ctrl.answerTime }}" user="$root.user"></user-box></a>
 					</div>
 				</div>
 			</div>

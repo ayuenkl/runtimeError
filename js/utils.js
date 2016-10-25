@@ -15,4 +15,18 @@ angular.module('ayUtils', [])
 		return (number / Math.pow(1000, exp)).toFixed(digits) + suffixes[exp - 1];
 	};
 
-});
+})
+
+.factory('utilFactory', function () {
+	return {
+
+		numArray: function (number) {
+			var a = [];
+			for (i = 0; i < number; i++) {
+				a.push(i + 1);
+			}
+			return a;
+		}
+
+	}
+})

@@ -15,7 +15,7 @@
 				<li><a ui-sref="authUser.login">登錄 | 注冊</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right" ng-show="$root.isLoggedIn">
-				<li><a ui-sref="user({uid: 111})"><nav-user-box /></a></li>
+				<li><a ui-sref="user({uid: 0})"><nav-user-box /></a></li>
 			</ul>
 			<form class="navbar-form navbar-right" ng-submit="$ctrl.searchQA()">
 				<div class="form-group">
@@ -39,7 +39,7 @@
 				<li><a ui-sref="home.interest" ng-click="$ctrl.toggleCollapse()">看問題</a></li>
 				<li><a ui-sref="askQuestion" ng-click="$ctrl.toggleCollapse()">問問題</a></li>
 				<li ng-hide="$root.isLoggedIn"><a ui-sref="authUser.login" ng-click="$ctrl.toggleCollapse()">登錄 | 注冊</a></li>
-				<li ng-show="$root.isLoggedIn"><a ui-sref="user({uid: 111})" ng-click="$ctrl.toggleCollapse()"><nav-user-box /></a></li>
+				<li ng-show="$root.isLoggedIn"><a ui-sref="user({uid: 0})" ng-click="$ctrl.toggleCollapse()"><nav-user-box /></a></li>
 			</ul>
 		</nav>
 
