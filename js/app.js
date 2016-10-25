@@ -314,11 +314,14 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 					ctrl.editPicture = false;
 				}
 			}
-			if (!ctrl.user.name.first && !ctrl.user.name.last) {
+			if (angular.isUndefined(ctrl.user.name) || (!ctrl.user.name.first && !ctrl.user.name.last)) {
 					ctrl.editName = true;
 			}
 			if (!ctrl.user.selfDesc) {
 				ctrl.editSelfDesc = true;
+			}
+			if (!ctrl.user.city) {
+				ctrl.editCity = true;
 			}
 			ctrl.tinymceOptions = {
 				height: 200

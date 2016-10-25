@@ -47,6 +47,34 @@
 				</div>
 				<button class="btn btn-default btn-xs" ng-click="ctrl.editCompany = false">儲存公司/職位</button>
 			</form>
+			<hr />
+			<div ng-hide="ctrl.editEmail">
+				<p>電郵: {{ ctrl.user.email }}
+					<button class="btn btn-default btn-xs" ng-click="ctrl.editEmail = true">修改電郵</button>
+				</p>
+			</div>
+			<form class="form-inline" ng-show="ctrl.editEmail">
+				<div class="form-group">
+					<label>電郵</label>
+					<input type="email" class="form-control" ng-model="ctrl.user.email" placeholder="user@domain.com" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editEmail = false">儲存電郵</button>
+			</form>
+			<p class="text-info"><small>(只作內部用途，不會公開展示。)</small></p>
+			<hr />
+			<div ng-hide="ctrl.editCity">
+				<p>居住在{{ ctrl.user.city }}
+					<button class="btn btn-default btn-xs" ng-click="ctrl.editCity = true">修改居住城市</button>
+				</p>
+			</div>
+			<form class="form-inline" ng-show="ctrl.editCity">
+				<div class="form-group">
+					<label>居住城市</label>
+					<input class="form-control" ng-model="ctrl.user.city" placeholder="香港" />
+				</div>
+				<button class="btn btn-default btn-xs" ng-click="ctrl.editCity = false">儲存居住城市</button>
+			</form>
+			<hr />
 			<div ng-hide="ctrl.editSelfDesc">
 				<div ng-bind-html="ctrl.user.selfDesc"></div>
 				<button class="btn btn-default btn-xs" ng-click="ctrl.editSelfDesc = true">修改自我介紹</button>
@@ -59,5 +87,185 @@
 				<button class="btn btn-default btn-xs" ng-click="ctrl.editSelfDesc = false">儲存自我介紹</button>
 			</form>
 		</div>
-	</h4>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-5 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>聲譽 - {{:: ctrl.user.reputation }}</h3>
+				</div>
+				<div class="panel-body">
+					<p>最近增減的記錄</p>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>增/減</th>
+								<th><span class="glyphicon glyphicon-arrow-up"></span></th>
+								<th><span class="glyphicon glyphicon-arrow-down"></span></th>
+								<th>問題/答案</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>30</td>
+								<td>2</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第一條問題</a></td>
+							</tr>
+							<tr>
+								<td>45</td>
+								<td>3</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第二條問題</a></td>
+							</tr>
+							<tr>
+								<td>60</td>
+								<td>4</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第三條問題</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>權限</h3>
+				</div>
+				<div class="panel-body">
+					<p>你的權限</p>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>聲譽</th>
+								<th>權限</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="color: #AAAAAA;">
+								<td>100</td>
+								<td>權限 10</td>
+							</tr>
+							<tr style="color: #AAAAAA;">
+								<td>90</td>
+								<td>權限 9</td>
+							</tr>
+							<tr class="success">
+								<td>80</td>
+								<td>權限 8</td>
+							</tr>
+							<tr class="info">
+								<td>70</td>
+								<td>權限 7</td>
+							</tr>
+							<tr class="info">
+								<td>60</td>
+								<td>權限 6</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>奬章</h3>
+				</div>
+				<div class="panel-body">
+					<h5 class="list-group-item-heading">金章: 2 個</h5>
+					<div class="list-group-item-text">
+					<div class="goldBadge">金章一號</div>
+					<div class="goldBadge">金章二號</div>
+					<h5 class="list-group-item-heading" style="clear: left; padding-top: 10px;">銀章: 4 個</h5>
+					<div class="silverBadge">銀章一號</div>
+					<div class="silverBadge">銀章二號</div>
+					<div class="silverBadge">銀章三號</div>
+					<div class="silverBadge">銀章四號</div>
+					<h5 class="list-group-item-heading" style="clear: left; padding-top: 10px">銅章 8 個</h5>
+					<div class="bronzeBadge">銅章一號</div>
+					<div class="bronzeBadge">銅章二號</div>
+					<div class="bronzeBadge">銅章三號</div>
+					<div class="bronzeBadge">銅章四號</div>
+					<div class="bronzeBadge">銅章五號</div>
+					<div class="bronzeBadge">銅章六號</div>
+					<div class="bronzeBadge">銅章七號</div>
+					<div class="bronzeBadge">銅章八號</div>
+					<div style="clear: left;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>過去的問題 (4)</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th><span class="glyphicon glyphicon-arrow-up"></span></th>
+								<th><span class="glyphicon glyphicon-arrow-down"></span></th>
+								<th>問題</th>
+							</tr>
+						<tbody>
+							<tr>
+								<td>2</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第一條問題</a></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第二條問題</a></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第三條問題</a></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>1</td>
+								<td><a ui-sref="question({qid: 111})">這用戶發問過的第四條問題</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>過去的答案 (2)</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th><span class="glyphicon glyphicon-arrow-up"></span></th>
+								<th><span class="glyphicon glyphicon-arrow-down"></span></th>
+							</tr>
+						<tbody>
+							<tr>
+								<td>2</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶答過的第一條答案</a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td></td>
+								<td><a ui-sref="question({qid: 111})">這用戶答過的第二條答案</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

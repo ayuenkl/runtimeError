@@ -43,3 +43,37 @@
 	width: 24px;
 	height: 24px;
 }
+
+.goldBadge {
+	padding: 3px;
+	margin: 2px;
+	background-color: gold;
+	font-size: 0.8em;
+	text-align: justify;
+	float: left;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.silverBadge {
+	padding: 3px;
+	margin: 2px;
+	background-color: silver;
+	font-size: 0.8em;
+	text-align: justify;
+	float: left;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.bronzeBadge {
+	padding: 3px;
+	margin: 2px;
+	background-color: darkgoldenrod;
+	font-size: 0.8em;
+	color: #DDDDDD;
+	text-align: justify;
+	float: left;
+	border: 1px solid black;
+	border-radius: 5px;
+}

@@ -150,9 +150,11 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 				avatarLarge: userData.picture.large,
 				jobTitle: 'CTO',
 				company: 'JDB Holdings Ltd.',
+				email: userData.email,
 				reputation: this.getReputation(),
-				numOfBadges: this.getNumOfBadges()
-
+				numOfBadges: this.getNumOfBadges(),
+				city: '香港',
+				selfDesc: '<p>我是 <a href="http://www.jobsdb.com">JobsDB.com</a> <b>偉大創辦人兼前首席科技總監</b>的繼承人。</p><p>在我在任期間，我把 JobsDB.com 的系統成功改寫為以 AngularJS 為前端及以 Sails.js 為後端的系統。</p>' 
 			};
 			return loadedUser;
 		}
