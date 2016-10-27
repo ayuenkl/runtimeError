@@ -1,8 +1,8 @@
-var reApp = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.tinymce', 'ngTouch', 'ngAnimate', 'ayUtils']);
+var app = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.tinymce', 'ngTouch', 'ngAnimate', 'ayUtils']);
 
-reApp.constant('APPNAME', 'Hackga');
+app.constant('APPNAME', 'Hackga');
 
-reApp.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 
 	var sp = $stateProvider;
 
@@ -349,7 +349,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 
 });
 
-reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
+app.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
 

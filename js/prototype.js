@@ -1,4 +1,4 @@
-reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
+app.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 
 	return {
 

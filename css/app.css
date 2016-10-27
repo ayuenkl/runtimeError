@@ -9,22 +9,20 @@
 
 .backdrop {
 	background-color: rgba(0, 0, 0, 0.7);
-	bottom: 0;
 	height: 100%;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
+	left: 0px;
+	position: fixed;
+	top: 0px;
 	width: 100%;
 	z-index: 1050;
 }
 
-.backdrop > .loading {
+.loading {
 	color: #FFF;
-	position: relative;
+	position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
-	text-align: center;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .userBox {
@@ -110,4 +108,59 @@
 
 .bronze {
 	color: darkgoldenrod;
+}
+
+.hg-header {
+	background-color: #333;
+	padding: 10px;
+	color: #DDD;
+	height: 50px;
+}
+
+.hg-header-brand {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+
+.hg-navbar {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.hg-navbar-right li {
+	float: right;
+}
+
+.hg-navbar li {
+	display: inline-block;
+	padding: 0px 16px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.hg-navbar li a {
+	color: #DDD;
+	text-decoration: none;
+}
+
+.hg-navbar li a:hover {
+	color: #FFF;
+}
+
+.hg-current-window {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+}
+
+.hg-center-screen {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

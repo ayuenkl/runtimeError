@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app="HackgaAdmin">
+<head>
+	<title>Hackga Admin</title>
+
+	<link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+	<link href="/node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+	<link href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+	<link href="/css/app.css" rel="stylesheet" />
+
+	<script src="/node_modules/angular/angular.js"></script>
+	<script src="/node_modules/angular-animate/angular-animate.js"></script>
+	<script src="/node_modules/angular-touch/angular-touch.js"></script>
+	<script src="/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script> 
+	<script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+
+	<script src="/admin/js/app.js"></script>
+	<script src="/admin/js/components.js"></script>
+	<script src="/admin/js/prototype.js"></script>
+
+	<script src="/js/prototype.js"></script>
+	<script src="/js/components.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="backdrop" ng-show="$root.isLoading">
+		<div class="loading">
+			<i class="fa fa-spinner fa-pulse fa-fw" style="font-size: 4em;"></i>
+		</div>
+	</div>
+	<hg-navbar></hg-navbar>
+	<main>
+		<div class="container">
+			<ui-view></ui-view>
+		</div>
+	</main>
+</body>
+</html>
