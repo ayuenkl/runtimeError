@@ -9,7 +9,7 @@ app.factory('adminPrototype', function ($rootScope, $http, $state, prototypeFact
 				$rootScope.user = prototypeFactory.loadUser(response.data.results[0]);
 				$rootScope.isLoggedIn = true;
 				$rootScope.isLoading = false;
-				$state.go('main');
+				$state.go('main.home');
 			});
 
 		}

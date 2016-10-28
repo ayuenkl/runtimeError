@@ -130,6 +130,11 @@
 	overflow: hidden;
 }
 
+.hg-navbar-toggle-button {
+	padding-right: 10px;
+	float: left;
+}
+
 .hg-navbar-right li {
 	float: right;
 }

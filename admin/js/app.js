@@ -21,14 +21,38 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'main',
 		url: '/main',
-		template: 'To be implemented...',
+		abstract: true,
+		templateUrl: './templates/main.html',
 		controller: function ($rootScope, $state) {
 			if (!$rootScope.isLoggedIn) {
 				$state.go('login');
 			}
 		}
+	})
+
+	sp.state({
+		name: 'main.home',
+		url: '/home',
+		templateUrl: './templates/home.html',
 	});
 
-	$urlRouterProvider.otherwise('/main');
+	sp.state({
+		name: 'main.moderation',
+		url: '/moderation',
+		template: 'To be implemented..'
+	})
+
+	$urlRouterProvider.otherwise('/main/home');
 
 });
+
+app.run(function ($rootScope) {
+
+	$rootScope.$on('$stateChangeStart', function (event, toState) {
+		$rootScope.isLoading = true;
+	});
+
+	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState, fromParam) {
+		$rootScope.isLoading = false;
+	});
+})

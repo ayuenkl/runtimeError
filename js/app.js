@@ -299,7 +299,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		name: 'user',
 		url: '/user/{uid}',
 		templateUrl: '/templates/userProfile.html',
-		controller: function ($rootScope, utilFactory, $stateParams) {
+		controller: function ($rootScope, utilFactory, $state, $stateParams) {
 			var ctrl = this;
 			if ($stateParams.uid == 0) {
 				ctrl.user = $rootScope.user;
@@ -316,8 +316,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					ctrl.editPicture = false;
 				}
 			}
-			if (angular.isUndefined(ctrl.user.name) || (!ctrl.user.name.first && !ctrl.user.name.last)) {
-					ctrl.editName = true;
+			if (angular.isUndefined(ctrl.user)) {
+				$state.go('doLogin');
 			}
 			if (!ctrl.user.selfDesc) {
 				ctrl.editSelfDesc = true;
