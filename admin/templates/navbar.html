@@ -1,5 +1,6 @@
 <div class="hg-header">
-	<i class="fa fa-bars fa-2x hg-navbar-toggle-button"></i>
+	<a href="" ng-click="$ctrl.toggleSideMenu()" class="hidden-xs"><i class="fa fa-bars fa-2x hg-navbar-toggle-button"></i></a>
+	<a href="" ng-click="$ctrl.toggleFloatMenu()" class="visible-xs"><i class="fa fa-bars fa-2x hg-navbar-toggle-button"></i></a>
 	<h3 class="hg-header-brand">Hackga Admin</h3>
 	<ul class="hg-navbar hg-navbar-right" ng-show="$root.isLoggedIn">
 		<li><a href="/#/user/0" target="frontEnd"><nav-user-box></nav-user-box></a></li>

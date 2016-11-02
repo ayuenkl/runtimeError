@@ -112,9 +112,15 @@
 
 .hg-header {
 	background-color: #333;
+	margin: 0px;
 	padding: 10px;
 	color: #DDD;
 	height: 50px;
+}
+
+.hg-header a {
+	text-decoration: none;
+	color: #DDD;
 }
 
 .hg-header-brand {
@@ -168,4 +174,76 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.hg-main, .hg-side-menu, .hg-main-content {
+	margin: 0px;
+	border-width: 0px;
+}
+
+.hg-main {
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+}
+
+.hg-side-menu, .hg-side-menu-float {
+	width: 200px;
+	height: 100%;
+	padding: 0px;
+	background-color: whitesmoke;
+}
+
+.hg-side-menu {
+	float: left;
+}
+
+.hg-side-menu-float {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1000;
+}
+
+.hg-main-content, .hg-main-content-fix {
+	height: 100%;
+	padding: 10px;
+}
+
+.hg-main-content {
+	float: left;
+}
+
+.hg-main-content-fix {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 0;
+}
+
+.hg-side-menu-nav {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+.hg-side-menu-nav li a {
+	display: block;
+	padding: 8px 16px;
+	text-decoration: none;
+	color: slategrey;
+	font-weight: bold;
+}
+
+.hg-side-menu-nav li a.active {
+	background-color: lightblue;
+}
+
+.hg-side-menu-nav li a:hover:not(.active) {
+	background-color: dimgrey;
+	color: white;
 }

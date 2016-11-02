@@ -1,49 +1,30 @@
 <!--
-<div class="row">
-	<div class="col-xs-2">
-		<ul class="nav nav-pills nav-stacked">
-			<li class="active"><a ui-sref="main.home">Home</a></li>
-			<li><a ui-sref="main.moderation">Moderation</a></li>
-		</ul>
-	</div>
-	<div class="col-xs-10">
-		<ui-view></ui-view>
-	</div>
-</div>
--->
-<style>
-	.testa {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		width: 100%;
-	}
-
-	.testa li a {
-		display: block;
-		padding: 8px 16px;
-		text-decoration: none;
-		color: slategrey;
-		font-weight: bold;
-	}
-
-	.testa li a.active {
-		background-color: lightblue;
-	}
-
-	.testa li a:hover:not(.active) {
-		background-color: dimgrey;
-		color: white;
-	}
-
-</style>
-<div style="position: absolute; top: 50px; left: 0px; width: 200px; margin: 0px; padding: 0px; border-width: 0px; background-color: whitesmoke;">
-	<ul class="testa">
+<div ng-class="$root.sideMenuClass" ng-hide="$root.isSideMenuCollapsed || $root.isFloatMenuCollapsed" ng-init="$root.sideMenuClass = {'hidden-xs': true, 'hg-side-menu': true}">
+	<ul class="hg-side-menu-nav">
 		<li><a class="active" ui-sref="main.home">Home</a></li>
 		<li><a ui-sref="main.moderation">Moderation</a></li>
 	</ul>
 </div>
-<div style="position: absolute; top: 50px; left: 200px; margin: 0px; border-width: 0px; padding-left: 30px;">
+<div ng-class="$root.mainContentClass" ng-init="$root.mainContentClass = 'hg-main-content'">
 	<ui-view></ui-view>
+</div>
+-->
+<div class="hg-main">
+	<div class="hg-side-menu hidden-xs" ng-hide="$root.isSideMenuCollapsed">
+		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
+			<li><a ng-class="{active: ctrl.activeState == menu.state}" ui-sref="{{ menu.state }}">{{ menu.menu }}</a></li>
+		</ul>
+	</div>
+	<div class="hg-side-menu-float visible-xs" ng-show="$root.isSideMenuFloated">
+		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
+			<li><a ng-class="{active: ctrl.activeState == menu.state}" ui-sref="{{ menu.state }}">{{ menu.menu }}</a></li>
+		</ul>
+	</div>
+	<div class="hg-main-content hidden-xs">
+		<ui-view></ui-view>
+	</div>
+	<div class="hg-main-content-fix visible-xs">
+		<ui-view></ui-view>
+	</div>
 </div>
 

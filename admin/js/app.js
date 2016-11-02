@@ -24,10 +24,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		abstract: true,
 		templateUrl: './templates/main.html',
 		controller: function ($rootScope, $state) {
+			var ctrl = this;
 			if (!$rootScope.isLoggedIn) {
 				$state.go('login');
 			}
-		}
+			ctrl.menuItems = [{
+				menu: 'Home',
+				state: 'main.home'
+			}, {
+				menu: 'Moderation',
+				state: 'main.moderation'
+			}];
+			ctrl.activeState = 'main.home';
+		},
+		controllerAs: 'ctrl'
 	})
 
 	sp.state({
@@ -48,6 +58,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 app.run(function ($rootScope) {
 
+	$rootScope.mainContentClass = 'hg-main-content';
+
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
 		$rootScope.isLoading = true;
 	});
@@ -55,4 +67,5 @@ app.run(function ($rootScope) {
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState, fromParam) {
 		$rootScope.isLoading = false;
 	});
+
 })
