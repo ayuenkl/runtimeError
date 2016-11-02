@@ -1,3 +1,4 @@
+<!--
 <div class="hg-main">
 	<div class="hg-side-menu hidden-xs" ng-hide="$root.isSideMenuCollapsed">
 		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
@@ -11,6 +12,24 @@
 	</div>
 	<div class="hg-main-content">
 		<ui-view></ui-view>
+	</div>
+</div>
+-->
+<div class="row">
+	<div class="col-sm-3 col-md-2 hidden-xs" ng-hide="$root.isSideMenuCollapsed">
+		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
+			<li><a ng-class="{active: $root.currState == menu.state}" ui-sref="{{ menu.state }}" ng-click="$root.isSideMenuFloated = false">{{ menu.menu }}</a></li>
+		</ul>
+	</div>
+	<div class="hg-side-menu-float visible-xs" ng-show="$root.isSideMenuFloated">
+		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
+			<li><a ng-class="{active: ctrl.activeState == menu.state}" ui-sref="{{ menu.state }}" ng-click="$root.isSideMenuFloated = false">{{ menu.menu }}</a></li>
+		</ul>
+	</div>
+	<div class="col-sm-9 col-md-10">
+		<div class="container">
+			<ui-view></ui-view>
+		</div>
 	</div>
 </div>
 
