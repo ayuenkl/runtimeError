@@ -1,29 +1,15 @@
-<!--
-<div ng-class="$root.sideMenuClass" ng-hide="$root.isSideMenuCollapsed || $root.isFloatMenuCollapsed" ng-init="$root.sideMenuClass = {'hidden-xs': true, 'hg-side-menu': true}">
-	<ul class="hg-side-menu-nav">
-		<li><a class="active" ui-sref="main.home">Home</a></li>
-		<li><a ui-sref="main.moderation">Moderation</a></li>
-	</ul>
-</div>
-<div ng-class="$root.mainContentClass" ng-init="$root.mainContentClass = 'hg-main-content'">
-	<ui-view></ui-view>
-</div>
--->
 <div class="hg-main">
 	<div class="hg-side-menu hidden-xs" ng-hide="$root.isSideMenuCollapsed">
 		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
-			<li><a ng-class="{active: ctrl.activeState == menu.state}" ui-sref="{{ menu.state }}">{{ menu.menu }}</a></li>
+			<li><a ng-class="{active: $root.currState == menu.state}" ui-sref="{{ menu.state }}" ng-click="$root.isSideMenuFloated = false">{{ menu.menu }}</a></li>
 		</ul>
 	</div>
 	<div class="hg-side-menu-float visible-xs" ng-show="$root.isSideMenuFloated">
 		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
-			<li><a ng-class="{active: ctrl.activeState == menu.state}" ui-sref="{{ menu.state }}">{{ menu.menu }}</a></li>
+			<li><a ng-class="{active: ctrl.activeState == menu.state}" ui-sref="{{ menu.state }}" ng-click="$root.isSideMenuFloated = false">{{ menu.menu }}</a></li>
 		</ul>
 	</div>
-	<div class="hg-main-content hidden-xs">
-		<ui-view></ui-view>
-	</div>
-	<div class="hg-main-content-fix visible-xs">
+	<div class="hg-main-content">
 		<ui-view></ui-view>
 	</div>
 </div>
