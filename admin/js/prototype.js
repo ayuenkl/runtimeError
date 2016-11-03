@@ -36,6 +36,40 @@ app.factory('adminPrototype', function ($rootScope, $http, $state, prototypeFact
 				type: 'Q',
 				content: 'what is the difference these statements in insertionSort?'
 			}];
+		},
+
+		loadModerationHistory: function () {
+			return [{
+				time: '16-08-01 05:09',
+				type: 'Q',
+				content: 'Binary Data in MySQL',
+				handledBy: 'Anthony',
+				action: 'passed'
+			}, {
+				time: '16-08-01 04:59',
+				type: 'Q',
+				content: 'Filling a DataSet or DataTable from a LINQ query result set',
+				handledBy: 'Roy',
+				action: 'edited'
+			}, {
+				time: '16-08-01 00:59',
+				type: 'Q',
+				content: 'Difference betwwen Math.Floor() and Math.Truncate()',
+				handledBy: 'Anthony',
+				action: 'deleted'
+			}, {
+				time: '16-08-01 00:42',
+				type: 'Q',
+				content: 'Determine a User\'s Timezone',
+				handledBy: 'Anthony',
+				action: 'passed'
+			}, {
+				time: '16-08-01 00:30',
+				type: 'Q',
+				content: 'How can relative time be calculated in C#?',
+				handledBy: 'Roy',
+				action: 'passed'
+			}];
 		}
 
 	};

@@ -259,6 +259,7 @@
 
 .hg-side-menu-nav li a.active {
 	background-color: lightblue;
+	color: black;
 }
 
 .hg-side-menu-nav li a:hover:not(.active) {

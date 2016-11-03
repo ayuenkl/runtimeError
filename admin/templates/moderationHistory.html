@@ -1,0 +1,44 @@
+<form class="form-inline">
+	<div class="form-group">
+		<label>From</label>
+		<div class="input-group">
+			<input type="text" class="form-control" uib-datepicker-popup ng-model="ctrl.dateFrom" is-open="ctrl.popup1.opened" ng-required="true" />
+			<div class="input-group-btn">
+				<button class="btn btn-default" ng-click="ctrl.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>To</label>
+		<div class="input-group">
+			<input type="text" class="form-control" uib-datepicker-popup ng-model="ctrl.dateTo" is-open="ctrl.popup2.opened" ng-required="true" />
+			<div class="input-group-btn">
+				<btton class="btn btn-default" ng-click="ctrl.open2()"><i class="glyphicon glyphicon-calendar"></i></btton>
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-primary" ng-click="ctrl.go = true">Go</button>
+</form>
+<hr />
+<div class="table-responsive" ng-show="ctrl.go">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Time</th>
+				<th>Type</th>
+				<th>Content</th>
+				<th>Handled By</th>
+				<th>Action Taken</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="record in ctrl.history">
+				<td>{{:: record.time }}</td>
+				<td>{{:: record.type }}</td>
+				<td><a href="/#/question/111" target="frontEnd">{{:: record.content }}</a></td>
+				<td>{{:: record.handledBy }}</td>
+				<td>{{:: record.action }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,4 +1,4 @@
-var app = angular.module('HackgaAdmin', ['ngAnimate', 'ngTouch', 'ui.router']);
+var app = angular.module('HackgaAdmin', ['ngAnimate', 'ngTouch', 'ui.router', 'ui.bootstrap']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -58,7 +58,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		name: 'main.moderation.waiting',
 		url: '/waiting',
 		templateUrl: './templates/waitingModeration.html',
-		//template: 'testing',
 		controller: function (adminPrototype) {
 			var ctrl = this;
 			ctrl.records = adminPrototype.loadWaitingModeration();
@@ -69,7 +68,33 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'main.moderation.history',
 		url: '/history',
-		template: 'Moderation History... contruting...'
+		templateUrl: './templates/moderationHistory.html',
+		controller: function (adminPrototype) {
+
+			var ctrl = this;
+
+			ctrl.history = adminPrototype.loadModerationHistory();
+
+			ctrl.dateFrom = new Date();
+			ctrl.dateTo = new Date();
+
+			ctrl.popup1 = {
+				opened: false
+			};
+
+			ctrl.popup2 = {
+				opened: false
+			};
+
+			ctrl.open1 = function () {
+				ctrl.popup1.opened = true;
+			};
+
+			ctrl.open2 = function () {
+				ctrl.popup2.opened = true;
+			};
+		},
+		controllerAs: 'ctrl'
 	})
 
 	$urlRouterProvider.otherwise('/main/home');
@@ -86,6 +111,7 @@ app.run(function ($rootScope) {
 
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState, fromParam) {
 		$rootScope.activeSideMenu = toState.name.split('.')[1];
+		$rootScope.currState = toState.name;
 		console.log('Curr Active Side Menu Item is ', $rootScope.activeSideMenu);
 		$rootScope.isLoading = false;
 	});
