@@ -1,0 +1,38 @@
+<ol class="breadcrumb">
+	<li><a ui-sref="main.users.list">List</a></li>
+</ol>
+<form class="form-inline">
+	<div class="form-group">
+		<input type="text" placeholder="User name" />
+	</div>
+	<button class="btn btn-primary">Find user</button>
+	<div class="btn-group" ng-init="ctrl.listOption = 'Backend'">
+        <label class="btn btn-info" ng-model="ctrl.listOption" uib-btn-radio="'Backend'">Backend Users</label>
+        <label class="btn btn-info" ng-model="ctrl.listOption" uib-btn-radio="'All'">All Users</label>
+    </div>
+</form>
+<hr />
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>User</th>
+				<th>Type</th>
+				<th>Level</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="record in ctrl.users">
+				<td><user-box qa-type="N" user="record.profile"></user-box>
+					{{:: record.name.first }} {{:: record.name.last }}
+				</td>
+			</tr>
+			<tr>
+				<td>{{:: record.type }}</td>
+			</tr>
+			<tr>
+				<td>{{:: record.level }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

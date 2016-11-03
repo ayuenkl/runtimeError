@@ -39,7 +39,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			}, {
 				menu: 'Users',
 				menuId: 'users',
-				state: 'main.users'
+				state: 'main.users.list'
 			}];
 		},
 		controllerAs: 'ctrl'
@@ -104,7 +104,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'main.users',
 		url: '/users',
-		templateUrl: './templates/users.html'
+		abstract: true,
+		template: '<ui-view></ui-view>'
+	});
+
+	sp.state({
+		name: 'main.users.list',
+		url: '/list',
+		templateUrl: './templates/usersList.html'
 	})
 
 	$urlRouterProvider.otherwise('/main/home');
