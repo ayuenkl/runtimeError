@@ -6,6 +6,11 @@ app.component('hgNavbar', {
 
 		ctrl.toggleSideMenu = function () {
 			$rootScope.isSideMenuCollapsed = !$rootScope.isSideMenuCollapsed;
+			if ($rootScope.isSideMenuCollapsed) {
+				$rootScope.mainContentStyle = {'padding-left': '5px'}
+			} else {
+				$rootScope.mainContentStyle = {'padding-left': '155px'}
+			}
 			$rootScope.isSideMenuFloated = false;
 		};
 
@@ -14,4 +19,4 @@ app.component('hgNavbar', {
 			$rootScope.isSideMenuCollapsed = false;
 		}
 	}
-});
+})

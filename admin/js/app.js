@@ -30,9 +30,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			}
 			ctrl.menuItems = [{
 				menu: 'Home',
+				menuId: 'home',
 				state: 'main.home'
 			}, {
 				menu: 'Moderation',
+				menuId: 'moderation',
 				state: 'main.moderation.waiting'
 			}];
 		},
@@ -83,8 +85,8 @@ app.run(function ($rootScope) {
 	});
 
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState, fromParam) {
-		$rootScope.currState = toState.name;
-		console.log('Curr State is ', $rootScope.currState);
+		$rootScope.activeSideMenu = toState.name.split('.')[1];
+		console.log('Curr Active Side Menu Item is ', $rootScope.activeSideMenu);
 		$rootScope.isLoading = false;
 	});
 

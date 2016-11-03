@@ -192,7 +192,10 @@
 
 @media (min-width: 768px) {
 	.hg-main-content {
-		float: left;
+		positon: absolute;
+		top: 0px;
+		left: 0px;
+		padding-left: 155px;
 	}
 }
 
@@ -201,19 +204,22 @@
 		postion: absolute;
 		top: 0px;
 		left: 0px;
+		padding-left: 5px;
 		z-index: 0;
 	}
 }
 
 .hg-side-menu, .hg-side-menu-float {
-	width: 200px;
+	width: 150px;
 	height: 100%;
 	padding: 0px;
 	background-color: whitesmoke;
 }
 
 .hg-side-menu {
-	float: left;
+	position: absolute;
+	top: 0px;
+	left: 0px;
 }
 
 .hg-side-menu-float {
@@ -223,20 +229,17 @@
 	z-index: 1000;
 }
 
-.hg-main-content, .hg-main-content-fix, .hg-container {
-	margin: 5px;
-	padding: 5px;
-}
-
-.hg-main-content, .hg-main-content-fix {
+.hg-main-content {
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
 	height: 100%;
 }
 
-.hg-main-content-fix {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	z-index: 0;
+.hg-container {
+	margin: 5px;
+	border-width: 2px
+	padding: 5px;
 }
 
 .hg-side-menu-nav {
