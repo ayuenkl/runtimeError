@@ -36,6 +36,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 				menu: 'Moderation',
 				menuId: 'moderation',
 				state: 'main.moderation.waiting'
+			}, {
+				menu: 'Users',
+				menuId: 'users',
+				state: 'main.users'
 			}];
 		},
 		controllerAs: 'ctrl'
@@ -95,6 +99,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			};
 		},
 		controllerAs: 'ctrl'
+	});
+
+	sp.state({
+		name: 'main.users',
+		url: '/users',
+		templateUrl: './templates/users.html'
 	})
 
 	$urlRouterProvider.otherwise('/main/home');
@@ -112,7 +122,6 @@ app.run(function ($rootScope) {
 	$rootScope.$on('$stateChangeSuccess', function (event, toState, toParam, fromState, fromParam) {
 		$rootScope.activeSideMenu = toState.name.split('.')[1];
 		$rootScope.currState = toState.name;
-		console.log('Curr Active Side Menu Item is ', $rootScope.activeSideMenu);
 		$rootScope.isLoading = false;
 	});
 
