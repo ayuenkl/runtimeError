@@ -192,15 +192,13 @@
 
 @media (min-width: 768px) {
 	.hg-main-content {
-		position: absolute;
-		top: 0px;
-		left: 200px;
+		float: left;
 	}
 }
 
 @media (max-width: 767px) {
 	.hg-main-content {
-		position: absolute;
+		postion: absolute;
 		top: 0px;
 		left: 0px;
 		z-index: 0;
