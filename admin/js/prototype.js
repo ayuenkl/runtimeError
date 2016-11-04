@@ -70,6 +70,49 @@ app.factory('adminPrototype', function ($rootScope, $http, $state, prototypeFact
 				handledBy: 'Roy',
 				action: 'passed'
 			}];
+		},
+
+		loadUser: function (user, backEndOnly) {
+
+				function genType() {
+					var t = Math.round(Math.random() + 1)
+					switch (t) {
+						case 1:
+							return 'Normal';
+							break;
+						case 2:
+							return 'Backend';
+					}
+				}
+
+				function genLevel() {
+					return Math.round(Math.random() * 2 + 1);
+				}
+
+				var _user = {};
+
+				_user.userBox = {
+					avatar: user.picture.thumbnail,
+					username: user.login.username,
+					reputation: prototypeFactory.getReputation(),
+					numOfBadges: prototypeFactory.getNumOfBadges()
+				};
+				_user.name = {
+					first: user.name.first,
+					last: user.name.last					
+				}
+
+				if (backEndOnly) {
+					_user.type = 'Backend'
+					_user.level = genLevel();
+				} else {
+					_user.type = genType();
+					if (_user.type == 'Backend') {
+						_user.level = genLevel();
+					}
+				}
+
+			return _user;
 		}
 
 	};

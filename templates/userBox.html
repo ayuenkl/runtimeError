@@ -1,5 +1,5 @@
 <div class="userBox">
-	<small class="text-muted">{{:: $ctrl.qaType }}於 {{:: $ctrl.qaTime }}</small>
+	<small class="text-muted" ng-hide="$ctrl.qaType == 'N'">{{:: $ctrl.qaType }}於 {{:: $ctrl.qaTime }}</small>
 	<div class="row">
 		<div class="col-xs-3">
 			<img class="userBoxAvatar" src="{{:: $ctrl.user.avatar }}">

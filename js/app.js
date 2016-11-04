@@ -302,6 +302,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: function ($rootScope, utilFactory, $state, $stateParams) {
 			var ctrl = this;
 			if ($stateParams.uid == 0) {
+				if (angular.isUndefined($rootScope.user)) {
+					$state.go('doLogin')
+				}
 				ctrl.user = $rootScope.user;
 				ctrl.isLoginUser = true;
 			} else {
@@ -316,9 +319,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					ctrl.editPicture = false;
 				}
 			}
-			if (angular.isUndefined(ctrl.user)) {
-				$state.go('doLogin');
-			}
+			// if (angular.isUndefined(ctrl.user)) {
+				// $state.go('doLogin');
+			// }
 			if (!ctrl.user.selfDesc) {
 				ctrl.editSelfDesc = true;
 			}

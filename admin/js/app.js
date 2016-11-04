@@ -111,7 +111,43 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'main.users.list',
 		url: '/list',
-		templateUrl: './templates/usersList.html'
+		templateUrl: './templates/usersList.html',
+		controller: function ($scope, $http, adminPrototype, $rootScope) {
+
+			var ctrl = this;
+
+			ctrl.loadUsers = function (backEndOnly) {
+				$rootScope.isLoading = true;
+				ctrl.users = [];
+				$http.get('https://api.randomuser.me/?results=6')
+				.then(function (response) {
+					for (var i = 0; i < response.data.results.length; i++) {
+						ctrl.users.push(adminPrototype.loadUser(response.data.results[i], backEndOnly));
+					}
+				})
+				.finally(function () {
+					$rootScope.isLoading = false;
+				});
+			};
+
+			$scope.$watch('ctrl.listOption', function (newValue, oldValue) {
+				if (newValue == 'Backend') {
+					ctrl.loadUsers(true);
+				} else {
+					ctrl.loadUsers(false);
+				}
+			});
+
+			ctrl.findUsers = function () {
+				if (ctrl.listOption == 'Backend') {
+					ctrl.loadUsers(true);
+				} else {
+					ctrl.loadUsers(false);
+				}
+			}
+
+		},
+		controllerAs: 'ctrl'
 	})
 
 	$urlRouterProvider.otherwise('/main/home');
