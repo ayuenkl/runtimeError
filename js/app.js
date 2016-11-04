@@ -309,25 +309,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					$state.go('doLogin')
 				}
 				ctrl.user = $rootScope.user;
-				ctrl.isLoginUser = true;
+				setUser(true)
 			} else {
 				if (angular.isUndefined($rootScope.otherUsers)) {
 					prototypeFactory.genUsers(1)
 					.then(function (response) {
 						ctrl.user = prototypeFactory.loadUser(response.data.results[0]);
-						setUser();
+						setUser(false);
 					})
 					.finally(function () {
 						$rootScope.isLoading = false;
 					})
 				} else {
 					ctrl.user = $rootScope.otherUsers[$stateParams.uid - 1];
-					setUser();
+					setUser(false);
 				}
 			}
 
-			function setUser() {
-				ctrl.isLoginUser = false;
+			function setUser(isLoginUser) {
+				ctrl.isLoginUser = isLoginUser;
 				if (angular.isUndefined(ctrl.user) || angular.isUndefined(ctrl.user.avatarLarge) || !ctrl.user.avatarLarge) {
 					ctrl.editPicture = true;
 				}
