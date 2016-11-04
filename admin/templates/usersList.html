@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-	<li><a ui-sref="main.users.list">List</a></li>
+	<li>List</li>
 </ol>
 <form class="form-inline">
 	<div class="form-group">
@@ -19,15 +19,17 @@
 				<th>User</th>
 				<th>Type</th>
 				<th>Level</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="record in ctrl.users">
 				<td><a href="/#/user/1" target="frontEnd"><user-box qa-type="N" user="record.userBox" style="display: inline-block; vertical-align: top;"></user-box>
-					{{:: record.name.first }} {{:: record.name.last }}</a>
+					{{ record.name.first }} {{ record.name.last }}</a>
 				</td>
-				<td>{{:: record.type }}</td>
-				<td>{{:: record.level }}</td>
+				<td>{{ record.type }}</td>
+				<td>{{ record.level }}</td>
+				<td><a class="btn btn-default btn-xs" ui-sref="main.users.details({uid: {{ $index + 1}}})">Set User</a></td>
 			</tr>
 		</tbody>
 	</table>

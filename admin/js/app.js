@@ -148,6 +148,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 		},
 		controllerAs: 'ctrl'
+	});
+
+	sp.state({
+		name: 'main.users.details',
+		url: '/details/{uid}',
+		templateUrl: './templates/usersDetails.html'
 	})
 
 	$urlRouterProvider.otherwise('/main/home');
