@@ -1,4 +1,4 @@
-var app = angular.module('HackgaAdmin', ['ngAnimate', 'ngTouch', 'ui.router', 'ui.bootstrap']);
+var app = angular.module('HackgaAdmin', ['ngAnimate', 'ngTouch', 'ui.router', 'ui.bootstrap', 'uiSwitch']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 

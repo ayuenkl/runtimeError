@@ -1,4 +1,19 @@
+<!--
 <ol class="breadcrumb">
-	<li><a ui-sref="main.users.list">List</a></li>
-	<li>Details</li>
+	<li><a ui-sref="main.users.list"><i class="glyphicon glyphicon-chevron-left"></i>Back</a></li>
 </ol>
+-->
+<nav>
+	<ul class="pager">
+		<li class="previous"><a ui-sref="main.users.list"><i class="glyphicon glyphicon-chevron-left"></i>Back</a></li>
+	</ul>
+</nav>
+
+<form class="form-horizontal">
+	<div class="form-group">
+		<label class="col-xs-6 control-label">Option 1</label>
+		<div class="col-xs-6">
+			<switch id="enabled" name="enabled" ng-model="enabled" class="red"></switch>
+		</div>
+	</div>
+</form>
