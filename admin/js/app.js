@@ -131,11 +131,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			};
 
 			$scope.$watch('ctrl.listOption', function (newValue, oldValue) {
-				if (newValue == 'Backend') {
-					ctrl.loadUsers(true);
-				} else {
-					ctrl.loadUsers(false);
-				}
+				ctrl.loadUsers(newValue);
 			});
 
 			ctrl.findUsers = function () {
@@ -147,7 +143,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			};
 
 			ctrl.userDetails = function (uid, userType, userLevel) {
-				console.log('going to details: type = ', userType, ' level = ', userLevel);
 				$rootScope.userType = userType;
 				$rootScope.userLevel = userLevel;
 				$state.go('main.users.details', {uid: uid});

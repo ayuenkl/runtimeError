@@ -72,7 +72,7 @@ app.factory('adminPrototype', function ($rootScope, $http, $state, prototypeFact
 			}];
 		},
 
-		loadUser: function (user, backEndOnly) {
+		loadUser: function (user, userType) {
 
 				function genType() {
 					var t = Math.round(Math.random() + 1)
@@ -102,10 +102,10 @@ app.factory('adminPrototype', function ($rootScope, $http, $state, prototypeFact
 					last: user.name.last					
 				}
 
-				if (backEndOnly) {
+				if (userType == 'Backend') {
 					_user.type = 'Backend'
 					_user.level = genLevel();
-				} else {
+				} else if (userType == 'Active') {
 					_user.type = genType();
 					if (_user.type == 'Backend') {
 						_user.level = genLevel();
