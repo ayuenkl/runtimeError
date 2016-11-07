@@ -1,0 +1,16 @@
+<div class="hg-main">
+	<div class="hg-side-menu hidden-xs" ng-hide="$root.isSideMenuCollapsed">
+		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
+			<li><a ng-class="{active: $root.activeSideMenu == menu.menuId}" ui-sref="{{ menu.state }}" ng-click="$root.isSideMenuFloated = false">{{ menu.menu }}</a></li>
+		</ul>
+	</div>
+	<div class="hg-side-menu-float visible-xs" ng-show="$root.isSideMenuFloated">
+		<ul class="hg-side-menu-nav" ng-repeat="menu in ctrl.menuItems">
+			<li><a ng-class="{active: $root.activeSideMenu == menu.menuId}" ui-sref="{{ menu.state }}" ng-click="$root.isSideMenuFloated = false">{{ menu.menu }}</a></li>
+		</ul>
+	</div>
+	<div class="hg-main-content" ng-style="$root.mainContentStyle">
+		<ui-view></ui-view>
+	</div>
+</div>
+

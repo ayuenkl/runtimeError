@@ -1,0 +1,23 @@
+<button class="btn btn-primary btn-sm">Refresh</button>
+<hr />
+<table class="table">
+	<thead>
+		<tr>
+			<th>Time</th>
+			<th>Type</th>
+			<th>Content</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="record in ctrl.records">
+			<td>{{:: record.time }}</td>
+			<td>{{:: record.type }}</td>
+			<td><a href="/#/question/111" target="frontEnd">{{:: record.content }}</a></td>
+			<td>
+				<button class="btn btn-default btn-xs">Done</button>
+				<button class="btn btn-default btn-xs">Pass</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

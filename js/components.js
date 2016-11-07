@@ -1,4 +1,4 @@
-reApp.component('reNavbar', {
+app.component('reNavbar', {
 
 	templateUrl: '/templates/navbar.html',
 
@@ -25,13 +25,13 @@ reApp.component('reNavbar', {
 
 });
 
-reApp.component('navUserBox', {
+app.component('navUserBox', {
 
 	templateUrl: '/templates/navUserBox.html'
 	
 });
 
-reApp.component('userBox', {
+app.component('userBox', {
 
 	templateUrl: '/templates/userBox.html',
 

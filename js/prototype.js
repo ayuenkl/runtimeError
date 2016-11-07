@@ -1,4 +1,4 @@
-reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
+app.factory('prototypeFactory', function($rootScope, $q, $timeout, $state, $http) {
 
 	return {
 
@@ -103,6 +103,10 @@ reApp.factory('prototypeFactory', function($rootScope, $q, $timeout, $state) {
 				votes: 39,
 				answers: 2
 			}]
+		},
+
+		genUsers: function (numOfUsers) {
+			return $http.get('https://api.randomuser.me/?results=' + numOfUsers);
 		},
 
 		getReputation: function () {

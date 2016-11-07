@@ -1,4 +1,4 @@
-reApp.factory('SEOFactory', function($rootScope, APPNAME) {
+app.factory('SEOFactory', function($rootScope, APPNAME) {
 
 	return {
 
@@ -28,7 +28,7 @@ reApp.factory('SEOFactory', function($rootScope, APPNAME) {
 	}
 });
 
-reApp.factory('NavFactory', function ($rootScope) {
+app.factory('NavFactory', function ($rootScope) {
 
 	return {
 

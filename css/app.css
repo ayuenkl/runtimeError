@@ -9,22 +9,20 @@
 
 .backdrop {
 	background-color: rgba(0, 0, 0, 0.7);
-	bottom: 0;
 	height: 100%;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
+	left: 0px;
+	position: fixed;
+	top: 0px;
 	width: 100%;
 	z-index: 1050;
 }
 
-.backdrop > .loading {
+.loading {
 	color: #FFF;
-	position: relative;
+	position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
-	text-align: center;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .userBox {
@@ -110,4 +108,167 @@
 
 .bronze {
 	color: darkgoldenrod;
+}
+
+.hg-header {
+	background-color: #333;
+	margin: 0px;
+	padding: 10px;
+	color: #DDD;
+	height: 50px;
+}
+
+.hg-header a {
+	text-decoration: none;
+	color: #DDD;
+}
+
+.hg-header-brand {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+
+.hg-navbar {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.hg-navbar-toggle-button {
+	padding-right: 10px;
+	float: left;
+}
+
+.hg-navbar-right li {
+	float: right;
+}
+
+.hg-navbar li {
+	display: inline-block;
+	padding: 0px 16px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.hg-navbar li a {
+	color: #DDD;
+	text-decoration: none;
+}
+
+.hg-navbar li a:hover {
+	color: #FFF;
+}
+
+.hg-current-window {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+}
+
+.hg-center-screen {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.hg-main, .hg-side-menu, .hg-main-content {
+	margin: 0px;
+	border-width: 0px;
+}
+
+.hg-main {
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+}
+
+@media (min-width: 768px) {
+	.hg-main-content {
+		positon: absolute;
+		top: 0px;
+		left: 0px;
+		padding-left: 155px;
+	}
+}
+
+@media (max-width: 767px) {
+	.hg-main-content {
+		postion: absolute;
+		top: 0px;
+		left: 0px;
+		padding-left: 5px;
+		z-index: 0;
+	}
+}
+
+.hg-side-menu, .hg-side-menu-float {
+	width: 150px;
+	height: 100%;
+	padding: 0px;
+	background-color: whitesmoke;
+}
+
+.hg-side-menu {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.hg-side-menu-float {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1000;
+}
+
+.hg-main-content {
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	height: 100%;
+}
+
+.hg-container {
+	margin: 5px;
+	border-width: 2px
+	padding: 5px;
+}
+
+.hg-side-menu-nav {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+.hg-side-menu-nav li a {
+	display: block;
+	padding: 8px 16px;
+	text-decoration: none;
+	color: slategrey;
+	font-weight: bold;
+}
+
+.hg-side-menu-nav li a.active {
+	background-color: lightblue;
+	color: black;
+}
+
+.hg-side-menu-nav li a:hover:not(.active) {
+	background-color: dimgrey;
+	color: white;
+}
+
+/* override angular ui switch */
+.switch.checked {
+	background: #337ab7;
+	border-color: #337ab7;
 }

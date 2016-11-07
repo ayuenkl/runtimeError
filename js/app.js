@@ -1,8 +1,8 @@
-var reApp = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.tinymce', 'ngTouch', 'ngAnimate', 'ayUtils']);
+var app = angular.module('reApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.tinymce', 'ngTouch', 'ngAnimate', 'ayUtils']);
 
-reApp.constant('APPNAME', 'Hackga');
+app.constant('APPNAME', 'Hackga');
 
-reApp.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 
 	var sp = $stateProvider;
 
@@ -127,14 +127,15 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 				return p.promise;
 			}
 		},
-		controller: function ($http, prototypeFactory, $rootScope) {
+		controller: function (prototypeFactory, $rootScope) {
 
 			var ctrl = this;
 			$rootScope.isLoading = true;
 
 			// for mockup purpose, randomly generate user info
 			ctrl.users = [];
-			$http.get('https://api.randomuser.me/?results=6')
+			// $http.get('https://api.randomuser.me/?results=6')
+			prototypeFactory.genUsers(6)
 			.then(function (response) {
 				for (var i = 0; i < response.data.results.length; i++) {
 					ctrl.users.push(prototypeFactory.loadUser(response.data.results[i]));
@@ -226,8 +227,8 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 			loggedIn: function (prototypeFactory) {
 				return prototypeFactory.login();
 			},
-			user: function ($http) {
-				return $http.get('https://randomuser.me/api/')
+			user: function (prototypeFactory) {
+				return prototypeFactory.genUsers(1);
 			}
 		},
 		controller: function (loggedIn, user, $rootScope, $state, prototypeFactory) {
@@ -299,47 +300,67 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 		name: 'user',
 		url: '/user/{uid}',
 		templateUrl: '/templates/userProfile.html',
-		controller: function ($rootScope, utilFactory, $stateParams) {
+		controller: function ($rootScope, utilFactory, $state, $stateParams, prototypeFactory) {
+
 			var ctrl = this;
+
 			if ($stateParams.uid == 0) {
+				if (angular.isUndefined($rootScope.user)) {
+					$state.go('doLogin')
+				}
 				ctrl.user = $rootScope.user;
-				ctrl.isLoginUser = true;
+				setUser(true)
 			} else {
-				ctrl.user = $rootScope.otherUsers[$stateParams.uid - 1];
-				ctrl.isLoginUser = false;
-			}
-			if (angular.isUndefined(ctrl.user) || angular.isUndefined(ctrl.user.avatarLarge) || !ctrl.user.avatarLarge) {
-				ctrl.editPicture = true;
-			}
-			ctrl.updatePicture = function () {
-				if (ctrl.user.avatarLarge) {
-					ctrl.editPicture = false;
+				if (angular.isUndefined($rootScope.otherUsers)) {
+					prototypeFactory.genUsers(1)
+					.then(function (response) {
+						ctrl.user = prototypeFactory.loadUser(response.data.results[0]);
+						setUser(false);
+					})
+					.finally(function () {
+						$rootScope.isLoading = false;
+					})
+				} else {
+					ctrl.user = $rootScope.otherUsers[$stateParams.uid - 1];
+					setUser(false);
 				}
 			}
-			if (angular.isUndefined(ctrl.user.name) || (!ctrl.user.name.first && !ctrl.user.name.last)) {
-					ctrl.editName = true;
-			}
-			if (!ctrl.user.selfDesc) {
-				ctrl.editSelfDesc = true;
-			}
-			if (!ctrl.user.city) {
-				ctrl.editCity = true;
-			}
-			ctrl.tinymceOptions = {
-				height: 200
-			}
-			ctrl.numArray = function (number) {
-				return utilFactory.numArray(number);
-			}
-			if (ctrl.user.numOfBadges.gold) {
-				ctrl.nextBadgeType = 'gold';
-				ctrl.nextBadgeName = '金章 ' + (ctrl.user.numOfBadges.gold + 1) + ' 號';
-			} else if (ctrl.user.numOfBadges.silver) {
-				ctrl.nextBadgeType = 'silver';
-				ctrl.nextBadgeName = '銀章 ' + (ctrl.user.numOfBadges.silver + 1) + ' 號';
-			} else {
-				ctrl.nextBadgeType = 'bronze';
-				ctrl.nextBadgeName = '銅章 ' + (ctrl.user.numOfBadges.bronze + 1) + ' 號';
+
+			function setUser(isLoginUser) {
+				ctrl.isLoginUser = isLoginUser;
+				if (angular.isUndefined(ctrl.user) || angular.isUndefined(ctrl.user.avatarLarge) || !ctrl.user.avatarLarge) {
+					ctrl.editPicture = true;
+				}
+				ctrl.updatePicture = function () {
+					if (ctrl.user.avatarLarge) {
+						ctrl.editPicture = false;
+					}
+				}
+				// if (angular.isUndefined(ctrl.user)) {
+					// $state.go('doLogin');
+				// }
+				if (!ctrl.user.selfDesc) {
+					ctrl.editSelfDesc = true;
+				}
+				if (!ctrl.user.city) {
+					ctrl.editCity = true;
+				}
+				ctrl.tinymceOptions = {
+					height: 200
+				}
+				ctrl.numArray = function (number) {
+					return utilFactory.numArray(number);
+				}
+				if (ctrl.user.numOfBadges.gold) {
+					ctrl.nextBadgeType = 'gold';
+					ctrl.nextBadgeName = '金章 ' + (ctrl.user.numOfBadges.gold + 1) + ' 號';
+				} else if (ctrl.user.numOfBadges.silver) {
+					ctrl.nextBadgeType = 'silver';
+					ctrl.nextBadgeName = '銀章 ' + (ctrl.user.numOfBadges.silver + 1) + ' 號';
+				} else {
+					ctrl.nextBadgeType = 'bronze';
+					ctrl.nextBadgeName = '銅章 ' + (ctrl.user.numOfBadges.bronze + 1) + ' 號';
+				}
 			}
 		},
 		controllerAs: 'ctrl'
@@ -349,7 +370,7 @@ reApp.config(function($stateProvider, $urlRouterProvider) {
 
 });
 
-reApp.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
+app.run(function ($rootScope, SEOFactory, NavFactory, APPNAME) {
 
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
 

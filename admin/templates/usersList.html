@@ -1,0 +1,34 @@
+<form class="form-inline">
+	<div class="form-group">
+		<input type="text" placeholder="User name" />
+	</div>
+	<button class="btn btn-primary" ng-click="ctrl.findUsers()">Find user</button>
+	<div class="btn-group" ng-init="ctrl.listOption = 'Backend'">
+        <label class="btn btn-info" ng-model="ctrl.listOption" uib-btn-radio="'Backend'">Backend Users</label>
+        <label class="btn btn-info" ng-model="ctrl.listOption" uib-btn-radio="'Active'">Active Users</label>
+        <label class="btn btn-default" ng-model="ctrl.listOption" uib-btn-radio="'Disabled'">Disabled Users</label>
+    </div>
+</form>
+<hr />
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>User</th>
+				<th>Type</th>
+				<th>Level</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="record in ctrl.users">
+				<td><a href="/#/user/1" target="frontEnd"><user-box qa-type="N" user="record.userBox" style="display: inline-block; vertical-align: top;"></user-box>
+					{{ record.name.first }} {{ record.name.last }}</a>
+				</td>
+				<td>{{ record.type }}</td>
+				<td>{{ record.level }}</td>
+				<td><button class="btn btn-default btn-xs" ng-click="ctrl.userDetails($index + 1, record.type, record.level)">{{ (ctrl.listOption == 'Disabled')? 'Enable User' : 'Set User' }}</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
