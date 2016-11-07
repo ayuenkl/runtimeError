@@ -1,19 +1,70 @@
-<!--
-<ol class="breadcrumb">
-	<li><a ui-sref="main.users.list"><i class="glyphicon glyphicon-chevron-left"></i>Back</a></li>
-</ol>
--->
 <nav>
 	<ul class="pager">
 		<li class="previous"><a ui-sref="main.users.list"><i class="glyphicon glyphicon-chevron-left"></i>Back</a></li>
 	</ul>
 </nav>
 
-<form class="form-horizontal">
-	<div class="form-group">
-		<label class="col-xs-6 control-label">Option 1</label>
-		<div class="col-xs-6">
-			<switch id="enabled" name="enabled" ng-model="enabled" class="red"></switch>
+<div class="row">
+	<div class="col-sm-4 col-md-3">
+		<div class="thumbnail" style="background-color: #DDDDDD; width: 200px;">
+			<img ng-src="{{ ctrl.user.avatarLarge }}"" style="width: 100%; height: auto" />
+			<div class="caption" style="background-color: #333333;">
+				<h4 style="color: white;">譽-{{ ctrl.user.reputation }}</h4>
+				<h4><span style="color: gold;">金-{{ ctrl.user.numOfBadges.gold }}</span>
+					<span style="color: silver;">銀-{{ ctrl.user.numbOfBadges.silver }}</span>
+					<span style="color: darkgoldenrod">銅-{{ ctrl.user.numOfBadges.bronze }}</span>
+				</h4>
+			</div>
 		</div>
+	</div>	
+	<div class="col-sm-8 col-md-9">
+		<h2>{{ ctrl.user.name.first }} {{ ctrl.user.name.last }}</h2>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-xs-4 control-label">Backend User</label>
+				<div class="col-xs-8">
+					<switch ng-model="ctrl.isBackendUser"></switch>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-4 control-label">Backend Previlege User</label>
+				<div class="col-xs-8">
+					<div ng-class="['radio', {disabled: !ctrl.isBackendUser}]">
+						<label>
+							<input type="radio" ng-model="ctrl.previlegeLevel" value="1" ng-disabled="!ctrl.isBackendUser"/>
+							<b>Level 1</b>
+							<p></p>
+							<ol>
+								<li>Able to edit other users' questions, answers or comments</li>
+							</ol>
+						</label>
+					</div>
+					<div ng-class="['radio', {disabled: !ctrl.isBackendUser}]">
+						<label>
+							<input type="radio" ng-model="ctrl.previlegeLevel" value="2" ng-disabled="!ctrl.isBackendUser" />
+							<b>Level 2</b>
+							<p></p>
+							<ol>
+								<li>Able to delete other users' questions, answers or comments</li>
+								<li>Able to change users to Backend users</li>
+								<li>Able to reset user's password</li>
+							</ol>
+						</label>
+					</div>
+					<div ng-class="['radio', {disabled: !ctrl.isBackendUser}]">
+						<label>
+							<input type="radio" ng-model="ctrl.previlegeLevel" value="3" ng-disabled="!ctrl.isBackendUser" />
+							<b>Level 3</b>
+							<p></p>
+							<ol>
+								<li>Able to disable any user</li>
+								<li>Able to manage Backend users' privilege</li>
+								<li>Able to manage Reputation / Privilege level</li>
+							</ol>
+						</label>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
-</form>
+</div>

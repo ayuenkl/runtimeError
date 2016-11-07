@@ -26,7 +26,10 @@
 				</td>
 				<td>{{ record.type }}</td>
 				<td>{{ record.level }}</td>
+				<td><button class="btn btn-default btn-xs" ng-click="ctrl.userDetails($index + 1, record.type, record.level)">Set User</button></td>
+				<!--
 				<td><a class="btn btn-default btn-xs" ui-sref="main.users.details({uid: {{ $index + 1}}})">Set User</a></td>
+				-->
 			</tr>
 		</tbody>
 	</table>

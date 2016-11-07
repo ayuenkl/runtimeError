@@ -112,7 +112,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		name: 'main.users.list',
 		url: '/list',
 		templateUrl: './templates/usersList.html',
-		controller: function ($scope, $http, adminPrototype, $rootScope) {
+		controller: function ($scope, $http, adminPrototype, $rootScope, $state) {
 
 			var ctrl = this;
 
@@ -144,6 +144,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 				} else {
 					ctrl.loadUsers(false);
 				}
+			};
+
+			ctrl.userDetails = function (uid, userType, userLevel) {
+				console.log('going to details: type = ', userType, ' level = ', userLevel);
+				$rootScope.userType = userType;
+				$rootScope.userLevel = userLevel;
+				$state.go('main.users.details', {uid: uid});
 			}
 
 		},
@@ -153,7 +160,29 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	sp.state({
 		name: 'main.users.details',
 		url: '/details/{uid}',
-		templateUrl: './templates/usersDetails.html'
+		templateUrl: './templates/usersDetails.html',
+		controller: function ($rootScope, prototypeFactory) {
+
+			var ctrl = this;
+
+			$rootScope.isLoading = true
+			prototypeFactory.genUsers(1)
+			.then(function (response) {
+				ctrl.user = prototypeFactory.loadUser(response.data.results[0]);
+			})
+			.finally(function () {
+				$rootScope.isLoading = false;
+			});
+
+			if ($rootScope.userType == 'Backend') {
+				ctrl.isBackendUser = true;
+				ctrl.previlegeLevel = $rootScope.userLevel;
+			} else {
+				ctrl.previlegeLevel = 1;
+			}
+
+		},
+		controllerAs: 'ctrl'
 	})
 
 	$urlRouterProvider.otherwise('/main/home');

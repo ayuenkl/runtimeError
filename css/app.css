@@ -266,3 +266,9 @@
 	background-color: dimgrey;
 	color: white;
 }
+
+/* override angular ui switch */
+.switch.checked {
+	background: #337ab7;
+	border-color: #337ab7;
+}

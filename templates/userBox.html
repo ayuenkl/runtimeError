@@ -2,7 +2,7 @@
 	<small class="text-muted" ng-hide="$ctrl.qaType == 'N'">{{ $ctrl.qaType }}於 {{ $ctrl.qaTime }}</small>
 	<div class="row">
 		<div class="col-xs-3">
-			<img class="userBoxAvatar" src="{{ $ctrl.user.avatar }}">
+			<img class="userBoxAvatar" ng-src="{{ $ctrl.user.avatar }}">
 		</div>
 		<div class="col-xs-9">
 			<p class="text-muted" style="margin: 0px;"><small>{{ $ctrl.user.username }}</small></p>

@@ -227,8 +227,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			loggedIn: function (prototypeFactory) {
 				return prototypeFactory.login();
 			},
-			user: function ($http) {
-				return $http.get('https://randomuser.me/api/')
+			user: function (prototypeFactory) {
+				return prototypeFactory.genUsers(1);
 			}
 		},
 		controller: function (loggedIn, user, $rootScope, $state, prototypeFactory) {
