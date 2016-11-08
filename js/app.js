@@ -366,6 +366,36 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controllerAs: 'ctrl'
 	});
 
+	sp.state({
+		name: 'aboutUs',
+		url: '/aboutUs',
+		template: 'About Us -- To be implemented ...'
+	});
+
+	sp.state({
+		name: 'tour',
+		url: '/tour',
+		template: 'Tour -- To be implemented ...'
+	});
+
+	sp.state({
+		name: 'help',
+		url: '/help',
+		template: 'Help -- To be implemented ...'
+	});
+
+	sp.state({
+		name: 'contactUs',
+		url: '/contactUs',
+		template: 'Contact us -- To be implemented ...'
+	});
+
+	sp.state({
+		name: 'feedback',
+		url: '/feedback',
+		template: 'Feedback -- To be implemented ...'
+	});
+
 	$urlRouterProvider.otherwise('/interest');
 
 });
