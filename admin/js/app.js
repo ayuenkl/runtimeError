@@ -40,6 +40,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 				menu: 'Users',
 				menuId: 'users',
 				state: 'main.users.list'
+			}, {
+				menu: 'Privilege',
+				menuId: 'privilege',
+				state: 'main.privilege'
 			}];
 		},
 		controllerAs: 'ctrl'
@@ -175,6 +179,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			} else {
 				ctrl.previlegeLevel = 1;
 			}
+
+		},
+		controllerAs: 'ctrl'
+	});
+
+	sp.state({
+		name: 'main.privilege',
+		url: '/privilege',
+		templateUrl: './templates/privilege.html',
+		controller: function (adminPrototype) {
+
+			var ctrl = this;
+
+			ctrl.privileges = adminPrototype.setPrivileges();
 
 		},
 		controllerAs: 'ctrl'

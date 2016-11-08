@@ -113,6 +113,58 @@ app.factory('adminPrototype', function ($rootScope, $http, $state, prototypeFact
 				}
 
 			return _user;
+		},
+
+		setPrivileges: function () {
+			return [{
+				reputation: 1,
+				privilege: '可發問問題或回答答案',
+				numOfPeople: 49836
+			}, {
+				reputation: 15,
+				privilege: '可給讚',
+				numOfPeople: 44513
+			}, {
+				reputation: 15,
+				privilege: '舉報問題發佈',
+				numOfPeople: 44513
+			}, {
+				reputation: 50,
+				privilege: '給別人的發佈評語',
+				numOfPeople: 16585,
+			}, {
+				reputation: 125,
+				privilege: '可給不讚',
+				numOfPeople: 6923
+			}, {
+				reputation: 1500,
+				privilege: '創建標籤',
+				numOfPeople: 3652
+			}, {
+				reputation: 2000,
+				privilege: '修改別人的問題與答案',
+				numOfPeople: 688
+			}, {
+				reputation: 2500,
+				privilege: '創建同義的標籤',
+				numOfPeople: 382
+			}, {
+				reputation: 3000,
+				privilege: '關閉已離題或重複了的發佈',
+				numOfPeople: 176
+			}, {
+				reputation: 10000,
+				privilege: '可使用網站的調節發佈工具',
+				numOfPeople: 27
+			}, {
+				reputation: 15000,
+				privilege: '設定受保護問題',
+				numOfPeople: 23
+			}, {
+				reputation: 20000,
+				privilege: '修改、刪除、恢復任何發佈',
+				numOfPeople: 5
+			}];
 		}
 
 	};

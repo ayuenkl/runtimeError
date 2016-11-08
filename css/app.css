@@ -267,6 +267,14 @@
 	color: white;
 }
 
+.hg-footer {
+	margin: 50px 0px;
+	padding: 10px 30px;
+	width: 100%;
+	background-color: #333;
+	color: #DDD;
+}
+
 /* override angular ui switch */
 .switch.checked {
 	background: #337ab7;
