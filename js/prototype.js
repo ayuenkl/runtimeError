@@ -160,6 +160,10 @@ app.factory('prototypeFactory', function($rootScope, $q, $timeout, $state, $http
 				selfDesc: '<p>我是 <a href="http://www.jobsdb.com">JobsDB.com</a> <b>偉大創辦人兼前首席科技總監</b>的繼承人。</p><p>在我在任期間，我把 JobsDB.com 的系統成功改寫為以 AngularJS 為前端及以 Sails.js 為後端的系統。</p>' 
 			};
 			return loadedUser;
+		},
+
+		setTagSet: function () {
+			return ['actionscript-3', 'ajax', 'algorithm', 'android', 'android-layout', 'angularjs', 'apache', 'api', 'arrays', 'asp.net', 'asp.net-mvc', 'bash', 'c', 'c++', 'c#', 'class', 'codeigniter', 'cordova', 'css', 'css3', 'database', 'date', 'django', 'eclipse', 'email', 'entity-framework', 'excel', 'excel-vba', 'facebook', 'file', 'forms', 'function', 'git', 'google-chrome', 'google-maps', 'hibernate', '.htaccess', 'htlm', 'html5', 'image', 'ios', 'iphone', 'java', 'javascript', 'jquery', 'json', 'jsp', 'laravel', 'linq', 'linux', 'list', 'loops', 'matlab', 'maven', 'mongodb', 'multithreading', 'mysql', '.net', 'node.js', 'objective-c', 'oracle', 'osx', 'performance', 'perl', 'php', 'postgresql', 'powershell', 'python', 'python-2.7', 'python-3.x', 'qt', 'r', 'regex', 'rest', 'rub-on-rails', 'ruby', 'ruby-on-rails-3', 'scala', 'shell', 'spring', 'sockets', 'sorting', 'sql', 'sql-server', 'sql-server-2008', 'sqlite', 'string', 'swift', 'swing', 'symfony2', 'tsql', 'twitter-bootstrap', 'uitabieview', 'unit-testing', 'validation', 'vb.net', 'vba', 'visual-studio', 'visual-studio-2010', 'wcf', 'web-services', 'windows', 'winforms', 'wordpress', 'wpf', 'xami', 'xcode', 'xml']
 		}
 
 	}

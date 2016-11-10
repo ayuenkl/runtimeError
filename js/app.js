@@ -275,7 +275,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		name: 'askQuestion',
 		url: '/askquestion',
 		templateUrl: 'templates/askQuestion.html',
-		controller: function ($rootScope, $state) {
+		controller: function ($rootScope, $state, prototypeFactory) {
 			var ctrl = this;
 			ctrl.stage = 1;
 			if (!$rootScope.isLoggedIn) {
@@ -292,6 +292,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				},
 				height: 200
 			};
+			ctrl.tagSet = prototypeFactory.setTagSet();
 		},
 		controllerAs: 'ctrl'
 	});
