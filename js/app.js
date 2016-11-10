@@ -368,6 +368,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	sp.state({
+		name: 'tags',
+		url: '/tags/{tag}',
+		templateUrl: '/templates/tags.html',
+		controller: function (prototypeFactory) {
+			var ctrl = this;
+			ctrl.tags = prototypeFactory.loadTags();
+		},
+		controllerAs: 'ctrl'
+	});
+
+	sp.state({
 		name: 'aboutUs',
 		url: '/aboutUs',
 		template: 'About Us -- To be implemented ...'

@@ -164,6 +164,58 @@ app.factory('prototypeFactory', function($rootScope, $q, $timeout, $state, $http
 
 		setTagSet: function () {
 			return ['actionscript-3', 'ajax', 'algorithm', 'android', 'android-layout', 'angularjs', 'apache', 'api', 'arrays', 'asp.net', 'asp.net-mvc', 'bash', 'c', 'c++', 'c#', 'class', 'codeigniter', 'cordova', 'css', 'css3', 'database', 'date', 'django', 'eclipse', 'email', 'entity-framework', 'excel', 'excel-vba', 'facebook', 'file', 'forms', 'function', 'git', 'google-chrome', 'google-maps', 'hibernate', '.htaccess', 'htlm', 'html5', 'image', 'ios', 'iphone', 'java', 'javascript', 'jquery', 'json', 'jsp', 'laravel', 'linq', 'linux', 'list', 'loops', 'matlab', 'maven', 'mongodb', 'multithreading', 'mysql', '.net', 'node.js', 'objective-c', 'oracle', 'osx', 'performance', 'perl', 'php', 'postgresql', 'powershell', 'python', 'python-2.7', 'python-3.x', 'qt', 'r', 'regex', 'rest', 'rub-on-rails', 'ruby', 'ruby-on-rails-3', 'scala', 'shell', 'spring', 'sockets', 'sorting', 'sql', 'sql-server', 'sql-server-2008', 'sqlite', 'string', 'swift', 'swing', 'symfony2', 'tsql', 'twitter-bootstrap', 'uitabieview', 'unit-testing', 'validation', 'vb.net', 'vba', 'visual-studio', 'visual-studio-2010', 'wcf', 'web-services', 'windows', 'winforms', 'wordpress', 'wpf', 'xami', 'xcode', 'xml']
+		},
+
+		loadTags: function () {
+			return [{
+				name: 'javascript',
+				numOfQuestions: 125795,
+				desc: 'Javascript（不要與 Java 混亂了）是一個給網頁前端、及後端開發的動態的、弱的類型語言...'
+			}, {
+				name: 'java',
+				numOfQuestions: 1163097,
+				desc: 'Java（不要與 Javascript 或 jscript 混亂了）是一個一般用途的以物為本的開發語言...'
+			}, {
+				name: 'c#',
+				numOfQuestions: 1022709,
+				desc: '一個多用途、管理的、安全類型的、以物為本的開發語言...'
+			}, {
+				name: 'php',
+				numOfQuestions: 996928,
+				desc: '一個在待服器上的多用途腳本語言，原旨在網頁上的開發...'
+			}, {
+				name: 'javascript',
+				numOfQuestions: 125795,
+				desc: 'Javascript（不要與 Java 混亂了）是一個給網頁前端、及後端開發的動態的、弱的類型語言...'
+			}, {
+				name: 'java',
+				numOfQuestions: 1163097,
+				desc: 'Java（不要與 Javascript 或 jscript 混亂了）是一個一般用途的以物為本的開發語言...'
+			}, {
+				name: 'c#',
+				numOfQuestions: 1022709,
+				desc: '一個多用途、管理的、安全類型的、以物為本的開發語言...'
+			}, {
+				name: 'php',
+				numOfQuestions: 996928,
+				desc: '一個在待服器上的多用途腳本語言，原旨在網頁上的開發...'
+			}, {
+				name: 'javascript',
+				numOfQuestions: 125795,
+				desc: 'Javascript（不要與 Java 混亂了）是一個給網頁前端、及後端開發的動態的、弱的類型語言...'
+			}, {
+				name: 'java',
+				numOfQuestions: 1163097,
+				desc: 'Java（不要與 Javascript 或 jscript 混亂了）是一個一般用途的以物為本的開發語言...'
+			}, {
+				name: 'c#',
+				numOfQuestions: 1022709,
+				desc: '一個多用途、管理的、安全類型的、以物為本的開發語言...'
+			}, {
+				name: 'php',
+				numOfQuestions: 996928,
+				desc: '一個在待服器上的多用途腳本語言，原旨在網頁上的開發...'
+			}]
 		}
 
 	}
