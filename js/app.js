@@ -8,6 +8,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	sp.state({
 		name: 'home',
+		url: '/home',
 		abstract: true,
 		templateUrl: '/templates/home.html',
 		controller: function (APPNAME) {
@@ -81,8 +82,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	sp.state({
-		name: 'home.month',
-		url: '/month',
+		name: 'home.latest',
+		url: '/latest',
 		views: {
 			'homeNav': {
 				templateUrl: '/templates/homeNav.html',
@@ -101,7 +102,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					ctrl.questions = [];
 
 					$timeout(function () {
-						ctrl.questions = prototypeFactory.loadQuestions('month');
+						ctrl.questions = prototypeFactory.loadQuestions('latest');
 						$rootScope.isLoading = false;
 					}, 1000);
 
@@ -379,6 +380,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	sp.state({
+		name: 'questions',
+		url: '/questions',
+		abstract: true,
+		template: '<ui-view></ui-view>'
+	});
+
+	sp.state({
+		name: 'questions.tag',
+		url: '/tag/{tag}',
+		templateUrl: '/templates/tagQuestList.html',
+		controller: function (prototypeFactory, $stateParams) {
+			var ctrl = this;
+			ctrl.tag = prototypeFactory.loadTagQuestions($stateParams.tag);
+			ctrl.questions = ctrl.tag.questions;
+		},
+		controllerAs: 'ctrl'
+	})
+
+	sp.state({
 		name: 'aboutUs',
 		url: '/aboutUs',
 		template: 'About Us -- To be implemented ...'
@@ -408,7 +428,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		template: 'Feedback -- To be implemented ...'
 	});
 
-	$urlRouterProvider.otherwise('/interest');
+	$urlRouterProvider.otherwise('/home/interest');
 
 });
 

@@ -10,52 +10,100 @@ app.factory('prototypeFactory', function($rootScope, $q, $timeout, $state, $http
 
 				case 'interest':
 					questions = [{
-							title: '有趣的問題 1',
-							tags: ['javascript', 'angularjs'],
-							votes: 0,
-							answers: 0,
-							views: 3
+							title: '以 NodeJs sdk 在 google cloud 生成 getServingUrl()',
+							body: '我正在用 Google Cloud 來儲存圖片，我還有一侍服器在運行 NodeJs，我想對每個圖片實時創造 servingUrl（又稱 magicUrl）...',
+							tags: ['javascript', 'node.js', 'google-cloud-storage', 'gcloud'],
+							votes: 6,
+							answers: 1,
+							views: 61
 						}, {
-							title: '有趣的問題 2',
-							tags: ['c#', 'java'],
-							votes: 0,
-							answers: 2,
-							views: 4
+							title: 'iisnode 在 windows 發生錯誤後不再接受請求',
+							body: '最近，我嘗試以 nodejs 新建一個簡單的侍服器，但我遇到一些問題我自己不能解決，簡單來說，我在 iisnode 裡設定了 4 個工作...',
+							tags: ['node.js', 'iis', 'httpserver', 'iisnode'],
+							votes: 4,
+							answers: 0,
+							views: 43
+						}, {
+							title: '當遷移 c++ 的共享程式庫到 python 時遇到 "unexpected reloc type 0xe7"',
+							body: '我有一個 C++ 的程式庫，我想把它遷移到 Python 處， 我不肯定我是否知道 C++ 程式庫怎樣運作，我的程式是連結到 link_dir/mylib 的，但實際上它卻需要其他文檔柜內的文檔...',
+							tags: ['c++', 'gcc', 'linker', 'cmake', 'shared-libraries'],
+							votes: 1,
+							answers: 0,
+							views: 101
+						}, {
+							title: '一個 group by 最多有多少個註解',
+							body: '我想計算每個 (b,c) 群組的最高 "a_priority"，a_pritiy 是一個基於 case/when 對照的文串值註解...',
+							tags: ['python', 'django'],
+							votes: 4,
+							answers: 1,
+							views: 115
 						}];
 					break;
 
 				case 'hot':
 
 					questions = [{
-						title: '熱門的問題 1',
-						tags: ['node.js', 'c#', 'sql'],
-						votes: 2,
-						answers: 121,
-						views: 12345
+						title: '甚麼是 NullPointerException？我又怎樣可以修復它？',
+						body: '甚麼是 NullPointerException？怎樣引起的？有甚麼方法或工具可以找出引起的原因？',
+						tags: ['java', 'nullpointerexception'],
+						votes: 211,
+						answers: 12,
+						views: 1112323
 					}, {
-						title: '熱門的問題 2',
-						tags: ['xcode', 'android', 'ionic', 'angular'],
-						votes: 1234,
-						answers: 20,
-						views: 123412
+						title: 'RegEx 匹配 open tags 除了 XHTML 的 self-contained tags',
+						body: '我需要匹配所有這類的 open tags 如 "<p> <a href="foo"> 等，但不是這些 "<br /> <hr class="foo" />，我用了這方法但不知道是否正確...',
+						tags: ['html', 'regex', 'xhtml'],
+						votes: 1326,
+						answers: 35,
+						views: 1723233
+					}, {
+						title: '我在 PHP 內怎樣能避免 SQL Injection？',
+						body: '若用戶的輸入沒有經過修飾而直接放到 SQL query 裡，程式便會可能會受到 SQL Infection 攻擊，例如以下的例子...',
+						tags: ['php', 'mysql', 'sql', 'security', 'sql-injection'],
+						votes: 2786,
+						answers: 28,
+						views: 1012323
+					}, {
+						title: '如何制造那偉大的 R reproducible 例子？',
+						body: '當與同事討論效能時，或在授課時，或在提交錯誤報告時，往往要提供一個能重複案件的例子...',
+						tags: ['r', 'r-faq'],
+						votes: 1578,
+						answers: 21,
+						views: 125232
 					}];
 
 					break;
 
-				case 'month':
+				case 'latest':
 
 					questions = [{
-						title: '本月熱門的問題 1',
-						tags: ['javascript', 'html', 'css', 'angularjs', 'node.js', 'sails.js', 'ionic'],
-						votes: 212,
-						answers: 2102,
-						views: 124124
+						title: '當讀到一個 "", (), 等等時，Android HTTP Link 便會停止',
+						body: '我嘗試以字串發送用戶指引到實時的侍服器時，這些附號卻不能傳送，有沒有方法如何能令 Android 讀到這些附號呢？ ...',
+						tags: ['php', 'android', 'json'],
+						votes: 0,
+						answers: 0,
+						views: 2
 					}, {
-						title: '本月熱門的問題 2',
-						tags: ['c#', '.net', 'c++'],
-						votes: 21,
-						answers: 123,
-						views: 314
+						title: '在 Kendo MVC DatePicker 內加按鍵',
+						body: '以下我有要個 Kendo MVC 的 DatePicker，它會生成一個 textbox 和一個按鍵（有日曆圖標），在內它會引發 date picker UI，我的情形是我需要加進一個按鍵...',
+						tags: ['asp.net-mvc', 'html5', 'kendo-ui', 'kendo-asp.net-mvc'],
+						votes: 0,
+						answers: 0,
+						views: 2
+					}, {
+						title: '由後台轉換 $#174; 到前台注冊了的附號',
+						body: '我正由後台（Java）接收 json 含有 Ramasamy &#174; Kanna，我想在前台把它轉換成 Ramasamy Kenna，需要怎樣轉換呢？請提供一些...',
+						tags: ['javascript', 'java', 'json'],
+						votes: 0,
+						answers: 0,
+						views: 3
+					}, {
+						title: '拿 DISTINCT 名',
+						body: '我正嘗試在我的列表上用 DISTINCT，但我似乎做錯了一點東西，因我拿不到，我需要怎樣才能...',
+						tags: ['c#', 'linq', 'distinct'],
+						votes: 0,
+						answers: 0,
+						views: 2
 					}];
 
 					break;
@@ -216,6 +264,21 @@ app.factory('prototypeFactory', function($rootScope, $q, $timeout, $state, $http
 				numOfQuestions: 996928,
 				desc: '一個在待服器上的多用途腳本語言，原旨在網頁上的開發...'
 			}]
+		},
+
+		loadTagQuestions: function (tagName) {
+			return {
+				name: tagName,
+				desc: 'Javascript（不要與 Java 混亂了）是一個給網頁前端、及後端開發的動態的、弱的類型語言。 這標籤適用於 ECMAScript 和一些其他的變種，除了 ActionScript 和 Google-Apps-Script。 除非有另一個標籤...',
+				questions: [{
+					title: 'Sonarqube 不顯示 Icov 文檔的覆蓋率',
+					body: 'body....body...',
+					tags: ['javascript', 'angularjs'],
+					votes: 111,
+					answers: 111,
+					views: 111
+				}]
+			}
 		}
 
 	}
