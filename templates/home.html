@@ -2,16 +2,5 @@
 	<h1>{{:: ctrl.appName }}</h1>
 	<p>一個給 IT 開發員以中文問問題和得到中文答案的平台</p>
 </div>
-<div class="row">
-	<div class="col-sm-7 hidden-xs" >
-		<h4>問題列表</h4>
-	</div>
-	<div class="col-sm-5 col-xs-12">
-		<ui-view name="homeNav"></ui-view>
-	</div>
-</div>
-<div class="panel panel-primary">
-	<div class="panel-body">
-		<ui-view name="homeQuestList"></ui-view>
-	</div>
-</div>
+<ui-view name="homeNav"></ui-view>
+<ui-view name="homeQuestList"></ui-view>

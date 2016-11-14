@@ -6,7 +6,9 @@ app.factory('prototypeFactory', function($rootScope, $q, $timeout, $state, $http
 
 			var questions = [];
 
-			switch (questionsGroup) {
+			var group = (questionsGroup)? questionsGroup : 'interest';
+
+			switch (group) {
 
 				case 'interest':
 					questions = [{
@@ -264,6 +266,13 @@ app.factory('prototypeFactory', function($rootScope, $q, $timeout, $state, $http
 				numOfQuestions: 996928,
 				desc: '一個在待服器上的多用途腳本語言，原旨在網頁上的開發...'
 			}]
+		},
+
+		getTabInfo: function () {
+			return {
+				name: 'javascript',
+				desc: 'Javascript（不要與 Java 混亂了）是一個給網頁前端、及後端開發的動態的、弱的類型語言。 這標籤適用於 ECMAScript 和一些其他的變種，除了 ActionScript 和 Google-Apps-Script。 除非有另一個標籤...'
+			}
 		},
 
 		loadTagQuestions: function (tagName) {

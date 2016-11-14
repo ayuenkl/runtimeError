@@ -24,7 +24,7 @@
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a ui-sref="home.interest">看問題</a></li>
+				<li><a ui-sref="home.questions({qType: 'interest'})">看問題</a></li>
 				<li><a ui-sref="askQuestion">問問題</a></li>
 				<li><a ui-sref="tags">標籤</a></li>
 			</ul>
@@ -37,7 +37,7 @@
 				</div>
 				<button type="submit" class="btn btn-default" ng-show="false">Submit</button>
 			<ul class="nav navbar-nav">
-				<li><a ui-sref="home.interest" ng-click="$ctrl.toggleCollapse()">看問題</a></li>
+				<li><a ui-sref="home.questions({qType: 'interest'})" ng-click="$ctrl.toggleCollapse()">看問題</a></li>
 				<li><a ui-sref="askQuestion" ng-click="$ctrl.toggleCollapse()">問問題</a></li>
 				<li><a ui-sref="tags" ng-click="$ctrl.toggleCollapse()">標籤</a></li>
 				<li ng-hide="$root.isLoggedIn"><a ui-sref="authUser.login" ng-click="$ctrl.toggleCollapse()">登錄 | 注冊</a></li>

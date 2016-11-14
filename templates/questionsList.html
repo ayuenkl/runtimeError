@@ -1,6 +1,6 @@
-<div class="list-group">
-	<!--<a ui-sref="question({qid: 111})" class="list-group-item" ng-repeat="question in ctrl.questions">-->
-		<div class="row" ng-repeat="question in ctrl.questions">
+<div class="list-group list-group-primary">
+	<div class="list-group-item" ng-repeat="question in ctrl.questions">
+		<div class="row">
 			<div class="col-sm-1 hidden-xs">
 				<h4 class="glyphicon glyphicon-thumbs-up text-info" title="讚好"> {{ question.votes | shortNumber: 0 }}</h4>
 			</div>
@@ -14,7 +14,7 @@
 				<a ui-sref="question({qid: 111})"><h4 class="list-group-item-heading">{{ question.title }}</h4></a>
 				<p class="list-group-item-text">{{ question.body }}</p>
 				<p class="list-group-itme-text">
-					<span ng-repeat="tag in question.tags"><mark><small><a ui-sref="questions.tag({tag: 'javascript'})">{{ tag }}</a></small></mark>&nbsp;&nbsp;</span>
+					<span ng-repeat="tag in question.tags"><mark><small><a ui-sref="questions.tag({tag: 'javascript', qType: 'interest'})">{{ tag }}</a></small></mark>&nbsp;&nbsp;</span>
 				</p>
 			</div>
 			<div class="col-xs-1 visible-xs">
@@ -27,5 +27,5 @@
 				<small class="glyphicon glyphicon-eye-open text-info" title="看過"> {{ question.views | shortNumber: 0 }}</small>
 			</div>
 		</div>
-	<!--</a>-->
+	</div>
 </div>

@@ -20,7 +20,7 @@ scope.$state.transitionTo('detail.zoom', { itemId: item.id});
 $scope.$on('$stateChangeSuccess', function () {alert('done transitioning!')});
 			</pre>
 			<p>transitionTo 的事件會觸發 $stateChangeSuccess，但 href 的版于郤不能，請問是否有辦法兩種事件也可同時觸發？</p>
-			<p><small><mark>angularjs</mark>&nbsp;&nbsp;<mark>angularjs-routing</mark></small></p>
+			<p><small><mark><a ui-sref="questions.tag({tag: 'javascript', qType: 'interest'})">angularjs</a></mark>&nbsp;&nbsp;<mark><a ui-sref="questions.tag({tag: 'javascript', qType: 'interest'})">angularjs-routing</a></mark></small></p>
 			<hr>
 			<div class="row">
 				<div class="col-sm-3">
