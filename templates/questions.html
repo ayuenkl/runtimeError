@@ -1,0 +1,10 @@
+<h3>標籤: {{ ctrl.tag.name }}</h3>
+<div class="panel panel-primary">
+	<div class="panel-body">
+		<p>{{ ctrl.tag.desc }}</p>
+		<p><button class="btn btn-default btn-xs">修改</button>
+		<button class="btn btn-default btn-xs">類似</button></p>
+	</div>
+</div>
+<ui-view name="homeNav"></ui-view>
+<ui-view name="tagQuestList"></ui-view>

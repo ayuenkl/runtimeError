@@ -1,0 +1,13 @@
+<h3>標籤</h3>
+<form class="form-inline">
+	<input type="text" class="form-control" placeholder="javascript" />
+	<button class="btn btn-primary">搜索標籤</button>
+</form>
+<div class="row" style="padding: 20px;">
+	<div class="pull-left" ng-repeat="tag in ctrl.tags">
+		<div style="padding: 5px; margin: 5px; width: 220px; height: 120px; border-width: 1px; border-style: solid; border-color: darkgrey">
+			<p><mark><small><a ui-sref="questions.tag({tag: 'javascript'})">{{ tag.name }}</a></small></mark> ({{ tag.numOfQuestions | number }})</p>
+			<p>{{ tag.desc }}</p>
+		</div>
+	</div>
+</div>

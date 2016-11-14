@@ -31,7 +31,7 @@
 
 		<div class="form-group">
 			<label for="questionTags">標籤</label>
-			<input class="form-control" id="questionTags" ng-focus="ctrl.showTagsTips = true" ng-blur="ctrl.showTagsTips = false" placeholder="最少一個標籤，（例: angularjs, .net），最多五個" />
+			<input class="form-control" id="questionTags" ng-focus="ctrl.showTagsTips = true" ng-blur="ctrl.showTagsTips = false" ng-model="ctrl.tags" uib-typeahead="tag for tag in ctrl.tagSet | filter:$viewValue | limitTo: 8" placeholder="最少一個標籤，（例: angularjs, .net），最多五個" />
 		</div>
 
 		<button class="btn btn-primary" ui-sref="question({qid: 111})">提交</button>
