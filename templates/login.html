@@ -1,5 +1,5 @@
 <div class="panel panel-default" style="position: relative; top: 20px;">
-	<div class="panel-body">
+	<div class="panel-body" ng-hide="ctrl.isForgotPassword">
 		<p>
 			<button class="btn" style="background-color: #e0492f; color: white">Google</button>
 			<button class="btn" style="background-color: #395697; color: white">Facebook</button>
@@ -16,6 +16,18 @@
 			</div>
 			<button ng-click="ctrl.userLogin()" class="btn btn-primary">登錄</button>
 		</form>
-		<p style="position:relative; top: 20px;"><a href="#"><small>忘記密碼</small></a></p>
+		<p style="position:relative; top: 20px;"><button class="btn btn-link btn-xs" ng-click="ctrl.isForgotPassword = 1">忘記密碼</button></p>
+	</div>
+	<div class="panel-body" ng-show="ctrl.isForgotPassword == 1">
+		<form>
+			<p>忘記了密碼？請輸入你的電郵，我們會發給你一條修復的鏈結</p>
+			<div class="form-group">
+				<input type="email" class="form-control" placeholder="abc@def.com" />
+			</div>
+			<button class="btn btn-primary" ng-click="ctrl.isForgotPassword = 2">發送修復電郵</button>
+		</form>
+	</div>
+	<div class="panel-body" ng-show="ctrl.isForgotPassword == 2">
+		<div class="alert alert-success">您的修復電郵已發送，若您收不到我們的電郵，請檢查一下你的垃圾郵件信箱。</div>
 	</div>
 </div>
