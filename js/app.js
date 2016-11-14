@@ -124,103 +124,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	});
 
-	// sp.state({
-	// 	name: 'home.interest',
-	// 	url: '/interest',
-	// 	views: {
-	// 		'homeNav': {
-	// 			templateUrl: '/templates/homeNav.html',
-	// 			controller: function () {
-	// 				var ctrl = this;
-	// 				ctrl.activeTab = 0;
-	// 				ctrl.questionTitle = '問題列表'
-	// 			},
-	// 			controllerAs: 'ctrl'
-	// 		},
-	// 		'homeQuestList': {
-	// 			templateUrl: '/templates/questionsList.html',
-	// 			controller: function ($timeout, prototypeFactory, $rootScope) {
-
-	// 				var ctrl = this;
-	// 				$rootScope.isLoading = true;
-	// 				ctrl.questions = [];
-
-	// 				$timeout(function () {
-	// 					ctrl.questions = prototypeFactory.loadQuestions('interest');
-	// 					$rootScope.isLoading = false;
-	// 				}, 1000);
-
-	// 			},
-	// 			controllerAs: 'ctrl'
-	// 		}
-	// 	}
-
-	// });
-
-	// sp.state({
-	// 	name: 'home.hot',
-	// 	url: '/hot',
-	// 	views: {
-	// 		'homeNav': {
-	// 			templateUrl: '/templates/homeNav.html',
-	// 			controller: function () {
-	// 				var ctrl = this;
-	// 				ctrl.activeTab = 1;
-	// 				ctrl.questionTitle = '問題列表'
-	// 			},
-	// 			controllerAs: 'ctrl'
-	// 		},
-	// 		'homeQuestList': {
-	// 			templateUrl: '/templates/questionsList.html',
-	// 			controller: function ($timeout, prototypeFactory, $rootScope) {
-
-	// 				var ctrl = this;
-	// 				$rootScope.isLoading = true;
-	// 				ctrl.questions = [];
-
-	// 				$timeout(function () {
-	// 					ctrl.questions = prototypeFactory.loadQuestions('hot');
-	// 					$rootScope.isLoading = false;
-	// 				}, 1000);
-
-	// 			},
-	// 			controllerAs: 'ctrl'
-	// 		}
-	// 	}
-	// });
-
-	// sp.state({
-	// 	name: 'home.latest',
-	// 	url: '/latest',
-	// 	views: {
-	// 		'homeNav': {
-	// 			templateUrl: '/templates/homeNav.html',
-	// 			controller: function () {
-	// 				var ctrl = this;
-	// 				ctrl.activeTab = 2;
-	// 				ctrl.questionTitle = '問題列表'
-	// 			},
-	// 			controllerAs: 'ctrl'
-	// 		},
-	// 		'homeQuestList': {
-	// 			templateUrl: '/templates/questionsList.html',
-	// 			controller: function ($timeout, prototypeFactory,$rootScope) {
-
-	// 				var ctrl = this;
-	// 				$rootScope.isLoading = true;
-	// 				ctrl.questions = [];
-
-	// 				$timeout(function () {
-	// 					ctrl.questions = prototypeFactory.loadQuestions('latest');
-	// 					$rootScope.isLoading = false;
-	// 				}, 1000);
-
-	// 			},
-	// 			controllerAs: 'ctrl'
-	// 		}
-	// 	}
-	// });
-
 sp.state({
 		name: 'question',
 		url: '/question/{qid}',
@@ -447,9 +350,6 @@ sp.state({
 						ctrl.editPicture = false;
 					}
 				}
-				// if (angular.isUndefined(ctrl.user)) {
-					// $state.go('doLogin');
-				// }
 				if (!ctrl.user.selfDesc) {
 					ctrl.editSelfDesc = true;
 				}
@@ -473,6 +373,13 @@ sp.state({
 					ctrl.nextBadgeName = '銅章 ' + (ctrl.user.numOfBadges.bronze + 1) + ' 號';
 				}
 			}
+
+			ctrl.logout = function () {
+
+				$rootScope.isLoggedIn = false;
+				delete $rootScope.user;
+				$state.go('authUser.login');
+			};
 		},
 		controllerAs: 'ctrl'
 	});
