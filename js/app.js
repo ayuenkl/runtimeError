@@ -224,6 +224,9 @@ sp.state({
 				controller: function (prototypeFactory, $state) {
 					var ctrl = this;
 					ctrl.activeTab = 0;
+					if (ctrl.isForgotPassword) {
+						delete ctrl.isForgotPassowrd;
+					}
 
 					ctrl.userLogin = function () {
 						$state.go('doLogin');
