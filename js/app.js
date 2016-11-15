@@ -8,6 +8,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	sp.state({
 		name: 'home',
+		url: '/home',
 		abstract: true,
 		templateUrl: '/templates/home.html',
 		controller: function (APPNAME) {
@@ -18,30 +19,45 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	sp.state({
-		name: 'home.interest',
-		url: '/interest',
+		name: 'home.questions',
+		url: '/{qType}',
 		views: {
 			'homeNav': {
 				templateUrl: '/templates/homeNav.html',
-				controller: function () {
+				controller: function ($stateParams) {
 					var ctrl = this;
-					ctrl.activeTab = 0;
+					ctrl.questionTitle = '問題列表';
+					switch ($stateParams.qType) {
+						case 'interest':
+							ctrl.activeTab = 0;
+							break;
+						case 'hot':
+							ctrl.activeTab = 1;
+							break;
+						case 'latest':
+							ctrl.activeTab = 3;
+							break;
+						default:
+							ctrl.activeTab = 0;
+					}
+					ctrl.interest = 'home.questions({qType: "interest"})';
+					ctrl.hot = 'home.questions({qType: "hot"})';
+					ctrl.latest = 'home.questions({qType: "latest"})';
 				},
 				controllerAs: 'ctrl'
 			},
 			'homeQuestList': {
 				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory, $rootScope) {
+				controller: function ($timeout, prototypeFactory, $rootScope, $stateParams) {
 
 					var ctrl = this;
 					$rootScope.isLoading = true;
-					ctrl.questions = [];
+					ctrl.questoins = [];
 
 					$timeout(function () {
-						ctrl.questions = prototypeFactory.loadQuestions('interest');
+						ctrl.questions = prototypeFactory.loadQuestions($stateParams.qType);
 						$rootScope.isLoading = false;
 					}, 1000);
-
 				},
 				controllerAs: 'ctrl'
 			}
@@ -50,68 +66,65 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	sp.state({
-		name: 'home.hot',
-		url: '/hot',
+		name: 'questions',
+		url: '/questions',
+		abstract: true,
+		templateUrl: '/templates/questions.html',
+		controller: function (prototypeFactory) {
+			var ctrl = this;
+			ctrl.tag = prototypeFactory.getTabInfo();
+		},
+		controllerAs: 'ctrl'
+	});
+
+	sp.state({
+		name: 'questions.tag',
+		url: '/{tag}/{qType}',
 		views: {
 			'homeNav': {
 				templateUrl: '/templates/homeNav.html',
-				controller: function () {
+				controller: function ($stateParams) {
 					var ctrl = this;
-					ctrl.activeTab = 1;
+					ctrl.questionTitle = '此標籤的問題';
+					switch ($stateParams.qType) {
+						case 'interest':
+							ctrl.activeTab = 0;
+							break;
+						case 'month':
+							ctrl.activeTab = 1;
+							break;
+						case 'latest':
+							ctrl.activeTab = 3;
+							break;
+						default:
+							ctrl.activeTab = 0;
+					}
+					ctrl.interest = 'questions.tag({tag: "javascript", qType: "interest"})';
+					ctrl.hot = 'questions.tag({tag: "javascript", qType: "hot"})';
+					ctrl.latest = 'questions.tag({tag: "javascript", qType: "latest"})';
 				},
 				controllerAs: 'ctrl'
 			},
-			'homeQuestList': {
+			'tagQuestList': {
 				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory, $rootScope) {
+				controller: function ($timeout, prototypeFactory, $rootScope, $stateParams) {
 
 					var ctrl = this;
 					$rootScope.isLoading = true;
-					ctrl.questions = [];
+					ctrl.questoins = [];
 
 					$timeout(function () {
-						ctrl.questions = prototypeFactory.loadQuestions('hot');
+						ctrl.questions = prototypeFactory.loadQuestions($stateParams.qType);
 						$rootScope.isLoading = false;
 					}, 1000);
-
 				},
 				controllerAs: 'ctrl'
 			}
 		}
+
 	});
 
-	sp.state({
-		name: 'home.month',
-		url: '/month',
-		views: {
-			'homeNav': {
-				templateUrl: '/templates/homeNav.html',
-				controller: function () {
-					var ctrl = this;
-					ctrl.activeTab = 2;
-				},
-				controllerAs: 'ctrl'
-			},
-			'homeQuestList': {
-				templateUrl: '/templates/questionsList.html',
-				controller: function ($timeout, prototypeFactory,$rootScope) {
-
-					var ctrl = this;
-					$rootScope.isLoading = true;
-					ctrl.questions = [];
-
-					$timeout(function () {
-						ctrl.questions = prototypeFactory.loadQuestions('month');
-						$rootScope.isLoading = false;
-					}, 1000);
-
-				},
-				controllerAs: 'ctrl'
-			}
-		}
-	});
-
-	sp.state({
+sp.state({
 		name: 'question',
 		url: '/question/{qid}',
 		templateUrl: '/templates/question.html',
@@ -211,6 +224,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				controller: function (prototypeFactory, $state) {
 					var ctrl = this;
 					ctrl.activeTab = 0;
+					if (ctrl.isForgotPassword) {
+						delete ctrl.isForgotPassowrd;
+					}
 
 					ctrl.userLogin = function () {
 						$state.go('doLogin');
@@ -275,7 +291,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		name: 'askQuestion',
 		url: '/askquestion',
 		templateUrl: 'templates/askQuestion.html',
-		controller: function ($rootScope, $state) {
+		controller: function ($rootScope, $state, prototypeFactory) {
 			var ctrl = this;
 			ctrl.stage = 1;
 			if (!$rootScope.isLoggedIn) {
@@ -292,6 +308,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				},
 				height: 200
 			};
+			ctrl.tagSet = prototypeFactory.setTagSet();
 		},
 		controllerAs: 'ctrl'
 	});
@@ -336,9 +353,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 						ctrl.editPicture = false;
 					}
 				}
-				// if (angular.isUndefined(ctrl.user)) {
-					// $state.go('doLogin');
-				// }
 				if (!ctrl.user.selfDesc) {
 					ctrl.editSelfDesc = true;
 				}
@@ -362,6 +376,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					ctrl.nextBadgeName = '銅章 ' + (ctrl.user.numOfBadges.bronze + 1) + ' 號';
 				}
 			}
+
+			ctrl.logout = function () {
+
+				$rootScope.isLoggedIn = false;
+				delete $rootScope.user;
+				$state.go('authUser.login');
+			};
+		},
+		controllerAs: 'ctrl'
+	});
+
+	sp.state({
+		name: 'tags',
+		url: '/tags/{tag}',
+		templateUrl: '/templates/tags.html',
+		controller: function (prototypeFactory) {
+			var ctrl = this;
+			ctrl.tags = prototypeFactory.loadTags();
 		},
 		controllerAs: 'ctrl'
 	});
@@ -396,7 +428,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		template: 'Feedback -- To be implemented ...'
 	});
 
-	$urlRouterProvider.otherwise('/interest');
+	$urlRouterProvider.otherwise('/home/interest');
 
 });
 

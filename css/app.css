@@ -220,6 +220,12 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	transition: 0.5s;
+}
+
+.hg-side-menu.ng-hide {
+	transition: 0.5s;
+	margin-left: -150px;
 }
 
 .hg-side-menu-float {
@@ -227,6 +233,13 @@
 	top: 0px;
 	left: 0px;
 	z-index: 1000;
+	transition: 0.5s;
+}
+
+.hg-side-menu-float.ng-hide {
+	transition: 0.5s;
+	height: 0;
+	opacity: 0;
 }
 
 .hg-main-content {
@@ -234,6 +247,7 @@
 	padding-right: 5px;
 	padding-bottom: 5px;
 	height: 100%;
+	transition: 0.5s;
 }
 
 .hg-container {

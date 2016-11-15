@@ -12,7 +12,8 @@
 						</h4>
 					</div>
 				</div>
-				<button class="btn btn-default btn-xs" ng-show="ctrl.isLoginUser" ng-click="ctrl.editPicture = true">更改相片</button>
+				<p><button class="btn btn-default btn-xs" ng-show="ctrl.isLoginUser" ng-click="ctrl.editPicture = true">更改相片</button></p>
+				<p><button class="btn btn-warning btn-lg" ng-show="ctrl.isLoginUser" ng-click="ctrl.logout()">登出</button></p>
 			</div>
 			<form ng-show="ctrl.editPicture">
 				<div class="form-group">
@@ -52,6 +53,7 @@
 			</form>
 			<hr />
 			<div ng-hide="ctrl.editEmail">
+				<p>用戶名： {{ ctrl.user.username }}</p>
 				<p>電郵: {{ ctrl.user.email }}
 					<button class="btn btn-default btn-xs" ng-click="ctrl.editEmail = true" ng-show="ctrl.isLoginUser">修改電郵</button>
 				</p>
