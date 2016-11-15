@@ -214,12 +214,23 @@
 	height: 100%;
 	padding: 0px;
 	background-color: whitesmoke;
+	transition: 0.5s;
 }
 
 .hg-side-menu {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+}
+
+.hg-side-menu.ng-hide {
+	transition: 0.1s;
+	width: 0;
+}
+
+.hg-side-menu.ng-show {
+	transition: 0.5s linear all;
+	width: 150px;
 }
 
 .hg-side-menu-float {
@@ -234,6 +245,7 @@
 	padding-right: 5px;
 	padding-bottom: 5px;
 	height: 100%;
+	transition: 0.5s;
 }
 
 .hg-container {
