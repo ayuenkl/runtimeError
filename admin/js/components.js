@@ -9,7 +9,8 @@ app.component('hgNavbar', {
 			if ($rootScope.isSideMenuCollapsed) {
 				$rootScope.mainContentStyle = {'padding-left': '5px'}
 			} else {
-				$rootScope.mainContentStyle = {'padding-left': '155px'}
+				//$rootScope.mainContentStyle = {'padding-left': '155px'}
+				delete $rootScope.mainContentStyle;
 			}
 			$rootScope.isSideMenuFloated = false;
 		};
